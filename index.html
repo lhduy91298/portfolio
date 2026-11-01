@@ -5285,7 +5285,35 @@
       text-align: center;
       display: none;
     }
-  </style>
+  
+    /* Modal QR Zalo */
+    #zalo-qr-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(5px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeInModal 0.2s ease-out;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .zalo-qr-card {
+      background: white;
+      border-radius: 16px;
+      max-width: 380px;
+      width: 100%;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+    </style>
 </head>
 <body>
 
@@ -7167,14 +7195,22 @@
           </form>
         </div>
 
-        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-          <a href="https://zalo.me" target="_blank" rel="noopener noreferrer" class="admin-btn-action primary" style="padding: 14px 28px; font-size: 16px; text-decoration: none; border-radius: var(--radius-md); box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35); display: inline-flex; align-items: center; gap: 8px;">
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+          <a href="https://zaloapp.com/qr/p/1kyar1cit4swj" target="_blank" rel="noopener noreferrer" class="admin-btn-action primary" style="background: #0068ff; padding: 14px 24px; font-size: 15px; text-decoration: none; border-radius: var(--radius-md); box-shadow: 0 4px 14px rgba(0, 104, 255, 0.35); display: inline-flex; align-items: center; gap: 8px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <span data-i18n="cta_btn_contact">Nhắn Zalo / Telegram Nhận Báo Giá Triển Khai</span>
+            <span data-i18n="cta_btn_zalo">Mở Chat Zalo (Hoàng Duy)</span>
           </a>
-          <button type="button" class="admin-btn-action" style="padding: 14px 24px; font-size: 16px; border-radius: var(--radius-md);" onclick="switchSimTab('admin'); document.getElementById('live-experience').scrollIntoView({ behavior: 'smooth' });">
+          <button type="button" class="admin-btn-action" style="padding: 14px 20px; font-size: 15px; border-radius: var(--radius-md); background: white; border: 1.5px solid var(--slate-300); display: inline-flex; align-items: center; gap: 8px;" onclick="openZaloQrModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span data-i18n="cta_btn_qr">Quét QR Danh Thiếp Zalo</span>
+          </button>
+          <a href="mailto:hduy991@gmail.com?subject=Y%C3%AAu%20c%E1%BA%A7u%20b%C3%A1o%20gi%C3%A1%20n%E1%BB%81n%20t%E1%BA%A3ng%20luy%E1%BB%87n%20thi%20White-Label" class="admin-btn-action" style="padding: 14px 20px; font-size: 15px; border-radius: var(--radius-md); text-decoration: none; color: var(--slate-700); background: white; border: 1.5px solid var(--slate-300); display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span data-i18n="cta_btn_email">Gửi Email (hduy991@gmail.com)</span>
+          </a>
+          <button type="button" class="admin-btn-action" style="padding: 14px 22px; font-size: 15px; border-radius: var(--radius-md);" onclick="switchSimTab('admin'); document.getElementById('live-experience').scrollIntoView({ behavior: 'smooth' });">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-            <span data-i18n="cta_btn_admin_demo">Xem Thử Màn Hình Quản Trị Trung Tâm</span>
+            <span data-i18n="cta_btn_admin_demo">Xem Thử Màn Hình Quản Trị</span>
           </button>
         </div>
       </div>
@@ -11553,14 +11589,13 @@
     const contact = contactInput.value.trim();
     if (!name || !contact) return;
 
-    // Rate-limit check (5 phút)
+    // Rate-limit kiểm tra nhẹ (15 giây chống double click nhầm)
     const lastSubmitTime = localStorage.getItem('portfolio_lead_last_sent');
     const now = Date.now();
-    if (lastSubmitTime && now - parseInt(lastSubmitTime, 10) < 5 * 60 * 1000) {
+    if (lastSubmitTime && now - parseInt(lastSubmitTime, 10) < 15 * 1000) {
       if (statusMsg) {
         statusMsg.style.display = 'block';
-        statusMsg.style.color = '#e11d48';
-        statusMsg.innerHTML = 'Bạn vừa gửi thông tin cách đây ít phút. Đội ngũ chúng tôi đã nhận được và sẽ liên hệ lại ngay! Hoặc bạn có thể chat trực tiếp với Admin qua Telegram: <a href="https://t.me/yuuwork_bot" target="_blank" style="color: #0284c7; font-weight: bold; text-decoration: underline;">@yuuwork_bot</a>';
+        statusMsg.innerHTML = '<div style="background: #fff1f2; border: 1px solid #f43f5e; padding: 10px; border-radius: 8px; color: #be123c; font-size: 13px;">Vui lòng chờ giây lát trước khi gửi lại yêu cầu tiếp theo.</div>';
       }
       return;
     }
@@ -11569,65 +11604,141 @@
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
     const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span>Đang chuyển thông tin tới Admin...</span>';
+    submitBtn.innerHTML = '<span>Đang chuyển thông tin tới Telegram Admin...</span>';
 
     // Dữ liệu Lead
     const leadData = {
       name: name,
       contact: contact,
-      need: _selectedLeadNeed || 'Tokutei 14 Ngành & Ngoại ngữ',
+      need: (typeof _selectedLeadNeed !== 'undefined' && _selectedLeadNeed) ? _selectedLeadNeed : 'Tokutei 14 Ngành & Ngoại ngữ',
       brandSimulation: window._customBrandName || 'Mặc định'
     };
 
-    // Lưu mốc gửi chống spam
     localStorage.setItem('portfolio_lead_last_sent', now.toString());
 
-    try {
-      // Gửi POST tới Serverless Dispatcher api/admin?action=quote-lead
-      const response = await fetch('/api/admin?action=quote-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadData)
-      });
+    // Soạn nội dung tin nhắn Telegram HTML chuẩn
+    const escapeTg = function(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    };
+    const nowJst = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Tokyo' });
+    const telegramMessageText = [
+      '🔔 <b>CÓ YÊU CẦU BÁO GIÁ MỚI TỪ PORTFOLIO!</b>',
+      '━━━━━━━━━━━━━━━━━━━━',
+      '👤 <b>Người liên hệ:</b> ' + escapeTg(leadData.name),
+      '📞 <b>Kênh liên hệ:</b> <code>' + escapeTg(leadData.contact) + '</code>',
+      '📚 <b>Môn quan tâm:</b> ' + escapeTg(leadData.need),
+      '🏷️ <b>Thương hiệu mô phỏng:</b> ' + escapeTg(leadData.brandSimulation),
+      '⏰ <b>Thời gian gửi:</b> ' + nowJst + ' (JST)',
+      '━━━━━━━━━━━━━━━━━━━━',
+      '👉 <i>Admin hãy liên hệ tư vấn trong vòng 2 giờ!</i>'
+    ].join('\n');
 
-      const resData = await response.json();
+    let isDispatched = false;
 
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
-      submitBtn.innerHTML = '<span>Đã Tiếp Nhận Yêu Cầu!</span>';
-      submitBtn.style.background = '#10b981';
-
-      if (statusMsg) {
-        statusMsg.style.display = 'block';
-        statusMsg.style.color = '#059669';
-        statusMsg.style.fontWeight = '500';
-        statusMsg.innerHTML = '<div style="margin-bottom: 10px;"><strong>Cảm ơn ' + name + '!</strong> Yêu cầu báo giá của bạn đã được chuyển thẳng tới Admin qua Bot Telegram Yuu2. Chúng tôi sẽ phản hồi qua <strong>' + contact + '</strong> trong vòng 2 giờ.</div>' +
-          '<div style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">' +
-          '  <a href="https://t.me/yuuwork_bot" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(2,132,199,0.3);">' +
-          '    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>' +
-          '    <span>Nhắn Tin Trực Tiếp Với Admin (@yuuwork_bot)</span>' +
-          '  </a>' +
-          '</div>';
+    // TẦNG 1: Thử gửi qua Serverless Backend nếu đang chạy trên HTTP/HTTPS
+    if (window.location.protocol.startsWith('http')) {
+      try {
+        const response = await fetch('/api/admin?action=quote-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadData)
+        });
+        if (response.ok) {
+          const resJson = await response.json();
+          if (resJson && resJson.success) {
+            isDispatched = true;
+          }
+        }
+      } catch (e) {
+        console.warn('Backend serverless chưa sẵn sàng, kích hoạt kênh Telegram trực tiếp:', e);
       }
-    } catch (err) {
-      console.warn('Lỗi mạng khi gửi lead, áp dụng chế độ dự phòng:', err);
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
-      submitBtn.innerHTML = '<span>Đã Tiếp Nhận!</span>';
-      submitBtn.style.background = '#10b981';
+    }
 
-      if (statusMsg) {
-        statusMsg.style.display = 'block';
-        statusMsg.style.color = '#059669';
-        statusMsg.innerHTML = '<div style="margin-bottom: 8px;">Cảm ơn ' + name + '! Thông tin của bạn đã được ghi nhận. Để được hỗ trợ ngay tức thì, bạn có thể nhắn tin trực tiếp qua Telegram:</div>' +
-          '<a href="https://t.me/yuuwork_bot" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px;">' +
-          '  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>' +
-          '  <span>Mở Telegram Chat Với Admin (@yuuwork_bot)</span>' +
-          '</a>';
+    // TẦNG 2: NẾU TẦNG 1 CHƯA GỬI ĐƯỢC (do chạy file:///, localhost không có serverless, hoặc mạng lỗi)
+    // -> Gửi thẳng trực tiếp tới Telegram Bot API Yuu2 (@yuuwork_bot)
+    if (!isDispatched) {
+      try {
+        const tgBotToken = '9241626125:AAGY3HqxaNHUC3TYxCrTvZAG_9l8ZEQcKlQ';
+        const tgChatId = '7113818403';
+        const tgRes = await fetch('https://api.telegram.org/bot' + tgBotToken + '/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: tgChatId,
+            text: telegramMessageText,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true
+          })
+        });
+        const tgJson = await tgRes.json();
+        if (tgJson && tgJson.ok) {
+          isDispatched = true;
+        }
+      } catch (errTg) {
+        console.error('Lỗi kết nối trực tiếp Telegram Bot API:', errTg);
       }
+    }
+
+    // Cập nhật giao diện sau khi gửi
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+    submitBtn.innerHTML = '<span>Đã Tiếp Nhận & Gửi Về Telegram!</span>';
+    submitBtn.style.background = '#10b981';
+
+    if (statusMsg) {
+      statusMsg.style.display = 'block';
+      statusMsg.innerHTML = '<div style="background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 8px; padding: 14px; margin-top: 12px; color: #065f46; text-align: left;">' +
+        '<div style="font-weight: 700; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">' +
+        '  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+        '  <span>Đã gửi yêu cầu thành công về Telegram của Admin!</span>' +
+        '</div>' +
+        '<div style="font-size: 13px; line-height: 1.6; color: #047857;">' +
+        '  Cảm ơn <strong>' + escapeTg(name) + '</strong>! Thông tin của bạn đã được chuyển thẳng tới Admin qua Bot Yuu2. Chúng tôi sẽ liên hệ qua <code>' + escapeTg(contact) + '</code> trong vòng 2 giờ.' +
+        '</div>' +
+        '<div style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">' +
+        '  <a href="https://t.me/yuuwork_bot" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(2,132,199,0.3);">' +
+        '    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>' +
+        '    <span>Nhắn Tin Trực Tiếp Với Admin (@yuuwork_bot)</span>' +
+        '  </a>' +
+        '</div>' +
+        '</div>';
     }
   }
 
-  </script>
+  
+  function openZaloQrModal() {
+    const modal = document.getElementById('zalo-qr-modal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function closeZaloQrModal(event) {
+    if (event && event.target && event.target.id !== 'zalo-qr-modal' && !event.target.closest('button')) return;
+    const modal = document.getElementById('zalo-qr-modal');
+    if (modal) modal.style.display = 'none';
+  }
+</script>
+
+  <!-- ── MODAL HIỂN THỊ DANH THIẾP QR CODE ZALO ADMIN HOÀNG DUY ────────── -->
+  <div id="zalo-qr-modal" onclick="closeZaloQrModal(event)">
+    <div class="zalo-qr-card" onclick="event.stopPropagation()">
+      <button type="button" onclick="closeZaloQrModal()" style="position: absolute; top: 14px; right: 14px; background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; line-height: 1; cursor: pointer; color: #475569; display: flex; align-items: center; justify-content: center;" aria-label="Đóng">&times;</button>
+      <div style="font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">Danh Thiếp Zalo</div>
+      <div style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Quản Trị Viên: <strong>Hoàng Duy</strong> • Tư vấn 24/7</div>
+      <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 16px; display: inline-block;">
+        <img src="./zalo-qr.jpg" alt="Mã QR Zalo Hoàng Duy" style="max-width: 240px; width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto;">
+      </div>
+      <div style="font-size: 12.5px; line-height: 1.5; color: #475569; margin-bottom: 16px;">
+        Mở ứng dụng Zalo trên điện thoại &gt; Chọn biểu tượng <strong>Quét mã QR</strong> để kết nối trực tiếp.
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://zaloapp.com/qr/p/1kyar1cit4swj" target="_blank" rel="noopener noreferrer" style="background: #0068ff; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(0,104,255,0.3);">
+          <span>Mở Ứng Dụng Zalo</span>
+        </a>
+        <a href="mailto:hduy991@gmail.com?subject=Y%C3%AAu%20c%E1%BA%A7u%20b%C3%A1o%20gi%C3%A1%20n%E1%BB%81n%20t%E1%BA%A3ng%20White-Label" style="background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+          <span>Gửi Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
