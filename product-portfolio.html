@@ -11541,7 +11541,7 @@
     btn.classList.add('active');
   }
 
-  function handleLeadSubmit(event) {
+  async function handleLeadSubmit(event) {
     event.preventDefault();
     const nameInput = document.getElementById('lead-name');
     const contactInput = document.getElementById('lead-contact');
@@ -11560,7 +11560,7 @@
       if (statusMsg) {
         statusMsg.style.display = 'block';
         statusMsg.style.color = '#e11d48';
-        statusMsg.textContent = 'Bạn vừa gửi thông tin cách đây ít phút. Đội ngũ chúng tôi đang xử lý và sẽ liên hệ lại ngay!';
+        statusMsg.innerHTML = 'Bạn vừa gửi thông tin cách đây ít phút. Đội ngũ chúng tôi đã nhận được và sẽ liên hệ lại ngay! Hoặc bạn có thể chat trực tiếp với Admin qua Telegram: <a href="https://t.me/yuuwork_bot" target="_blank" style="color: #0284c7; font-weight: bold; text-decoration: underline;">@yuuwork_bot</a>';
       }
       return;
     }
@@ -11569,21 +11569,29 @@
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
     const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span>Đang gửi thông tin...</span>';
+    submitBtn.innerHTML = '<span>Đang chuyển thông tin tới Admin...</span>';
 
-    // Nội dung gửi đi
+    // Dữ liệu Lead
     const leadData = {
       name: name,
       contact: contact,
-      need: _selectedLeadNeed,
-      timestamp: new Date().toLocaleString('vi-VN'),
+      need: _selectedLeadNeed || 'Tokutei 14 Ngành & Ngoại ngữ',
       brandSimulation: window._customBrandName || 'Mặc định'
     };
 
     // Lưu mốc gửi chống spam
     localStorage.setItem('portfolio_lead_last_sent', now.toString());
 
-    setTimeout(() => {
+    try {
+      // Gửi POST tới Serverless Dispatcher api/admin?action=quote-lead
+      const response = await fetch('/api/admin?action=quote-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData)
+      });
+
+      const resData = await response.json();
+
       submitBtn.disabled = false;
       submitBtn.style.opacity = '1';
       submitBtn.innerHTML = '<span>Đã Tiếp Nhận Yêu Cầu!</span>';
@@ -11592,16 +11600,32 @@
       if (statusMsg) {
         statusMsg.style.display = 'block';
         statusMsg.style.color = '#059669';
-        statusMsg.style.fontWeight = '700';
-        statusMsg.textContent = 'Cảm ơn ' + name + '! Yêu cầu của bạn đã được chuyển đến bộ phận kỹ thuật. Chúng tôi sẽ liên hệ qua ' + contact + ' trong vòng 2 giờ.';
+        statusMsg.style.fontWeight = '500';
+        statusMsg.innerHTML = '<div style="margin-bottom: 10px;"><strong>Cảm ơn ' + name + '!</strong> Yêu cầu báo giá của bạn đã được chuyển thẳng tới Admin qua Bot Telegram Yuu2. Chúng tôi sẽ phản hồi qua <strong>' + contact + '</strong> trong vòng 2 giờ.</div>' +
+          '<div style="margin-top: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">' +
+          '  <a href="https://t.me/yuuwork_bot" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; box-shadow: 0 2px 6px rgba(2,132,199,0.3);">' +
+          '    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>' +
+          '    <span>Nhắn Tin Trực Tiếp Với Admin (@yuuwork_bot)</span>' +
+          '  </a>' +
+          '</div>';
       }
+    } catch (err) {
+      console.warn('Lỗi mạng khi gửi lead, áp dụng chế độ dự phòng:', err);
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.innerHTML = '<span>Đã Tiếp Nhận!</span>';
+      submitBtn.style.background = '#10b981';
 
-      // Tạo link Zalo / Telegram trực tiếp hỗ trợ trao đổi ngay
-      const encodedMsg = encodeURIComponent(
-        'Chào bạn, tôi là ' + name + '. Tôi vừa gửi yêu cầu tư vấn nền tảng luyện thi White-Label cho môn ' + _selectedLeadNeed + '. Thông tin liên hệ của tôi là: ' + contact + '.'
-      );
-      console.log('Lead Captured:', leadData);
-    }, 800);
+      if (statusMsg) {
+        statusMsg.style.display = 'block';
+        statusMsg.style.color = '#059669';
+        statusMsg.innerHTML = '<div style="margin-bottom: 8px;">Cảm ơn ' + name + '! Thông tin của bạn đã được ghi nhận. Để được hỗ trợ ngay tức thì, bạn có thể nhắn tin trực tiếp qua Telegram:</div>' +
+          '<a href="https://t.me/yuuwork_bot" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: white; padding: 10px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px;">' +
+          '  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>' +
+          '  <span>Mở Telegram Chat Với Admin (@yuuwork_bot)</span>' +
+          '</a>';
+      }
+    }
   }
 
   </script>
