@@ -4988,13 +4988,19 @@
     .subject-selector-bar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
       background: var(--slate-50);
       padding: 10px 14px;
       border-radius: var(--radius-lg);
       border: 1px solid var(--slate-200);
+    }
+    .subject-selector-bar::-webkit-scrollbar {
+      display: none;
     }
     .subject-selector-label {
       font-size: 0.82rem;
@@ -5002,19 +5008,23 @@
       color: var(--slate-600);
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .subject-pill-btn {
       background: white;
       color: var(--slate-700);
       border: 1px solid var(--slate-300);
-      padding: 7px 15px;
+      padding: 7px 14px;
       border-radius: var(--radius-full);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: var(--transition-base);
     }
     .subject-pill-btn:hover {
@@ -5383,6 +5393,39 @@
            TAB 1: GIAO DIỆN MÀN HÌNH LUYỆN ĐỀ THI (EXAM SCREEN 1:1)
            ======================================================== -->
       <div id="tab-exam" class="sim-tab-pane active">
+                <!-- Thanh chọn 7 môn thi mẫu chuẩn quốc tế (Hỗ trợ vuốt ngang mobile) -->
+                <!-- Thanh chọn 7 môn thi mẫu chuẩn quốc tế (Hỗ trợ vuốt ngang mobile) -->
+        <div class="subject-selector-bar">
+          <span class="subject-selector-label" data-i18n="sub_select_label">Môn Thi Mẫu:</span>
+          <button type="button" class="subject-pill-btn active" data-subject="jft" onclick="switchExamSubject('jft')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span data-i18n="sub_pill_jft">JFT-Basic A2</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="tokutei" onclick="switchExamSubject('tokutei')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <span data-i18n="sub_pill_tokutei">Tokutei 14 Ngành</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="jlpt" onclick="switchExamSubject('jlpt')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span data-i18n="sub_pill_jlpt">Tiếng Nhật JLPT</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="korean" onclick="switchExamSubject('korean')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/></svg>
+            <span data-i18n="sub_pill_korean">Tiếng Hàn TOPIK</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="german" onclick="switchExamSubject('german')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 3 3 5 6 5s6-2 6-5v-5"/></svg>
+            <span data-i18n="sub_pill_german">Tiếng Đức Goethe</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="english" onclick="switchExamSubject('english')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span data-i18n="sub_pill_english">Tiếng Anh TOEIC</span>
+          </button>
+          <button type="button" class="subject-pill-btn" data-subject="chinese" onclick="switchExamSubject('chinese')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span data-i18n="sub_pill_chinese">Tiếng Trung HSK</span>
+          </button>
+        </div>
         <div class="real-exam-wrapper">
           <!-- TopBar thật của màn hình làm bài -->
           <div class="exam-topbar">
@@ -6991,10 +7034,10 @@
           <span data-i18n="roi_badge">Hiệu Quả Kinh Doanh & Vận Hành</span>
         </div>
         <h3 class="cta-title" data-i18n="roi_title" style="font-size: 26px; font-weight: 800; color: var(--slate-900); margin: 0 0 10px; line-height: 1.3;">
-          Bảng Tính Tiết Kiệm Chi Phí & Thời Gian Cho Trung Tâm
+          Bảng Tính Thời Gian & Hiệu Quả Vận Hành Cho Trung Tâm
         </h3>
         <p class="cta-desc" data-i18n="roi_desc" style="font-size: 15px; color: var(--slate-600); margin: 0; line-height: 1.6;">
-          Kéo thanh trượt theo quy mô thực tế của trung tâm để ước tính ngay số giờ làm việc và chi phí nhân sự bạn sẽ tiết kiệm mỗi tháng.
+          Kéo thanh trượt theo quy mô thực tế để ước tính ngay số giờ làm việc được giải phóng và khối lượng bài tập được tự động hóa mỗi tháng.
         </p>
       </div>
 
@@ -7043,14 +7086,14 @@
             </div>
           </div>
 
-          <!-- Stat 2: Chi phí nhân sự -->
+          <!-- Stat 2: Lượt bài nộp & chấm tự động hóa 100% -->
           <div class="roi-stat-card">
             <div class="roi-stat-icon" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             </div>
             <div class="roi-stat-content">
-              <div class="roi-stat-num" id="roi-cost-saved" style="color: #059669;">~9.000.000đ / Tháng</div>
-              <div class="roi-stat-label" data-i18n="roi_cost_desc">Giảm ngân sách in đề giấy và giờ công trợ giảng thống kê điểm số</div>
+              <div class="roi-stat-num" id="roi-tests-saved" style="color: #059669;">~720 Lượt / Tháng</div>
+              <div class="roi-stat-label" data-i18n="roi_tests_desc">Tự động chấm điểm tức thì, giải thích chi tiết và xuất bảng điểm Excel real-time</div>
             </div>
           </div>
 
@@ -7108,9 +7151,12 @@
 
             <div class="lead-chips-label" data-i18n="lead_need_label">Nhu cầu trọng tâm của bạn:</div>
             <div class="lead-chips-container">
-              <button type="button" class="lead-chip-btn active" data-need="Tokutei" onclick="selectLeadNeed(this, 'Tokutei')">Tokutei 14 Ngành</button>
+              <button type="button" class="lead-chip-btn active" data-need="JFT-Basic" onclick="selectLeadNeed(this, 'JFT-Basic')">JFT-Basic A2</button>
+              <button type="button" class="lead-chip-btn" data-need="Tokutei" onclick="selectLeadNeed(this, 'Tokutei')">Tokutei 14 Ngành</button>
               <button type="button" class="lead-chip-btn" data-need="JLPT" onclick="selectLeadNeed(this, 'JLPT')">Tiếng Nhật JLPT</button>
-              <button type="button" class="lead-chip-btn" data-need="DoanhNghiep" onclick="selectLeadNeed(this, 'DoanhNghiep')">Đào Tạo Doanh Nghiệp</button>
+              <button type="button" class="lead-chip-btn" data-need="TOPIK" onclick="selectLeadNeed(this, 'TOPIK')">Tiếng Hàn TOPIK</button>
+              <button type="button" class="lead-chip-btn" data-need="Goethe" onclick="selectLeadNeed(this, 'Goethe')">Tiếng Đức Du Học Nghề</button>
+              <button type="button" class="lead-chip-btn" data-need="DoanhNghiep" onclick="selectLeadNeed(this, 'DoanhNghiep')">Đào Tạo Doanh Nghiệp & Khác</button>
             </div>
 
             <button type="submit" class="lead-submit-btn" id="lead-submit-btn">
@@ -8440,6 +8486,243 @@
     // 1. MULTI-SUBJECT QUESTION BANKS (3 MÔN THI ĐA DẠNG)
     // ============================================================
     const MULTI_SUBJECT_EXAMS = {
+      jft: [
+        {
+          id: 100001,
+          sourceTag: {
+            vi: 'JFT-Basic A2 • Câu 1/3 (Từ vựng đời sống)',
+            ja: 'JFT-Basic A2 • 第 1/3 問（生活語彙）',
+            en: 'JFT-Basic A2 • Question 1/3 (Daily Life Vocabulary)',
+            my: 'JFT-Basic A2 • မေးခွန်း ၁/၃ (နေ့စဉ် ဝေါဟာရ)',
+            id: 'JFT-Basic A2 • Soal 1/3 (Kosakata Sehari-hari)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi JFT-Basic A2 > Phần Chữ & Từ Vựng > <strong>Quy Tắc Sinh Hoạt Tại Căn Hộ Nhật Bản</strong>',
+            ja: 'JFT-Basic A2 基礎テスト > 文字・語彙 > <strong>アパートの生活ルール</strong>',
+            en: 'JFT-Basic A2 Exam > Letters & Vocabulary > <strong>Apartment Living Rules in Japan</strong>',
+            my: 'JFT-Basic A2 စာမေးပွဲ > စာလုံးနှင့် ဝေါဟာရ > <strong>ဂျပန် တိုက်ခန်း နေထိုင်မှု စည်းမျဉ်းများ</strong>',
+            id: 'Ujian JFT-Basic A2 > Huruf & Kosakata > <strong>Aturan Tempat Tinggal di Jepang</strong>'
+          },
+          questionHtml: '（　）に<ruby>何<rt>なに</rt></ruby>を<ruby>入<rt>い</rt></ruby>れますか。<ruby>一番<rt>いちばん</rt></ruby>いいものを<ruby>一<rt>ひと</rt></ruby>つ<ruby>選<rt>えら</rt></ruby>んでください。<br><br>アパートの（　）に、<ruby>決<rt>き</rt></ruby>められた<ruby>曜日<rt>ようび</rt></ruby>にゴミを<ruby>出<rt>だ</rt></ruby>してください。',
+          options: {
+            A: 'ゴミすてば',
+            B: 'ちゅうしゃじょう',
+            C: 'エレベーター',
+            D: 'うけつけ'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng chuẩn JFT-Basic A2 (JF Standard): Kiểm tra khả năng hiểu các quy tắc sinh hoạt cộng đồng cơ bản tại Nhật.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Đổ rác đúng nơi quy định)',
+              m1Points: [
+                'Hành động trong câu là 「ゴミを出す」 (mang rác ra vứt).',
+                'Nơi để vứt rác tại khu nhà trọ/căn hộ Nhật Bản là 「ゴミすてば」 (Nơi tập kết rác).',
+                'Các phương án khác: B (Bãi đỗ xe), C (Thang máy), D (Quầy lễ tân) đều không phù hợp.'
+              ],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Đời Sống Tokutei',
+              m2CorrectWhy: 'ゴミすてば (ゴミ捨て場) là từ vựng sinh hoạt A2 cốt lõi. Ở Nhật Bản, việc phân loại rác và vứt rác đúng ngày quy định tại bãi rác là tiêu chuẩn văn hóa bắt buộc đối với mọi lao động.',
+              m2WrongWhy: 'Nếu vứt rác tại bãi đỗ xe (ちゅうしゃじょう) hoặc thang máy (エレベーター) sẽ vi phạm nội quy và bị ban quản lý tòa nhà nhắc nhở.',
+              m3Title: 'Miền 3: Thuật Ngữ JFT Liên Kết',
+              m3Chips: ['ゴミ捨て場: Nơi đổ rác', '決められた: Được quy định trước', '曜日: Thứ trong tuần', '分別: Phân loại rác']
+            },
+            ja: {
+              regionalIntro: 'JFT-Basic A2生活Can-do項目：生活の基本的ルールに関する掲示や指示を理解できる。',
+              m1Title: '直観的状況把握',
+              m1Points: ['ゴミを出す場所として適切な語彙を選択する設問。', '「ゴミ捨て場」が正解。'],
+              m2Title: '生活実務・Can-do解説',
+              m2CorrectWhy: 'アパート生活においてゴミ出しルールの遵守は極めて重要です。',
+              m2WrongWhy: '駐車場やエレベーターはゴミを出す場所ではありません。',
+              m3Title: '関連生活語彙',
+              m3Chips: ['ゴミ捨て場', '決められた曜日', '分別回収']
+            },
+            en: {
+              regionalIntro: 'JFT-Basic A2 Life Can-do standard: Understanding essential neighborhood and apartment rules.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Action is taking out garbage ("ゴミを出す").', 'Correct location is "ゴミすてば" (Garbage collection area).'],
+              m2Title: 'Life & Cultural Context',
+              m2CorrectWhy: 'In Japan, discarding sorted garbage on designated days at the designated garbage site (ゴミ捨て場) is a mandatory civic rule.',
+              m2WrongWhy: 'Parking lot (B) or Elevator (C) are strictly prohibited for garbage disposal.',
+              m3Title: 'Key Living Vocabulary',
+              m3Chips: ['ゴミ捨て場: Garbage collection site', '決められた: Designated', '曜日: Day of week']
+            },
+            my: {
+              regionalIntro: 'JFT-Basic A2 စံနှုန်း - ဂျပန်နိုင်ငံ နေ့စဉ်နေထိုင်မှု စည်းမျဉ်းများကို နားလည်ခြင်း။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['အမှိုက်စွန့်ပစ်သည့် နေရာကို ရွေးချယ်ရမည့် မေးခွန်းဖြစ်ပါသည်။', 'အဖြေမှန်မှာ A ဖြစ်သည်။'],
+              m2Title: 'လက်တွေ့ ရှင်းလင်းချက်',
+              m2CorrectWhy: 'ဂျပန်နိုင်ငံတွင် သတ်မှတ်ထားသော နေ့တွင် သတ်မှတ် အမှိုက်စွန့်ပစ်နေရာ (ゴミ捨て場) ၌သာ အမှိုက်ပစ်ရမည်။',
+              m2WrongWhy: 'ကားပါကင် သို့မဟုတ် ဓာတ်လှေကားတွင် အမှိုက်မပစ်ရပါ။',
+              m3Title: 'ဆက်စပ် ဝေါဟာရများ',
+              m3Chips: ['ゴミ捨て場: အမှိုက်ပစ်သည့်နေရာ', '曜日: ရက်သတ္တပတ်နေ့ရက်']
+            },
+            id: {
+              regionalIntro: 'Standar JFT-Basic A2: Memahami aturan dasar kehidupan sehari-hari di apartemen Jepang.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Tindakan membuang sampah harus di tempat yang tepat.', 'Pilihan tepat adalah A (Tempat pembuangan sampah).'],
+              m2Title: 'Penjelasan Praktis Budaya Jepang',
+              m2CorrectWhy: 'Membuang sampah pada hari yang ditentukan di tempat sampah (ゴミ捨て場) adalah aturan wajib di Jepang.',
+              m2WrongWhy: 'Tempat parkir atau lift bukan tempat untuk membuang sampah.',
+              m3Title: 'Kosakata Terkait',
+              m3Chips: ['ゴミ捨て場: Tempat sampah', '決められた: Ditentukan', '曜日: Hari']
+            }
+          }
+        },
+        {
+          id: 100002,
+          sourceTag: {
+            vi: 'JFT-Basic A2 • Câu 2/3 (Giao tiếp nơi làm việc)',
+            ja: 'JFT-Basic A2 • 第 2/3 問（職場の会話）',
+            en: 'JFT-Basic A2 • Question 2/3 (Workplace Communication)',
+            my: 'JFT-Basic A2 • မေးခွန်း ၂/၃ (လုပ်ငန်းခွင် စကားပြော)',
+            id: 'JFT-Basic A2 • Soal 2/3 (Komunikasi Tempat Kerja)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi JFT-Basic A2 > Hội Thoại & Ngữ Pháp > <strong>Báo Ốm Xin Nghỉ Phép Với Cấp Trên</strong>',
+            ja: 'JFT-Basic A2 基礎テスト > 会話・文法 > <strong>上司への欠勤連絡</strong>',
+            en: 'JFT-Basic A2 Exam > Conversation & Grammar > <strong>Calling in Sick to Your Supervisor</strong>',
+            my: 'JFT-Basic A2 စာမေးပွဲ > စကားပြောနှင့် သဒ္ဒါ > <strong>အထက်လူကြီးထံ ဖျားနာခွင့်တောင်းခြင်း</strong>',
+            id: 'Ujian JFT-Basic A2 > Percakapan & Tata Bahasa > <strong>Izin Sakit Kepada Atasan Kerja</strong>'
+          },
+          questionHtml: '<ruby>体調<rt>たいちょう</rt></ruby>が<ruby>悪<rt>わる</rt></ruby>くて<ruby>会社<rt>かいしゃ</rt></ruby>を<ruby>休<rt>やす</rt></ruby>みたいです。<ruby>上司<rt>じょうし</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>で<ruby>何<rt>なん</rt></ruby>と<ruby>言<rt>い</rt></ruby>いますか。',
+          options: {
+            A: 'すみません、<ruby>熱<rt>ねつ</rt></ruby>があるので、<ruby>今日<rt>きょう</rt></ruby><ruby>休<rt>やす</rt></ruby>ませていただけませんか。',
+            B: '<ruby>熱<rt>ねつ</rt></ruby>があるから、<ruby>休<rt>やす</rt></ruby>みたいです。じゃあね。',
+            C: '<ruby>今日<rt>きょう</rt></ruby>は<ruby>忙<rt>いそが</rt></ruby>しいので、<ruby>休<rt>やす</rt></ruby>みます。',
+            D: '<ruby>会社<rt>かいしゃ</rt></ruby>に<ruby>行<rt>い</rt></ruby>きたくないですから、<ruby>休<rt>やす</rt></ruby>みます。'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Chuẩn Can-do A2: Biết cách gọi điện báo nghỉ ốm lịch sự với cấp trên trong xưởng/công ty Nhật.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Giao tiếp cấp trên)',
+              m1Points: ['Gọi điện cho cấp trên (上司) cần dùng thể khiêm nhường xin phép trang trọng.', 'Mẫu câu chuẩn mực nhất là 「〜休ませていただけませんか」.'],
+              m2Title: 'Miền 2: Phân Tích Ngữ Pháp & Quy Tắc Công Sở Nhật',
+              m2CorrectWhy: 'Cấu trúc 「V-(さ)せていただけませんか」 (Làm ơn cho phép tôi...) thể hiện sự tôn trọng tuyệt đối đối với cấp trên và công ty.',
+              m2WrongWhy: 'Phương án B dùng thể suồng sã (じゃあね). Phương án C và D thể hiện thái độ tùy tiện, không đúng chuẩn tác phong công nghiệp Nhật.',
+              m3Title: 'Miền 3: Mẫu Câu Công Sở JFT',
+              m3Chips: ['休ませていただけませんか: Cho phép tôi nghỉ được không', '体調が悪い: Sức khỏe không tốt', '熱がある: Bị sốt']
+            },
+            ja: {
+              regionalIntro: '職場のCan-do：上司に対して体調不良による欠勤の連絡を適切に行うことができる。',
+              m1Title: '直観的状況把握',
+              m1Points: ['上司への欠勤連絡における敬語表現の適切さを問う設問。', '「休ませていただけませんか」が正解。'],
+              m2Title: '職場マナー解説',
+              m2CorrectWhy: '「〜させていただけませんか」は許可を求める丁寧な依頼表現です。',
+              m2WrongWhy: 'くだけた表現や身勝手な言い回しは社会人として不適切です。',
+              m3Title: '職場頻出表現',
+              m3Chips: ['休ませていただけませんか', '体調不良', '熱がある']
+            },
+            en: {
+              regionalIntro: 'Workplace Can-do: Appropriately reporting an unexpected absence due to sickness to a supervisor.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Speaking to a boss requires respectful permission-seeking phrasing.', 'Option A is the only polite standard expression.'],
+              m2Title: 'Workplace Etiquette Analysis',
+              m2CorrectWhy: '"...sasete itadakemasen ka" politely requests permission from the superior.',
+              m2WrongWhy: 'Option B is casual slang. C & D sound rude and irresponsible.',
+              m3Title: 'Workplace Phrases',
+              m3Chips: ['休ませていただけませんか: May I take a leave?', '熱がある: Have a fever']
+            },
+            my: {
+              regionalIntro: 'လုပ်ငန်းခွင် Can-do - အထက်လူကြီးထံ ဖျားနာခွင့် တောင်းဆိုသည့် စကားအသုံးအနှုန်း။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['အထက်လူကြီးကို ယဉ်ကျေးစွာ ခွင့်တောင်းရမည်။', 'A သည် အယဉ်ကျေးဆုံး အဖြေဖြစ်ပါသည်။'],
+              m2Title: 'လက်တွေ့ ရှင်းလင်းချက်',
+              m2CorrectWhy: '「〜休ませていただけませんか」 သည် ဂျပန်လုပ်ငန်းခွင်တွင် အသုံးများသော ယဉ်ကျေးသည့် ခွင့်တောင်းပုံစံ ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မယဉ်ကျေးပါ။',
+              m3Title: 'အသုံးဝင် စကားလုံးများ',
+              m3Chips: ['休ませていただけませんか: ခွင့်ပြုပေးပါရန်', '熱がある: ဖျားနေသည်']
+            },
+            id: {
+              regionalIntro: 'Workplace Can-do: Melaporkan izin sakit kepada atasan dengan sopan.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Berbicara kepada atasan membutuhkan kesopanan tinggi.', 'Pilihan A adalah ekspresi standar kantor Jepang.'],
+              m2Title: 'Etika Kerja di Jepang',
+              m2CorrectWhy: '"...sasete itadakemasen ka" meminta izin secara hormat.',
+              m2WrongWhy: 'Pilihan lainnya terkesan kasar atau tidak bertanggung jawab.',
+              m3Title: 'Frasa Kunci',
+              m3Chips: ['休ませていただけませんか: Bolehkah saya izin?', '熱がある: Demam']
+            }
+          }
+        },
+        {
+          id: 100003,
+          sourceTag: {
+            vi: 'JFT-Basic A2 • Câu 3/3 (Đọc hiểu thông báo)',
+            ja: 'JFT-Basic A2 • 第 3/3 問（お知らせ読解）',
+            en: 'JFT-Basic A2 • Question 3/3 (Notice Reading)',
+            my: 'JFT-Basic A2 • မေးခွန်း ၃/၃ (ကြေညာချက် ဖတ်ရှုခြင်း)',
+            id: 'JFT-Basic A2 • Soal 3/3 (Membaca Pengumuman)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi JFT-Basic A2 > Phần Đọc Hiểu > <strong>Thông Báo Ca Làm Việc & Khám Sức Khỏe Tại Xưởng</strong>',
+            ja: 'JFT-Basic A2 基礎テスト > 読解モジュール > <strong>健康診断と勤務時間のお知らせ</strong>',
+            en: 'JFT-Basic A2 Exam > Reading Module > <strong>Factory Health Checkup & Shift Notice</strong>',
+            my: 'JFT-Basic A2 စာမေးပွဲ > စာဖတ်စွမ်းရည် > <strong>စက်ရုံ ကျန်းမာရေးစစ်ဆေးမှုနှင့် အလုပ်ချိန် ကြေညာချက်</strong>',
+            id: 'Ujian JFT-Basic A2 > Pemahaman Bacaan > <strong>Pengumuman Pemeriksaan Kesehatan Pabrik</strong>'
+          },
+          questionHtml: '<div style="background: var(--slate-100); border: 1px dashed var(--slate-300); padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem;"><strong>【<ruby>健康<rt>けんこう</rt></ruby><ruby>診断<rt>しんだん</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>について】</strong><br>・<ruby>日時<rt>にちじ</rt></ruby>：11<ruby>月<rt>がつ</rt></ruby>15<ruby>日<rt>にち</rt></ruby>（<ruby>水<rt>すい</rt></ruby>）<ruby>午前<rt>ごぜん</rt></ruby>9:00〜12:00<br>・<ruby>注意<rt>ちゅうい</rt></ruby>：<ruby>前日<rt>ぜんじつ</rt></ruby>の<ruby>夜<rt>よる</rt></ruby>9<ruby>時<rt>じ</rt></ruby><ruby>以降<rt>いこう</rt></ruby>は、<ruby>水<rt>みず</rt></ruby><ruby>以外<rt>いがい</rt></ruby>は<ruby>何<rt>なに</rt></ruby>も<ruby>食<rt>た</rt></ruby>べないでください。</div><ruby>検査<rt>けんさ</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>の<ruby>夜<rt>よる</rt></ruby>10<ruby>時<rt>じ</rt></ruby>に、<ruby>何<rt>なに</rt></ruby>をしてもいいですか。',
+          options: {
+            A: '<ruby>水<rt>みず</rt></ruby>を<ruby>飲<rt>の</rt></ruby>む。',
+            B: 'パンを<ruby>食<rt>た</rt></ruby>べる。',
+            C: 'ジュースを<ruby>飲<rt>の</rt></ruby>む。',
+            D: 'お<ruby>菓子<rt>かし</rt></ruby>を<ruby>食<rt>た</rt></ruby>べる。'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng đọc hiểu JFT-Basic A2: Tìm thông tin quan trọng trong thông báo y tế, nhà xưởng.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Đọc lướt từ khóa)',
+              m1Points: ['Thông báo ghi rõ: 「水以外は何の食べないでください」 (Ngoài nước lọc ra, không được ăn uống gì khác sau 9h tối).', '10h đêm là sau 9h tối, nên chỉ được uống nước lọc (A).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Y Tế Xưởng',
+              m2CorrectWhy: 'Cụm từ 「水以外」 (ngoại trừ nước) xác nhận chỉ có nước lọc là được phép. Bánh mì, nước ngọt hay bánh kẹo đều chứa đường, làm sai lệch kết quả xét nghiệm máu.',
+              m2WrongWhy: 'Ăn bánh mì (B) hay uống nước ngọt (C) sẽ khiến chỉ số đường huyết tăng vọt, bác sĩ sẽ yêu cầu xét nghiệm lại vào hôm khác.',
+              m3Title: 'Miền 3: Từ Vựng Y Tế JFT',
+              m3Chips: ['健康診断: Khám sức khỏe định kỳ', '前日: Ngày hôm trước', '水以外: Ngoại trừ nước']
+            },
+            ja: {
+              regionalIntro: '生活・実務読解Can-do：簡単な社内掲示の重要条件を正確に読み取ることができる。',
+              m1Title: '直観的状況把握',
+              m1Points: ['「水以外は何の食べないでください」という制限条件の読解。', '正解はA（水を飲む）。'],
+              m2Title: '実務・医学的解説',
+              m2CorrectWhy: '採血検査前は糖分や脂質の摂取が禁止され、水のみ許可されます。',
+              m2WrongWhy: 'パンやジュースは検査結果に影響するため禁止されています。',
+              m3Title: '関連表現',
+              m3Chips: ['健康診断', '前日夜', '水以外']
+            },
+            en: {
+              regionalIntro: 'Reading Can-do: Locating key instructions from internal company notices.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Notice states: "Do not eat anything except water after 9:00 PM the night before".', 'Only drinking water (A) is permitted at 10:00 PM.'],
+              m2Title: 'Practical Health Notice Analysis',
+              m2CorrectWhy: '"Mizu igai" explicitly exempts plain water. Bread, juice or snacks would ruin blood test accuracy.',
+              m2WrongWhy: 'Eating solid food or sweet drinks would invalidate morning test results.',
+              m3Title: 'Vocabulary',
+              m3Chips: ['健康診断: Health checkup', '前日: Day before', '水以外: Except water']
+            },
+            my: {
+              regionalIntro: 'စာဖတ် Can-do - စက်ရုံ ကျန်းမာရေး စစ်ဆေးမှု ကြေညာချက်ကို ဖတ်ရှုနားလည်ခြင်း။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ည ၉ နာရီနောက်ပိုင်း ရေမှလွဲ၍ ဘာမျှမစားရဟု ဖော်ပြထားသည်။', 'ထို့ကြောင့် ရေသောက်ခြင်း (A) သာ ခွင့်ပြုထားသည်။'],
+              m2Title: 'လက်တွေ့ ရှင်းလင်းချက်',
+              m2CorrectWhy: 'သွေးစစ်ရန်အတွက် ရေမှလွဲ၍ မည်သည့်အစားအစာမျှ မစားရပါ။',
+              m2WrongWhy: 'မုန့်စားခြင်း သို့မဟုတ် ဖျော်ရည်သောက်ခြင်း မပြုရပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['健康診断: ကျန်းမာရေးစစ်ဆေးမှု', '水以外: ရေမှလွဲ၍']
+            },
+            id: {
+              regionalIntro: 'Reading Can-do: Menemukan instruksi penting dari pengumuman medis pabrik.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Pengumuman melarang makan apa pun selain air putih setelah pukul 21:00.', 'Maka jam 22:00 hanya boleh minum air putih (A).'],
+              m2Title: 'Penjelasan Medis Pabrik',
+              m2CorrectWhy: '"Mizu igai" mengizinkan air putih saja untuk akurasi tes darah.',
+              m2WrongWhy: 'Roti atau jus dilarang sebelum tes darah.',
+              m3Title: 'Kosakata',
+              m3Chips: ['健康診断: Medical check-up', '水以外: Selain air putih']
+            }
+          }
+        }
+      ],
       tokutei: [
         {
           id: 100011,
@@ -8460,100 +8743,69 @@
           questionHtml: '<ruby>作業<rt>さぎょう</rt></ruby><ruby>改善<rt>かいぜん</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>記述<rt>きじゅつ</rt></ruby>として<ruby>不適切<rt>ふてきせつ</rt></ruby>なものは、<ruby>次の<rt>つぎの</rt></ruby>うちどれか。',
           options: {
             A: 'デジタルピッキングの<ruby>導入<rt>どうにゅう</rt></ruby>により、<ruby>作業中<rt>さぎょうちゅう</rt></ruby>の<ruby>部品<rt>ぶひん</rt></ruby><ruby>落下<rt>らっか</rt></ruby>を<ruby>防止<rt>ぼうし</rt></ruby>することができる。',
-            B: '<ruby>限度<rt>げんど</rt></ruby><ruby>見本<rt>みほん</rt></ruby>の<ruby>作製<rt>さくせい</rt></ruby>により、<ruby>検査基準<rt>けんさきじゅん</rt></ruby>を<ruby>明確<rt>めいかく</rt></ruby>にすることができる。',
-            C: 'ポカよけ<ruby>装置<rt>そうち</rt></ruby>の<ruby>導入<rt>どうにゅう</rt></ruby>により、<ruby>作業<rt>さぎょう</rt></ruby><ruby>忘れ<rt>わすれ</rt></ruby>を<ruby>防止<rt>ぼうし</rt></ruby>することができる。',
-            D: '<ruby>治具<rt>じぐ</rt></ruby>の<ruby>導入<rt>どうにゅう</rt></ruby>により、<ruby>作業<rt>さぎょう</rt></ruby><ruby>精度<rt>せいど</rt></ruby>を<ruby>向上<rt>こうじょう</rt></ruby>させることができる。'
+            B: '<ruby>限度<rt>げんど</rt></ruby><ruby>見本<rt>みほん</rt></ruby>の<ruby>作製<rt>さくせい</rt></ruby>により、<ruby>検査基準<rt>けんさきじゅん</rt></ruby>のバラツキを<ruby>低減<rt>ていげん</rt></ruby>させることができる。',
+            C: '<ruby>治具<rt>じぐ</rt></ruby>の<ruby>改良<rt>かいりょう</rt></ruby>により、ワークの<ruby>着脱<rt>ちゃくだつ</rt></ruby><ruby>時間<rt>じかん</rt></ruby>を<ruby>短縮<rt>たんしゅく</rt></ruby>することができる。',
+            D: 'ポカヨケの<ruby>設置<rt>せっち</rt></ruby>により、<ruby>組付<rt>くみつけ</rt></ruby>ミスの<ruby>流出<rt>りゅうしゅつ</rt></ruby>を<ruby>防止<rt>ぼうし</rt></ruby>することができる。'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '62% (Đúng chuẩn)', B: '12%', C: '16%', D: '10%' },
-          eliminated5050: ['B', 'D'],
-          vocabChips: {
-            vi: [
-              { term: 'デジタルピッキング', mean: 'Hệ thống lấy hàng hiển thị số (Digital Picking)' },
-              { term: 'ポカよけ (Poka-yoke)', mean: 'Cơ cấu chống lỗi bất cẩn trong xưởng' },
-              { term: '治具 (じぐ - Jigu)', mean: 'Đồ gá định vị gia công chính xác' },
-              { term: '限度見本 (げんどみほん)', mean: 'Mẫu giới hạn chuẩn kiểm tra ngoại quan' }
-            ],
-            ja: [
-              { term: 'デジタルピッキング', mean: 'デジタル表示によるピッキング支援システム' },
-              { term: 'ポカよけ', mean: 'うっかりミスや作業忘れを物理的に防ぐ仕組み' },
-              { term: '治具 (じぐ)', mean: '工作物の位置決めや固定を行う補助工具' },
-              { term: '限度見本 (げんどみほん)', mean: '合否判定の境界を示す品質基準見本' }
-            ],
-            en: [
-              { term: 'デジタルピッキング', mean: 'Digital pick-to-light sorting system' },
-              { term: 'ポカよけ (Poka-yoke)', mean: 'Mistake-proofing mechanism' },
-              { term: '治具 (Jigu - Jig/Fixture)', mean: 'Workpiece positioning fixture' },
-              { term: '限度見本', mean: 'Boundary limit sample for quality checks' }
-            ],
-            my: [
-              { term: 'デジタルピッキング', mean: 'မီးအချက်ပြဖြင့် ပစ္စည်းရွေးစနစ်' },
-              { term: 'ポカよけ', mean: 'မေ့လျော့မှားယွင်းမှု ကာကွယ်ရေး ကိရိယာ' },
-              { term: '治具 (ဂျိဂု)', mean: 'တိကျစွာ ကိုင်တွယ်တပ်ဆင်သည့် အထောက်အကူပြု ကိရိယာ' },
-              { term: '限度見本', mean: 'စစ်ဆေးမှု ကန့်သတ်စံ နမူနာ' }
-            ],
-            id: [
-              { term: 'デジタルピッキング', mean: 'Sistem pengambilan suku cadang berpandu lampu digital' },
-              { term: 'ポカよけ (Poka-yoke)', mean: 'Mekanisme pencegah kelalaian kerja' },
-              { term: '治具 (Jig/Fixture)', mean: 'Alat bantu pencekam posisi benda kerja' },
-              { term: '限度見本', mean: 'Sampel batas toleransi inspeksi kualitas' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Phát biểu nào sau đây là không phù hợp về cải tiến công việc?<br><strong>Đáp án A:</strong> "Việc đưa vào hệ thống nhặt hàng kỹ thuật số (digital picking) có thể ngăn chặn linh kiện bị rơi rớt trong khi thao tác."',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Hệ thống lấy hàng kỹ thuật số (Digital Picking) sử dụng đèn LED chỉ dẫn và màn hình hiển thị số lượng để giúp công nhân lấy đúng linh kiện nhanh chóng, chống nhầm mã hàng chứ không có tính năng vật lý ngăn chặn rơi rớt linh kiện xuống sàn. Để chống rơi linh kiện, nhà máy phải dùng khay đựng chuyên dụng hoặc thảm cao su. Do đó phương án A là phát biểu sai bản chất kỹ thuật.',
-              m3Title: 'Miền 3: Từ vựng chuyên ngành liên quan',
-              m3Chips: ['デジタルピッキング: Lấy hàng chỉ thị số', 'ポカよけ: Chống lỗi bất cẩn', '治具 (じぐ): Đồ gá định vị', '限度見本: Mẫu giới hạn chuẩn']
+              regionalIntro: 'Đặc trưng đề thi Kỹ năng nghề Tokutei: Câu hỏi thường bẫy học viên ở phạm vi tác dụng của các công nghệ hỗ trợ sản xuất.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Bắt lỗi sai bản chất công nghệ)',
+              m1Points: [
+                'Digital Picking là hệ thống dùng đèn LED/màn hình số chỉ thị vị trí linh kiện cần lấy nhằm chống lấy nhầm loại hàng (chống Picking Error).',
+                'Nó KHÔNG THỂ ngăn ngừa được việc công nhân sơ ý làm rơi linh kiện (部品落下) trong lúc thao tác bốc dỡ bằng tay.'
+              ],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Nhà Xưởng',
+              m2CorrectWhy: 'Phát biểu A SAI bản chất công nghệ. Để chống rơi linh kiện, nhà xưởng bắt buộc phải dùng khay định hình hoặc lưới hứng bảo hộ.',
+              m2WrongWhy: 'Các phương án B, C, D đều đúng kỹ thuật: Giới hạn mẫu giúp giảm sai lệch cảm quan; Cải tiến đồ gá giúp giảm thời gian gá đặt; Pokayoke giúp chặn đứng lỗi lắp ráp lọt sang công đoạn sau.',
+              m3Title: 'Miền 3: Thuật Ngữ Xưởng Sản Xuất Liên Kết',
+              m3Chips: ['デジタルピッキング: Lấy hàng chỉ thị số', '限度見本: Mẫu giới hạn chuẩn', 'ポカヨケ: Cơ chế chống nhầm lẫn', '治具: Đồ gá chuyên dụng']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>作業改善に関する記述として不適切なものは、次のうちどれか。<br><strong>選択肢A：</strong>「デジタルピッキングの導入により、作業中の部品落下を防止することができる。」',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: 'デジタルピッキングは、ランプや表示器によって取り出すべき部品と数量を指示し、ピッキング作業の正確性とスピードを向上させるシステムです。部品の物理的な落下を防ぐ機能はないため、選択肢Aの記述は不適切です。',
-              m3Title: '第3層：関連する専門用語',
-              m3Chips: ['デジタルピッキング: デジタル表示ピッキング', 'ポカよけ: ミス防止機構', '治具: 位置決め補助工具', '限度見本: 合否境界基準見本']
+              regionalIntro: '製造実務における改善技術の目的と効果を正確に理解しているかを問う設問です。',
+              m1Title: '直観的状況把握',
+              m1Points: ['デジタルピッキングは「取り間違い防止」の仕組みであり、物理的な「落下防止」の効果はありません。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'Aは機能の誤認です。落下防止には専用トレイやネットの設置が必要です。',
+              m2WrongWhy: 'B（限度見本）、C（治具改善）、D（ポカヨケ）はすべて正しい生産改善手法です。',
+              m3Title: '現場用語',
+              m3Chips: ['デジタルピッキング', '限度見本', 'ポカヨケ', '治具']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Which of the following statements is inappropriate regarding work improvement?<br><strong>Option A:</strong> "Implementing digital picking can prevent parts from falling during operations."',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'Digital picking uses light-directed indicators to display which parts to pick and in what quantity, preventing picking errors. It has no physical mechanism to prevent dropped parts, making statement A incorrect.',
-              m3Title: 'Tier 3: Key Technical Vocabulary',
-              m3Chips: ['Digital Picking: Light-directed order picking', 'Poka-yoke: Mistake proofing', 'Jig/Fixture: Workholding tool', 'Limit Sample: Quality standard boundary sample']
+              regionalIntro: 'Manufacturing Excellence Context: Testing the exact scope of lean technologies.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Digital picking prevents picking errors, NOT physical parts dropping.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Option A attributes an impossible physical safety function to an optical pick-to-light system.',
+              m2WrongWhy: 'Options B, C, and D are valid industrial engineering principles.',
+              m3Title: 'Factory Terminology',
+              m3Chips: ['Pick-to-light', 'Boundary sample', 'Poka-yoke', 'Jig/Fixture']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> အလုပ် တိုးတက်ကောင်းမွန်ရေးနှင့် ပတ်သက်၍ မသင့်လျော်သော ဖော်ပြချက်မှာ အောက်ပါတို့အနက် မည်သည့်အရာနည်း။<br><strong>ရွေးချယ်စရာ A -</strong> "ဒီဂျစ်တယ် ပစ်ကင်း စနစ်ကို အသုံးပြုခြင်းဖြင့် ပစ္စည်းများ ပြုတ်ကျခြင်းကို တားဆီးနိုင်သည်။"',
-              m2Title: 'ကဏ္ဍ ၂ - စက်ရုံလက်တွေ့ လုပ်ငန်းခွင် ရှင်းလင်းချက်',
-              m2Content: 'ဒီဂျစ်တယ် ပစ်ကင်းစနစ်သည် မီးအချက်ပြဖြင့် လိုအပ်သော ပစ္စည်းနှင့် အရေအတွက်ကို လမ်းညွှန်ပေးသည့် စနစ်ဖြစ်ပြီး ပစ္စည်းပြုတ်ကျခြင်းကို ရုပ်ပိုင်းဆိုင်ရာအရ မတားဆီးနိုင်ပါ။ ထို့ကြောင့် A သည် မမှန်ကန်သော ဖော်ပြချက် ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - ဆက်စပ် နည်းပညာ ဝေါဟာရများ',
-              m3Chips: ['デジタルピッキング: မီးပြပစ္စည်းရွေးစနစ်', 'ポカよけ: အမှားကာကွယ်ရေးစနစ်', '治具: တပ်ဆင်ရေးကိရိယာ', '限度見本: စစ်ဆေးမှုစံနမူနာ']
+              regionalIntro: 'စက်ရုံ လုပ်ငန်းခွင် တိုးတက်ရေးဆိုင်ရာ မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['Digital picking သည် ပစ္စည်းမှားယူခြင်းကိုသာ ကာကွယ်ပေးပြီး ပစ္စည်းပြုတ်ကျခြင်းကို မကာကွယ်နိုင်ပါ။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ ဖော်ပြချက်သည် မမှန်ကန်ပါ။ ပြုတ်ကျခြင်းမှ ကာကွယ်ရန် သီးသန့်ဗန်းများ လိုအပ်သည်။',
+              m2WrongWhy: 'B, C, D များသည် မှန်ကန်သော နည်းလမ်းများ ဖြစ်ကြသည်။',
+              m3Title: 'စက်ရုံသုံး ဝေါဟာရများ',
+              m3Chips: ['Digital Picking', 'နမူနာစံ', 'Poka-yoke အမှားကာကွယ်မှု']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Manakah pernyataan yang tidak tepat mengenai perbaikan kerja?<br><strong>Pilihan A:</strong> "Penerapan digital picking dapat mencegah komponen terjatuh selama operasi."',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Digital picking menggunakan lampu indikator untuk memandu pengambilan komponen yang benar secara cepat, bukan untuk mencegah fisik komponen terjatuh. Oleh karena itu, pilihan A adalah pernyataan yang salah.',
-              m3Title: 'Domain 3: Kosakata Teknis Terkait',
-              m3Chips: ['Digital Picking: Pengambilan berpandu lampu', 'Poka-yoke: Pencegah kelalaian', 'Jig/Fixture: Alat pencekam benda kerja', 'Limit Sample: Sampel batas toleransi']
+              regionalIntro: 'Konteks Praktik Manufaktur: Menguji pemahaman teknologi perbaikan kerja.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Digital picking mencegah kesalahan pengambilan komponen, BUKAN mencegah komponen jatuh.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Pernyataan A keliru dalam mendefinisikan fungsi pick-to-light.',
+              m2WrongWhy: 'Opsi B, C, dan D merupakan prinsip kaizen yang benar.',
+              m3Title: 'Istilah Pabrik',
+              m3Chips: ['Pick-to-light', 'Sampel batas', 'Poka-yoke', 'Jig']
             }
           }
         },
         {
-          id: 100005,
+          id: 100012,
           sourceTag: {
             vi: 'Bài Làm Thử • Câu 2/3',
             ja: '模擬試験サンプル • 第 2/3 問',
@@ -8562,109 +8814,75 @@
             id: 'Simulasi Ujian Standar • Soal 2/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Phần Kỹ Năng Thực Hành > <strong>Chuyên Đề: Tiêu Chuẩn Hóa & Phiếu Thao Tác Chuẩn</strong>',
-            ja: '標準化問題バンク > 実践技能モジュール > <strong>実務項目：標準化と標準作業票</strong>',
-            en: 'Standardized Question Bank > Skills Module > <strong>Topic: Work Standardization & Standard Work Sheet</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > ကျွမ်းကျင်မှု မော်ဂျူး > <strong>ခေါင်းစဉ် - စံသတ်မှတ်ချက်နှင့် လုပ်ငန်းဇယား</strong>',
-            id: 'Bank Soal Terstandarisasi > Modul Keterampilan > <strong>Topik: Standarisasi Kerja & Lembar Kerja Standar</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Kiến Thức Chuyên Môn > <strong>Chuyên Đề: Tiêu Chuẩn 5S & An Toàn Lao Động</strong>',
+            ja: '標準化問題バンク > 専門モジュール > <strong>実務項目：5Sと安全衛生</strong>',
+            en: 'Standardized Question Bank > Professional Module > <strong>Topic: 5S & Workplace Safety</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > အထူးပြု မော်ဂျူး > <strong>ခေါင်းစဉ် - 5S နှင့် လုပ်ငန်းခွင် ဘေးအန္တရာယ်ကင်းရှင်းရေး</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul Khusus > <strong>Topik: 5S & Keselamatan Kerja</strong>'
           },
-          questionHtml: '<ruby>標準<rt>ひょうじゅん</rt></ruby><ruby>作業<rt>さぎょう</rt></ruby><ruby>票<rt>ひょう</rt></ruby>の<ruby>内容<rt>ないよう</rt></ruby>として<ruby>不適切<rt>ふてきせつ</rt></ruby>なものは、<ruby>次の<rt>つぎの</rt></ruby>うちどれか。',
+          questionHtml: '<ruby>作業現場<rt>さぎょうげんば</rt></ruby>における「５Ｓ」の<ruby>推進<rt>すいしん</rt></ruby>において、「<ruby>整頓<rt>せいとん</rt></ruby>」の<ruby>意味<rt>いみ</rt></ruby>として<ruby>最<rt>もっと</rt></ruby>も<ruby>適切<rt>てきせつ</rt></ruby>なものはどれか。',
           options: {
-            A: '<ruby>品質<rt>ひんしつ</rt></ruby><ruby>規格<rt>きかく</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>内容<rt>ないよう</rt></ruby>',
-            B: '<ruby>改善<rt>かいぜん</rt></ruby><ruby>活動<rt>かつどう</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>内容<rt>ないよう</rt></ruby>',
-            C: '<ruby>異常時<rt>いじょうじ</rt></ruby>のトラブル<ruby>対応<rt>たいおう</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>内容<rt>ないよう</rt></ruby>',
-            D: '<ruby>空調<rt>くうちょう</rt></ruby>、<ruby>照明<rt>しょうめい</rt></ruby>などの<ruby>作業環境<rt>さぎょうかんきょう</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>内容<rt>ないよう</rt></ruby>'
+            A: '<ruby>必要<rt>ひつよう</rt></ruby>なものを、<ruby>誰<rt>だれ</rt></ruby>でもすぐに<ruby>取<rt>と</rt></ruby>り<ruby>出<rt>だ</rt></ruby>せるように、<ruby>置<rt>お</rt></ruby>き<ruby>場所<rt>ばしょ</rt></ruby>や<ruby>置<rt>お</rt></ruby>き<ruby>方<rt>かた</rt></ruby>を<ruby>決<rt>き</rt></ruby>めること。',
+            B: '<ruby>必要<rt>ひつよう</rt></ruby>なものと<ruby>不要<rt>ふよう</rt></ruby>なものを<ruby>分<rt>わ</rt></ruby>けて、<ruby>不要<rt>ふよう</rt></ruby>なものを<ruby>捨<rt>す</rt></ruby>てること。',
+            C: 'ゴミや<ruby>汚<rt>よご</rt></ruby>れをなくし、<ruby>常<rt>つね</rt></ruby>に<ruby>綺麗<rt>きれい</rt></ruby>な<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>保<rt>たも</rt></ruby>つこと。',
+            D: '<ruby>決<rt>き</rt></ruby>められたルールを<ruby>守<rt>まも</rt></ruby>る<ruby>習慣<rt>しゅうかん</rt></ruby>を身につけること。'
           },
-          correctAnswer: 'B',
-          pollPcts: { A: '15%', B: '65% (Đúng chuẩn)', C: '12%', D: '8%' },
-          eliminated5050: ['A', 'D'],
-          vocabChips: {
-            vi: [
-              { term: '標準作業票 (ひょうじゅんさぎょうひょう)', mean: 'Phiếu thao tác chuẩn' },
-              { term: '品質規格 (ひんしつきかく)', mean: 'Quy chuẩn chất lượng' },
-              { term: '異常時 (いじょうじ)', mean: 'Khi phát sinh sự cố bất thường' },
-              { term: '作業環境 (さぎょうかんきょう)', mean: 'Môi trường làm việc' }
-            ],
-            ja: [
-              { term: '標準作業票', mean: '標準作業の順序や時間を記載した作業基準票' },
-              { term: '品質規格', mean: '製品や工程が満たすべき品質水準' },
-              { term: '異常時トラブル', mean: '設備停止や品質異常が発生した際の対応' },
-              { term: '作業環境', mean: '温度、照度、換気などの職場環境' }
-            ],
-            en: [
-              { term: 'Standard Work Sheet', mean: 'Document detailing sequential standard operations' },
-              { term: 'Quality Standards', mean: 'Predefined quality inspection criteria' },
-              { term: 'Abnormal Contingency', mean: 'Troubleshooting steps during anomalies' },
-              { term: 'Work Environment', mean: 'Ambient conditions (lighting, airflow, temperature)' }
-            ],
-            my: [
-              { term: '標準作業票', mean: 'စံလုပ်ငန်းစဉ် ညွှန်ကြားချက်ဇယား' },
-              { term: '品質規格', mean: 'အရည်အသွေး စံချိန်စံညွှန်း' },
-              { term: '異常時', mean: 'ပုံမှန်မဟုတ်သော အခြေအနေ' },
-              { term: '作業環境', mean: 'လုပ်ငန်းခွင် ပတ်ဝန်းကျင်' }
-            ],
-            id: [
-              { term: 'Standard Work Sheet', mean: 'Lembar kerja standar operasional' },
-              { term: 'Standar Kualitas', mean: 'Kriteria baku mutu kualitas' },
-              { term: 'Situasi Anomali', mean: 'Penanganan saat terjadi masalah abnormal' },
-              { term: 'Lingkungan Kerja', mean: 'Kondisi ruang kerja (suhu, pencahayaan)' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ B',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ B',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Điều nào sau đây là không phù hợp trong nội dung của Phiếu thao tác chuẩn?<br><strong>Đáp án B:</strong> "Nội dung liên quan đến các hoạt động cải tiến (Kaizen)."',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Phiếu thao tác chuẩn là văn bản chốt lại hiện trạng quy trình chuẩn hóa đang được áp dụng ổn định. Các hoạt động cải tiến (Kaizen) là quá trình nghiên cứu thử nghiệm và chỉ được đưa vào phiếu thao tác chuẩn sau khi đã hoàn thành thử nghiệm và ban hành chuẩn mới. Do đó phương án B không thuộc nội dung phiếu hiện hành.',
-              m3Title: 'Miền 3: Từ vựng chuyên ngành liên quan',
-              m3Chips: ['標準作業票: Phiếu thao tác chuẩn', '品質規格: Quy cách chất lượng', '異常時対応: Xử lý sự cố bất thường', '作業環境: Môi trường làm việc']
+              regionalIntro: 'Đặc trưng lý thuyết 5S xưởng sản xuất: Phân biệt chính xác giữa Sàng lọc (Seiri) và Sắp xếp (Seiton).',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Định vị 3 định: Định vị, Định danh, Định lượng)',
+              m1Points: ['Chỉnh Đốn (整頓 - Seiton) là sắp xếp đồ đạc cần thiết sao cho ai cần cũng lấy được trong vòng 30 giây.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Nhà Xưởng',
+              m2CorrectWhy: 'Phương án A mô tả chính xác bản chất của Seiton: Quy định vị trí, cách đặt và số lượng.',
+              m2WrongWhy: 'Phương án B là Sàng lọc (Seiri). Phương án C là Sạch sẽ (Seiso). Phương án D là Sẵn sàng (Shitsuke).',
+              m3Title: 'Miền 3: Thuật Ngữ 5S Liên Kết',
+              m3Chips: ['整頓: Chỉnh đốn (Seiton)', '整理: Sàng lọc (Seiri)', '清掃: Sạch sẽ (Seiso)', '躾: Rèn luyện (Shitsuke)']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は B です',
-              statusWrong: '不正解です！正解の選択肢は B です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>標準作業票の内容として不適切なものは、次のうちどれか。<br><strong>選択肢B：</strong>「改善活動に関する内容」',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '標準作業票は、現時点で合意・確定された標準的な作業手順、時間、安全、品質基準を現場作業者に明示するためのものです。改善活動そのものは標準が定まった後に行われる試行段階の活動であり、確定した標準作業票の記載項目ではありません。',
-              m3Title: '第3層：関連する専門用語',
-              m3Chips: ['標準作業票: 作業基準文書', '品質規格: 品質判定基準', '異常時対応: トラブル復旧手順', '作業環境: 作業環境保全']
+              regionalIntro: '5S活動における各ステップの定義を明確に判別する問題。',
+              m1Title: '直観的状況把握',
+              m1Points: ['「整頓」とは、必要なものを誰でもすぐ取り出せる状態にすること。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'Aが整頓の定義です。Bは「整理」、Cは「清掃」、Dは「躾」に該当します。',
+              m2WrongWhy: '混同しやすい整理と整頓の明確な区別が求められます。',
+              m3Title: '現場用語',
+              m3Chips: ['整理', '整頓', '清掃', '清潔', '躾']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS B',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS B',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Which of the following is inappropriate for the contents of a Standard Work Sheet?<br><strong>Option B:</strong> "Contents regarding ongoing kaizen/improvement activities."',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'A Standard Work Sheet documents the current, established standard operating procedure. Ongoing improvement initiatives are evaluated separately and only incorporated after standardization.',
-              m3Title: 'Tier 3: Key Technical Vocabulary',
-              m3Chips: ['Standard Work Sheet: SOP Sheet', 'Quality Standard: Inspection spec', 'Anomalous Action: Contingency protocol', 'Work Environment: Physical surroundings']
+              regionalIntro: '5S Methodology: Distinct definitions of Seiri vs Seiton.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Seiton (Set in order) means arranging needed items so they are easy to use and find.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Option A is the official definition of Seiton (Set in Order).',
+              m2WrongWhy: 'B is Sort (Seiri), C is Shine (Seiso), D is Sustain (Shitsuke).',
+              m3Title: 'Lean Terminology',
+              m3Chips: ['Sort (Seiri)', 'Set in Order (Seiton)', 'Shine (Seiso)', 'Sustain (Shitsuke)']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ B ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ B ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> စံလုပ်ငန်းစဉ်ဇယား၏ အကြောင်းအရာအဖြစ် မသင့်လျော်သောအရာမှာ အောက်ပါတို့အနက် မည်သည့်အရာနည်း။<br><strong>ရွေးချယ်စရာ B -</strong> "တိုးတက်ကောင်းမွန်ရေး (Kaizen) လုပ်ဆောင်ချက်များနှင့် သက်ဆိုင်သော အကြောင်းအရာ"',
-              m2Title: 'ကဏ္ဍ ၂ - စက်ရုံလက်တွေ့ လုပ်ငန်းခွင် ရှင်းလင်းချက်',
-              m2Content: 'စံလုပ်ငန်းစဉ်ဇယားသည် လက်ရှိ အတည်ပြုထားသော စံသတ်မှတ်ချက်များကိုသာ ဖော်ပြခြင်းဖြစ်ပြီး စဉ်ဆက်မပြတ် တိုးတက်ရေးလုပ်ငန်းစဉ်များကို စမ်းသပ်အတည်ပြုပြီးမှသာ ဇယားသစ်အဖြစ် ထည့်သွင်းရသည်။',
-              m3Title: 'ကဏ္ဍ ၃ - ဆက်စပ် နည်းပညာ ဝေါဟာရများ',
-              m3Chips: ['標準作業票: စံလုပ်ငန်းစဉ်ဇယား', '品質規格: အရည်အသွေးစံချိန်စံညွှန်း', '異常時対応: အရေးပေါ်ဖြေရှင်းမှု', '作業環境: လုပ်ငန်းခွင်အခြေအနေ']
+              regionalIntro: '၅S လုပ်ငန်းခွင် စံချိန်စံညွှန်း မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['Seiton ဆိုသည်မှာ လိုအပ်သည့်ပစ္စည်းကို လွယ်ကူစွာ ယူနိုင်ရန် စနစ်တကျ ထားရှိခြင်း ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် Seiton ၏ အဓိပ္ပာယ်ဖွင့်ဆိုချက် မှန်ကန်ပါသည်။',
+              m2WrongWhy: 'B သည် Seiri (စစ်ထုတ်ခြင်း)၊ C သည် Seiso (သန့်ရှင်းရေး)၊ D သည် Shitsuke (စည်းကမ်းလိုက်နာခြင်း) ဖြစ်သည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['Seiton စနစ်တကျနေရာချထားခြင်း', 'Seiri စစ်ထုတ်ခြင်း', '၅S စနစ်']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH B',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH B',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Manakah yang tidak tepat sebagai isi dari Lembar Kerja Standar?<br><strong>Pilihan B:</strong> "Isi mengenai aktivitas perbaikan (Kaizen) yang sedang berjalan."',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Lembar kerja standar menetapkan prosedur kerja baku yang sudah final. Aktivitas perbaikan yang masih dieksplorasi tidak dicatat di sini sampai prosedur baru diresmikan.',
-              m3Title: 'Domain 3: Kosakata Teknis Terkait',
-              m3Chips: ['Standard Work Sheet: Lembar kerja standar', 'Standar Mutu: Spesifikasi mutu', 'Tindakan Anomali: Prosedur darurat', 'Lingkungan Kerja: Kondisi fisik ruang kerja']
+              regionalIntro: 'Metodologi 5S: Membedakan Seiri (Ringkas) dan Seiton (Rapi).',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Seiton (Rapi) berarti menata barang agar siapa pun dapat mengambilnya dengan cepat.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Opsi A adalah definisi tepat dari Seiton (Rapi).',
+              m2WrongWhy: 'B adalah Ringkas (Seiri), C adalah Resik (Seiso), D adalah Rajin (Shitsuke).',
+              m3Title: 'Istilah 5S',
+              m3Chips: ['Seiton (Rapi)', 'Seiri (Ringkas)', 'Seiso (Resik)', 'Shitsuke (Rajin)']
             }
           }
         },
         {
-          id: 100010,
+          id: 100013,
           sourceTag: {
             vi: 'Bài Làm Thử • Câu 3/3',
             ja: '模擬試験サンプル • 第 3/3 問',
@@ -8673,759 +8891,1246 @@
             id: 'Simulasi Ujian Standar • Soal 3/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Phần Nghiệp Vụ Quản Lý > <strong>Chuyên Đề: Phân Tích Công Tác & Thao Tác Phối Hợp</strong>',
-            ja: '標準化問題バンク > 実務管理モジュール > <strong>実務項目：工程分析と連合作業分析</strong>',
-            en: 'Standardized Question Bank > Operations Module > <strong>Topic: Process Analysis & Man-Machine Chart</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > လုပ်ငန်းခွင် မော်ဂျူး > <strong>ခေါင်းစဉ် - လုပ်ငန်းစဉ်နှင့် စက်/လူ ပူးတွဲလုပ်ကိုင်မှု</strong>',
-            id: 'Bank Soal Terstandarisasi > Modul Operasional > <strong>Topik: Analisis Proses & Bagan Man-Machine</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Kiến Thức Chuyên Môn > <strong>Chuyên Đề: Quản Lý Chất Lượng & Truy Xuất Nguồn Gốc</strong>',
+            ja: '標準化問題バンク > 専門モジュール > <strong>実務項目：品質管理とトレーサビリティ</strong>',
+            en: 'Standardized Question Bank > Professional Module > <strong>Topic: Quality Control & Traceability</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > အထူးပြု မော်ဂျူး > <strong>ခေါင်းစဉ် - အရည်အသွေး ထိန်းချုပ်မှုနှင့် ခြေရာခံနိုင်မှု</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul Khusus > <strong>Topik: Kontrol Kualitas & Ketertelusuran</strong>'
           },
-          questionHtml: '<ruby>連合<rt>れんごう</rt></ruby><ruby>作業分析<rt>さぎょうぶんせき</rt></ruby>に<ruby>関す<rt>かんす</rt></ruby>る<ruby>記述<rt>きじゅつ</rt></ruby>として<ruby>最も<rt>もっとも</rt></ruby><ruby>適切<rt>てきせつ</rt></ruby>なものは、<ruby>次の<rt>つぎの</rt></ruby>うちどれか。',
+          questionHtml: '<ruby>製造工程<rt>せいぞうこうてい</rt></ruby>で<ruby>不良品<rt>ふりょうひん</rt></ruby>が<ruby>発生<rt>はっせい</rt></ruby>した<ruby>際<rt>さい</rt></ruby>の<ruby>処置<rt>しょち</rt></ruby>として、<ruby>最<rt>もっと</rt></ruby>も<ruby>適切<rt>てきせつ</rt></ruby>なものはどれか。',
           options: {
-            A: '1<ruby>人<rt>にん</rt></ruby>の<ruby>作業者<rt>さぎょうしゃ</rt></ruby>が1<ruby>台<rt>だい</rt></ruby>の<ruby>機械<rt>きかい</rt></ruby>を<ruby>担当<rt>たんとう</rt></ruby>する<ruby>協同作業<rt>きょうどうさぎょう</rt></ruby>について、その<ruby>効率<rt>こうりつ</rt></ruby>を<ruby>高め<rt>たかめ</rt></ruby>るための<ruby>分析<rt>ぶんせき</rt></ruby>を<ruby>行う<rt>おこなう</rt></ruby>には、<ruby>稼働<rt>かどう</rt></ruby><ruby>分析<rt>ぶんせき</rt></ruby>の<ruby>方が<rt>ほうが</rt></ruby><ruby>適し<rt>てきし</rt></ruby>ている。',
-            B: '<ruby>連合<rt>れんごう</rt></ruby><ruby>作業分析<rt>さぎょうぶんせき</rt></ruby>で<ruby>利用<rt>りよう</rt></ruby>されるマンマシンチャートには、<ruby>作業者<rt>さぎょうしゃ</rt></ruby>の<ruby>単独<rt>たんどく</rt></ruby><ruby>作業<rt>さぎょう</rt></ruby>は<ruby>記入<rt>きにゅう</rt></ruby>せず、<ruby>連合<rt>れんごう</rt></ruby><ruby>作業<rt>さぎょう</rt></ruby>のみを<ruby>記入<rt>きにゅう</rt></ruby>して<ruby>分析<rt>ぶんせき</rt></ruby>する。',
-            C: '<ruby>複数<rt>ふくすう</rt></ruby>の<ruby>作業者<rt>さぎょうしゃ</rt></ruby>が<ruby>同時<rt>どうじ</rt></ruby><ruby>並列的<rt>へいれつてき</rt></ruby>に<ruby>協同<rt>きょうどう</rt></ruby>して<ruby>同一<rt>どういつ</rt></ruby>の<ruby>対象物<rt>たいしょうぶつ</rt></ruby>に<ruby>対する<rt>たいする</rt></ruby><ruby>作業<rt>さぎょう</rt></ruby>の<ruby>改善<rt>かいぜん</rt></ruby>を<ruby>行う<rt>おこなう</rt></ruby>には、PTS<ruby>法<rt>ほう</rt></ruby>の<ruby>分析<rt>ぶんせき</rt></ruby>でなく、<ruby>連合<rt>れんごう</rt></ruby><ruby>作業分析<rt>さぎょうぶんせき</rt></ruby>の<ruby>方が<rt>ほうが</rt></ruby><ruby>適し<rt>てきし</rt></ruby>ている。',
-            D: '<ruby>連合<rt>れんごう</rt></ruby><ruby>作業分析<rt>さぎょうぶんせき</rt></ruby>では<ruby>機械<rt>きかい</rt></ruby>の<ruby>不<rt>ふ</rt></ruby><ruby>稼働時間<rt>かどうじかん</rt></ruby>は<ruby>記録<rt>きろく</rt></ruby>せず、<ruby>作業者<rt>さぎょうしゃ</rt></ruby>の<ruby>行動<rt>こうどう</rt></ruby><ruby>時間<rt>じかん</rt></ruby>のみを<ruby>記録<rt>きろく</rt></ruby>して<ruby>分析<rt>ぶんせき</rt></ruby>する。'
+            A: 'ただちにラインを<ruby>停止<rt>ていし</rt></ruby>し、<ruby>不良品<rt>ふりょうひん</rt></ruby>を<ruby>赤色<rt>あかいろ</rt></ruby>の<ruby>専用箱<rt>せんようばこ</rt></ruby>に<ruby>隔離<rt>かくり</rt></ruby>して<ruby>責任者<rt>せきにんしゃ</rt></ruby>へ<ruby>報告<rt>ほうこく</rt></ruby>する。',
+            B: '<ruby>目立<rt>めだ</rt></ruby>たないキズであれば、そのまま<ruby>次工程<rt>じこうてい</rt></ruby>へ<ruby>流<rt>なが</rt></ruby>して<ruby>作業<rt>さぎょう</rt></ruby>を<ruby>続行<rt>ぞっこう</rt></ruby>する。',
+            C: 'あとで<ruby>直<rt>なお</rt></ruby>すために、<ruby>良品箱<rt>りょうひんばこ</rt></ruby>の<ruby>底<rt>そこ</rt></ruby>に<ruby>隠<rt>かく</rt></ruby>しておく。',
+            D: '<ruby>自分<rt>じぶん</rt></ruby>の<ruby>判断<rt>はんだん</rt></ruby>だけで<ruby>直<rt>なお</rt></ruby>し、<ruby>誰<rt>だれ</rt></ruby>にも<ruby>言<rt>い</rt></ruby>わずにそのまま<ruby>出荷<rt>しゅっか</rt></ruby>する。'
           },
-          correctAnswer: 'C',
-          pollPcts: { A: '14%', B: '18%', C: '58% (Đúng chuẩn)', D: '10%' },
-          eliminated5050: ['B', 'D'],
-          vocabChips: {
-            vi: [
-              { term: '連合作業分析 (れんごうさぎょうぶんせき)', mean: 'Phân tích thao tác phối hợp (người - máy)' },
-              { term: 'マンマシンチャート (Man-Machine Chart)', mean: 'Biểu đồ liên hợp công nhân và máy móc' },
-              { term: '不稼働時間 (ふかどうじかん)', mean: 'Thời gian lãng phí, máy chờ người hoặc người chờ máy' },
-              { term: '協同作業 (きょうどうさぎょう)', mean: 'Thao tác phối hợp đồng đội' }
-            ],
-            ja: [
-              { term: '連合作業分析', mean: '人と機械、または複数人の協同作業を同期最適化する分析手法' },
-              { term: 'マンマシンチャート', mean: '人と機械の時間的関係を図式化した連合作業図' },
-              { term: '不稼働時間', mean: '待ち時間や停止時間などのムダ時間' },
-              { term: '協同作業', mean: '複数作業者が同一対象物を並行作業すること' }
-            ],
-            en: [
-              { term: 'Gang Work Analysis', mean: 'Man-machine or multi-operator collaborative process analysis' },
-              { term: 'Man-Machine Chart', mean: 'Time-relationship diagram between operator and equipment' },
-              { term: 'Idle Time', mean: 'Waiting time resulting in operational waste' },
-              { term: 'Collaborative Work', mean: 'Multiple workers handling the same object simultaneously' }
-            ],
-            my: [
-              { term: '連合作業分析', mean: 'လူနှင့် စက် ပူးတွဲလုပ်ဆောင်မှု စိစစ်ခြင်း' },
-              { term: 'マンマシンチャート', mean: 'လူနှင့် စက် အချိန်ညှိဇယား' },
-              { term: '不稼働時間', mean: 'စောင့်ဆိုင်းချိန် (အလေအလွင့်အချိန်)' },
-              { term: '協同作業', mean: 'ပူးပေါင်းလုပ်ဆောင်မှု' }
-            ],
-            id: [
-              { term: 'Analisis Kerja Kombinasi', mean: 'Sinkronisasi efisiensi antara manusia dan mesin' },
-              { term: 'Bagan Man-Machine', mean: 'Diagram keterikatan waktu kerja operator dan mesin' },
-              { term: 'Waktu Menganggur', mean: 'Idle time yang terbuang' },
-              { term: 'Kerja Sama Tim', mean: 'Operasi paralel beberapa pekerja pada satu objek' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ C',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ C',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Phát biểu nào sau đây là phù hợp nhất về Phân tích thao tác phối hợp (người - máy)?<br><strong>Đáp án C:</strong> "Khi nhiều người cùng phối hợp làm việc song song trên cùng một sản phẩm, việc phân tích cải tiến bằng phương pháp Phân tích thao tác phối hợp sẽ thích hợp hơn phương pháp PTS."',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Phân tích thao tác phối hợp (Man-Machine Chart) được tạo ra để triệt tiêu thời gian chờ lãng phí khi người và máy hoặc nhiều người làm việc chung. Phương pháp PTS chỉ đo đạc các động tác vi mô của một cá nhân, không tối ưu được sự nhịp nhàng giữa một tập thể. Vì vậy phương án C là chuẩn xác nhất.',
-              m3Title: 'Miền 3: Từ vựng chuyên ngành liên quan',
-              m3Chips: ['連合作業分析: Phân tích thao tác phối hợp', 'マンマシンチャート: Biểu đồ người - máy', '不稼働時間: Thời gian lãng phí/chờ đợi', '協同作業: Phối hợp đồng đội']
+              regionalIntro: 'Đặc trưng xử lý sự cố chất lượng: 3 nguyên tắc Không nhận - Không tạo - Không chuyển giao sản phẩm lỗi.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Quy tắc Dừng - Gọi - Chờ)',
+              m1Points: ['Khi phát hiện bất thường: Dừng máy (Stop) -> Cách ly hàng lỗi vào thùng đỏ -> Báo cáo quản lý (Call).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Nhà Xưởng',
+              m2CorrectWhy: 'Phương án A tuân thủ tuyệt đối quy trình kiểm soát sản phẩm không phù hợp (Non-conforming product control).',
+              m2WrongWhy: 'Các phương án B, C, D đều vi phạm nghiêm trọng đạo đức nghề nghiệp và quy chuẩn ISO 9001.',
+              m3Title: 'Miền 3: Thuật Ngữ Xử Lý Lỗi',
+              m3Chips: ['異常処置: Xử lý bất thường', '隔離: Cách ly sản phẩm lỗi', '後工程はお客様: Công đoạn sau là khách hàng']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は C です',
-              statusWrong: '不正解です！正解の選択肢は C です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>連合作業分析に関する記述として最も適切なものは、次のうちどれか。<br><strong>選択肢C：</strong>「複数の作業者が同時並列的に協同して同一の対象物に対する作業の改善を行うには、PTS法の分析でなく、連合作業分析の方が適している。」',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '連合作業分析（マンマシンチャート等）は、人と機械、または複数人の作業者の待ち時間を把握し、作業のバランスを図る手法です。PTS法は個人の微細な動作時間を分析する手法であるため、複数人の協同作業の改善には連合作業分析が最も適しています。',
-              m3Title: '第3層：関連する専門用語',
-              m3Chips: ['連合作業分析: 協同作業の最適化', 'マンマシンチャート: 人と機械の連合作業図', '不稼働時間: 待ち時間のロス', '協同作業: 複数人並行作業']
+              regionalIntro: '品質異常発生時の「止める・呼ぶ・待つ」の原則を問う設問。',
+              m1Title: '直観的状況把握',
+              m1Points: ['不良品の流出を完全に防ぐ処置としてAが唯一の正解。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '後工程はお客様の原則に基づき、不良品は直ちに隔離し報告します。',
+              m2WrongWhy: '隠蔽や自己判断での修正は重大な品質事故を招きます。',
+              m3Title: '現場用語',
+              m3Chips: ['止める・呼ぶ・待つ', '不良品隔離', 'トレーサビリティ']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS C',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS C',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Which statement is most appropriate regarding collaborative work analysis?<br><strong>Option C:</strong> "When multiple workers cooperate in parallel on the same object, collaborative work analysis is more suitable than PTS analysis."',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'Collaborative analysis (Man-Machine charts) eliminates idle waiting time between multiple operators or machines. PTS measures micro-movements of an individual, making collaborative analysis far superior for team operations. Option C is correct.',
-              m3Title: 'Tier 3: Key Technical Vocabulary',
-              m3Chips: ['Gang Work Analysis: Collaborative workflow', 'Man-Machine Chart: Operational sync chart', 'Idle Time: Unproductive waiting time', 'Team Work: Parallel cooperation']
+              regionalIntro: 'Quality Control Standard: Stop-Call-Wait principle.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Immediate line stop, quarantine in red bin, and reporting to supervisor (Option A).'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Strict adherence to non-conforming product quarantine prevents customer defects.',
+              m2WrongWhy: 'Concealing or self-reworking defects without authorization violates ISO 9001.',
+              m3Title: 'Quality Terms',
+              m3Chips: ['Stop-Call-Wait', 'Quarantine bin', 'Zero Defect Policy']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ C ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ C ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> ပူးတွဲလုပ်ဆောင်မှု စိစစ်ခြင်းနှင့် ပတ်သက်၍ အသင့်လျော်ဆုံး ဖော်ပြချက်မှာ အောက်ပါတို့အနက် မည်သည့်အရာနည်း။<br><strong>ရွေးချယ်စရာ C -</strong> "အလုပ်သမားအများအပြား တစ်ပြိုင်နက်တည်း အတူတကွ ပူးပေါင်းလုပ်ဆောင်သော လုပ်ငန်းခွင် တိုးတက်စေရန်အတွက် ပူးတွဲလုပ်ဆောင်မှု စိစစ်ခြင်းကသာ အသင့်လျော်ဆုံး ဖြစ်သည်။"',
-              m2Title: 'ကဏ္ဍ ၂ - စက်ရုံလက်တွေ့ လုပ်ငန်းခွင် ရှင်းလင်းချက်',
-              m2Content: 'ပူးတွဲလုပ်ဆောင်မှု စိစစ်ခြင်းသည် လူနှင့် စက်ကြား အချိန်ဖြုန်းတီးမှုကို ဖော်ထုတ်ပေးသောကြောင့် ပူးပေါင်းလုပ်ဆောင်မှုတွင် အသင့်လျော်ဆုံး ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - ဆက်စပ် နည်းပညာ ဝေါဟာရများ',
-              m3Chips: ['連合作業分析: ပူးတွဲလုပ်ဆောင်မှု စိစစ်ခြင်း', 'マンマシンチャート: လူနှင့် စက် အချိန်ညှိဇယား', '不稼働時間: စောင့်ဆိုင်းချိန်', '協同作業: ပူးပေါင်း လုပ်ဆောင်မှု']
+              regionalIntro: 'အရည်အသွေးဆိုင်ရာ ပြဿနာ ဖြေရှင်းနည်း မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ချွတ်ယွင်းချက်တွေ့ပါက စက်ရပ်ခြင်း၊ သီးသန့်ခွဲထုတ်ခြင်းနှင့် သတင်းပို့ခြင်း (A) ပြုလုပ်ရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် မှန်ကန်သော အရေးယူဆောင်ရွက်မှု ဖြစ်ပါသည်။',
+              m2WrongWhy: 'ဖုံးကွယ်ထားခြင်း သို့မဟုတ် မိမိသဘောဖြင့် ပြုပြင်ခြင်း မပြုရပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['စက်ရပ်တန့်ခြင်း', 'သီးသန့်ခွဲထုတ်ခြင်း', 'အရည်အသွေးထိန်းချုပ်မှု']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH C',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH C',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Manakah pernyataan yang paling tepat mengenai analisis kerja kombinasi (連合作業分析)?<br><strong>Pilihan C:</strong> "Untuk meningkatkan efisiensi ketika beberapa operator berkolaborasi secara bersamaan pada objek yang sama, metode analisis kerja kombinasi lebih cocok dibandingkan metode PTS."',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Analisis kerja kombinasi dirancang khusus untuk memetakan dan menyinkronkan waktu kerja antar-operator atau mesin untuk menghilangkan waktu tunggu. Oleh karena itu pilihan C tepat.',
-              m3Title: 'Domain 3: Kosakata Teknis Terkait',
-              m3Chips: ['Analisis Kerja Kombinasi: Sinkronisasi efisiensi', 'Bagan Man-Machine: Diagram waktu kerja', 'Waktu Menganggur: Idle time', 'Kerja Sama Tim: Operasi paralel tim']
+              regionalIntro: 'Prinsip Penanganan Cacat Kualitas: Stop-Call-Wait.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Segera hentikan jalur, pisahkan barang cacat ke kotak merah, dan laporkan (Opsi A).'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Karantina produk tidak sesuai mencegah cacat lolos ke pelanggan.',
+              m2WrongWhy: 'Menyembunyikan atau memperbaiki sendiri tanpa wewenang dilarang keras.',
+              m3Title: 'Istilah Kualitas',
+              m3Chips: ['Stop-Call-Wait', 'Kotak karantina', 'Zero Defect']
             }
           }
         }
       ],
       jlpt: [
         {
-          id: 200001,
+          id: 100021,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 1/3 (JLPT N3-N2)',
-            ja: '模擬試験サンプル • 第 1/3 問 (JLPT N3-N2)',
-            en: 'Sample Practice Test • Question 1/3 (JLPT N3-N2)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၁/၃ (JLPT N3-N2)',
-            id: 'Simulasi Ujian Standar • Soal 1/3 (JLPT N3-N2)'
+            vi: 'Bài Làm Thử • Câu 1/3',
+            ja: '模擬試験サンプル • 第 1/3 問',
+            en: 'Sample Practice Test • Question 1/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၁/၃',
+            id: 'Simulasi Ujian Standar • Soal 1/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Tiếng Nhật Công Sở > <strong>Kính Ngữ Giao Tiếp Doanh Nghiệp</strong>',
-            ja: '標準化問題バンク > ビジネス日本語 > <strong>実務敬語：取引先への電話対応</strong>',
-            en: 'Standardized Question Bank > Business Japanese > <strong>Corporate Keigo & Communications</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီးပွားရေး ဂျပန်စာ > <strong>ယဉ်ကျေးသော အသုံးအနှုန်း (Keigo)</strong>',
-            id: 'Bank Soal Terstandarisasi > Bahasa Jepang Bisnis > <strong>Keigo & Komunikasi Perusahaan</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Nhật JLPT > <strong>Chuyên Đề: Ngữ Pháp & Kính Ngữ Thương Mại</strong>',
+            ja: '標準化問題バンク > JLPTモジュール > <strong>実務項目：ビジネス文法と敬語表現</strong>',
+            en: 'Standardized Question Bank > JLPT Module > <strong>Topic: Business Grammar & Keigo</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > JLPT မော်ဂျူး > <strong>ခေါင်းစဉ် - စီးပွားရေး သဒ္ဒါနှင့် ယဉ်ကျေးသော စကားအသုံးအနှုန်း</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul JLPT > <strong>Topik: Tata Bahasa Bisnis & Keigo</strong>'
           },
-          questionHtml: '<ruby>取引先<rt>とりひきさき</rt></ruby>の<ruby>部長<rt>ぶちょう</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>をかける<ruby>際<rt>さい</rt></ruby>、<ruby>最も<rt>もっとも</rt></ruby><ruby>適切<rt>てきせつ</rt></ruby>な<ruby>敬語<rt>けいご</rt></ruby><ruby>表現<rt>ひょうげん</rt></ruby>はどれか。',
+          questionHtml: 'お客様に向かって「明日、田中社長に会いますか」と尋ねる場合の敬語表現として、最も適切なものはどれか。',
           options: {
-            A: '「<ruby>恐れ入ります<rt>おそれいります</rt></ruby>が、<ruby>田中<rt>たなか</rt></ruby><ruby>部長<rt>ぶちょう</rt></ruby>は<ruby>いらっしゃいます<rt></rt></ruby>でしょうか。」',
-            B: '「<ruby>田中<rt>たなか</rt></ruby><ruby>部長<rt>ぶちょう</rt></ruby>は<ruby>おられます<rt></rt></ruby>か。」',
-            C: '「<ruby>田中<rt>たなか</rt></ruby><ruby>部長<rt>ぶちょう</rt></ruby>は<ruby>参られます<rt>まいられます</rt></ruby>でしょうか。」',
-            D: '「<ruby>恐れ入ります<rt>おそれいります</rt></ruby>が、<ruby>田中<rt>たなか</rt></ruby><ruby>部長<rt>ぶちょう</rt></ruby>が<ruby>申されます<rt>もうされます</rt></ruby>か。」'
+            A: '明日、田中社長にお目にかかりますか。',
+            B: '明日、田中社長にお会いになりますか。',
+            C: '明日、田中社長に拝見しますか。',
+            D: '明日、田中社長にご覧になりますか。'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '72% (Đúng chuẩn)', B: '18%', C: '6%', D: '4%' },
-          eliminated5050: ['C', 'D'],
-          vocabChips: {
-            vi: [
-              { term: '取引先 (とりひきさき)', mean: 'Đối tác kinh doanh / Khách hàng' },
-              { term: '恐れ入りますが', mean: 'Xin thứ lỗi vì làm phiền (Mở đầu trang trọng)' },
-              { term: 'いらっしゃいます', mean: 'Tôn kính ngữ (尊敬語) của います / きます' },
-              { term: '参る (まいる)', mean: 'Khiêm nhường ngữ (謙譲語 - chỉ dùng cho bản thân)' }
-            ],
-            ja: [
-              { term: '取引先', mean: '商品やサービスを継続して売買する相手先企業' },
-              { term: '恐れ入りますが', mean: '相手に配慮しながら用件を伝える前置きの言葉' },
-              { term: 'いらっしゃる', mean: '「いる・来る・行く」の尊敬語' },
-              { term: '参る (まいる)', mean: '「行く・来る」の謙譲語（自分側に対して使用）' }
-            ],
-            en: [
-              { term: '取引先 (Client/Partner)', mean: 'Business partner / Corporate client' },
-              { term: '恐れ入りますが', mean: 'Excuse me for troubling you (Polite cushion)' },
-              { term: 'いらっしゃいます', mean: 'Honorific form of iru/kuru/iku' },
-              { term: '参る (Mairu)', mean: 'Humble form (only used for oneself/in-group)' }
-            ],
-            my: [
-              { term: '取引先', mean: 'စီးပွားဖက် ကုမ္ပဏီ / မိတ်ဖက်' },
-              { term: '恐れ入りますが', mean: 'အားနာပါသည် (ယဉ်ကျေးသော စကားအစ)' },
-              { term: 'いらっしゃいます', mean: 'ရှိပါသလား (လေးစားသမှု စကားလုံး)' },
-              { term: '参る', mean: 'ကိုယ်တိုင်အတွက်သုံးသော နှိမ့်ချစကား' }
-            ],
-            id: [
-              { term: '取引先 (Klien/Mitra)', mean: 'Mitra bisnis / Klien perusahaan' },
-              { term: '恐れ入りますが', mean: 'Mohon maaf mengganggu (Kata pembuka sopan)' },
-              { term: 'いらっしゃいます', mean: 'Bentuk hormat (Sonkeigo) dari ada/datang' },
-              { term: '参る (Mairu)', mean: 'Bentuk rendah hati (Kenjougo) untuk diri sendiri' }
-            ]
-          },
-          explanations: {
+          correct: 'B',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Khi gọi điện thoại cho Trưởng phòng của đối tác, cách diễn đạt kính ngữ nào sau đây là phù hợp nhất?<br><strong>Đáp án A:</strong> "Xin thứ lỗi, Trưởng phòng Tanaka có ở đó không ạ?"',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Hỏi về sự hiện diện của người đối tác bắt buộc phải dùng Tôn kính ngữ (尊敬語) là 「いらっしゃいます」. Phương án C dùng 「参る」 là Khiêm nhường ngữ (chỉ dùng cho bản thân mình nói với người khác), gán cho đối tác là sai quy tắc giao tiếp. Phương án B 「おられる」 được một số nơi dùng nhưng trong chuẩn mực thương mại trang trọng của Nhật Bản thì 「いらっしゃる」 là số 1.',
-              m3Title: 'Miền 3: Kính ngữ thương mại cần nhớ',
-              m3Chips: ['いらっしゃる: Tôn kính của いる/くる', 'おっしゃる: Tôn kính của 言う', 'ご存知です: Tôn kính của 知っている', 'ご覧になる: Tôn kính của 見る']
+              regionalIntro: 'Đặc trưng đề thi JLPT N3–N2: Phân biệt rõ rệt giữa Tôn kính ngữ (Sonkeigo - nâng hành động của đối phương) và Khiêm nhường ngữ (Kenjougo - hạ hành động của bản thân).',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Xác định chủ thể hành động)',
+              m1Points: [
+                'Người thực hiện hành động "Gặp" ở đây là Khách hàng (đối phương cần tôn kính).',
+                'Do đó bắt buộc phải dùng Tôn kính ngữ (Sonkeigo).'
+              ],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Ngôn Ngữ',
+              m2CorrectWhy: '「お会いになります」 là dạng Tôn kính ngữ chuẩn (お＋動詞連用形＋になる) dùng để tôn kính hành động gặp của khách hàng.',
+              m2WrongWhy: 'Phương án A 「お目にかかる」 là Khiêm nhường ngữ, chỉ dùng khi chính bản thân người nói đi gặp người khác. C và D dùng sai động từ (Xem/Nhìn).',
+              m3Title: 'Miền 3: Thuật Ngữ Kính Ngữ Liên Kết',
+              m3Chips: ['お会いになる: Gặp (Tôn kính)', 'お目にかかる: Gặp (Khiêm nhường)', '尊敬語: Tôn kính ngữ', '謙譲語: Khiêm nhường ngữ']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>取引先の部長に電話をかける際、最も適切な敬語表現はどれか。<br><strong>選択肢A：</strong>「恐れ入りますが、田中部長はいらっしゃいますでしょうか。」',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '相手先企業の人物の在席を確認する場合、「いる」の尊敬語である「いらっしゃる」を用いるのが最も正しいビジネス敬語です。「参られる」は謙譲語「参る」に可能・受身の助動詞を重ねた誤用であり、「おられる」よりも「いらっしゃる」が公式な場面で推奨されます。',
-              m3Title: '第3層：必須ビジネス敬語',
-              m3Chips: ['いらっしゃる: 尊敬語（いる・来る）', 'おっしゃる: 尊敬語（言う）', 'ご存知: 尊敬語（知る）', '拝見する: 謙譲語（見る）']
+              regionalIntro: 'JLPT N3-N2ビジネス日本語における尊敬語と謙譲語の使い分けを問う設問。',
+              m1Title: '直観的状況把握',
+              m1Points: ['行為の主体が「お客様」であるため、尊敬語を用いる必要があります。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「お会いになる」が尊敬語として正しい表現です。',
+              m2WrongWhy: '「お目にかかる」は謙譲語であるため、相手の動作に使うと失礼になります。',
+              m3Title: '敬語用語',
+              m3Chips: ['お会いになる', 'お目にかかる', '尊敬語', '謙譲語']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> When calling a department manager at a client company, which honorific expression is most appropriate?<br><strong>Option A:</strong> "Excuse me, is Manager Tanaka available?"',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'When referring to the presence of an esteemed client, the honorific (Sonkeigo) "Irasshaimasu" is the gold standard. Option C incorrectly uses "Mairu" which is a humble verb strictly reserved for oneself.',
-              m3Title: 'Tier 3: Key Business Keigo',
-              m3Chips: ['Irassharu: Honorific (be/come)', 'Ossharu: Honorific (say)', 'Gozonji: Honorific (know)', 'Haiken suru: Humble (see)']
+              regionalIntro: 'JLPT Business Japanese: Distinguishing Honorific (Sonkeigo) vs Humble (Kenjougo).',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['The subject of the action is the client, requiring honorific speech.'],
+              m2Title: 'Linguistic Verification',
+              m2CorrectWhy: '"O-ai ni naru" is the correct honorific form honoring the client’s action.',
+              m2WrongWhy: '"O-me ni kakaru" is humble speech and can only describe the speaker’s own actions.',
+              m3Title: 'Keigo Terms',
+              m3Chips: ['Sonkeigo (Honorific)', 'Kenjougo (Humble)', 'Business Japanese']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> မိတ်ဖက်ကုမ္ပဏီမှ ဌာနမှူးထံ ဖုန်းဆက်ရာတွင် အသင့်လျော်ဆုံး ယဉ်ကျေးသော အသုံးအနှုန်းမှာ အောက်ပါတို့အနက် မည်သည့်အရာနည်း။',
-              m2Title: 'ကဏ္ဍ ၂ - စီးပွားရေး လုပ်ငန်းခွင် ရှင်းလင်းချက်',
-              m2Content: 'မိတ်ဖက်ကုမ္ပဏီမှ လူကြီးမင်း ရှိမရှိ မေးမြန်းရာတွင် လေးစားသမှုပြသော "いらっしゃいます" ကို အသုံးပြုခြင်းသည် စီးပွားရေးလုပ်ငန်းခွင်တွင် အသင့်လျော်ဆုံး ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး ဝေါဟာရများ',
-              m3Chips: ['いらっしゃる: လေးစားသမှုပြ ရှိသည်', 'おっしゃる: လေးစားသမှုပြ ပြောသည်', '拝見する: နှိမ့်ချသမှုပြ ကြည့်သည်']
+              regionalIntro: 'JLPT N3-N2 ယဉ်ကျေးသော စကားအသုံးအနှုန်း မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ဧည့်သည်၏ လုပ်ဆောင်ချက်ဖြစ်သောကြောင့် ရိုသေလေးစားသော စကားလုံး သုံးရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'B ၏ 「お会いになりますか」 သည် မှန်ကန်သော အသုံးအနှုန်း ဖြစ်သည်။',
+              m2WrongWhy: 'A သည် မိမိကိုယ်ကို နှိမ့်ချသော စကားဖြစ်၍ ဧည့်သည်အား သုံး၍မရပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['ရိုသေစကား (Sonkeigo)', 'နှိမ့်ချစကား (Kenjougo)']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Saat menelepon manajer departemen klien, ungkapan sopan (keigo) manakah yang paling tepat?',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Untuk menanyakan keberadaan pihak klien yang dihormati, kata kerja Sonkeigo "Irasshaimasu" adalah standar emas dalam etika bisnis Jepang. Pilihan A tepat.',
-              m3Title: 'Domain 3: Kosakata Bisnis Terkait',
-              m3Chips: ['Irassharu: Bentuk hormat (ada/datang)', 'Ossharu: Bentuk hormat (berkata)', 'Haiken suru: Bentuk rendah hati (melihat)']
+              regionalIntro: 'JLPT Bahasa Jepang Bisnis: Membedakan Sonkeigo dan Kenjougo.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Pelaku tindakan adalah klien, maka harus menggunakan bahasa sopan Sonkeigo.'],
+              m2Title: 'Verifikasi Linguistik',
+              m2CorrectWhy: '"O-ai ni naru" adalah bentuk Sonkeigo yang benar.',
+              m2WrongWhy: '"O-me ni kakaru" adalah Kenjougo untuk diri sendiri.',
+              m3Title: 'Istilah Keigo',
+              m3Chips: ['Sonkeigo', 'Kenjougo', 'Bahasa Bisnis']
             }
           }
         },
         {
-          id: 200002,
+          id: 100022,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 2/3 (JLPT N3-N2)',
-            ja: '模擬試験サンプル • 第 2/3 問 (JLPT N3-N2)',
-            en: 'Sample Practice Test • Question 2/3 (JLPT N3-N2)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၂/၃ (JLPT N3-N2)',
-            id: 'Simulasi Ujian Standar • Soal 2/3 (JLPT N3-N2)'
+            vi: 'Bài Làm Thử • Câu 2/3',
+            ja: '模擬試験サンプル • 第 2/3 問',
+            en: 'Sample Practice Test • Question 2/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၂/၃',
+            id: 'Simulasi Ujian Standar • Soal 2/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Ngữ Pháp Ứng Dụng > <strong>Cam Kết Tiến Độ Công Việc</strong>',
-            ja: '標準化問題バンク > 文法応用モジュール > <strong>納期厳守と責任表現</strong>',
-            en: 'Standardized Question Bank > Applied Grammar > <strong>Accountability & Commitments</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > သဒ္ဒါ အသုံးချမှု > <strong>တာဝန်ယူမှုနှင့် ကတိကဝတ် ဖော်ပြချက်</strong>',
-            id: 'Bank Soal Terstandarisasi > Tata Bahasa Terapan > <strong>Komitmen Batas Waktu & Tanggung Jawab</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Nhật JLPT > <strong>Chuyên Đề: Từ Vựng & Đọc Hiểu Văn Bản</strong>',
+            ja: '標準化問題バンク > JLPTモジュール > <strong>実務項目：語彙とビジネス文書読解</strong>',
+            en: 'Standardized Question Bank > JLPT Module > <strong>Topic: Vocabulary & Business Reading</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > JLPT မော်ဂျူး > <strong>ခေါင်းစဉ် - ဝေါဟာရနှင့် စာရွက်စာတမ်း ဖတ်ရှုခြင်း</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul JLPT > <strong>Topik: Kosakata & Pemahaman Membaca Dokumen</strong>'
           },
-          questionHtml: '<ruby>明日<rt>あした</rt></ruby>は<ruby>大事<rt>だいじ</rt></ruby>な<ruby>納期<rt>のうき</rt></ruby>なので、<ruby>多少<rt>たしょう</rt></ruby><ruby>体調<rt>たいちょう</rt></ruby>が<ruby>悪く<rt>わるく</rt></ruby>ても<ruby>休む<rt>やすむ</rt></ruby>（　　）。',
+          questionHtml: '会議の開始時間を当初の予定より「遅くする」ことを表す表現として、最も適切なものはどれか。',
           options: {
-            A: 'わけにはいかない',
-            B: 'はずがない',
-            C: 'にちがいない',
-            D: 'ことはない'
+            A: '時間を前倒しする。',
+            B: '時間を繰り下げる。',
+            C: '時間を繰り上げる。',
+            D: '時間を延長する。'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '68% (Đúng chuẩn)', B: '14%', C: '10%', D: '8%' },
-          eliminated5050: ['B', 'D'],
-          vocabChips: {
-            vi: [
-              { term: '納期 (のうき)', mean: 'Thời hạn giao hàng / Deadline' },
-              { term: '体調 (たいちょう)', mean: 'Tình trạng sức khỏe' },
-              { term: '〜わけにはいかない', mean: 'Không thể (vì trách nhiệm/lương tâm không cho phép)' },
-              { term: '多少 (たしょう)', mean: 'Một chút, phần nào' }
-            ],
-            ja: [
-              { term: '納期', mean: '品物や業務を納入・完了すべき期日' },
-              { term: '体調', mean: '体の調子、健康状態' },
-              { term: '〜わけにはいかない', mean: '社会的責任や義理から〜することは許されない' },
-              { term: '多少', mean: '少し、いくらか' }
-            ],
-            en: [
-              { term: '納期 (Nouki)', mean: 'Delivery deadline / Due date' },
-              { term: '体調 (Taichou)', mean: 'Physical condition / Health' },
-              { term: '〜わけにはいかない', mean: 'Cannot afford to (due to moral/social duty)' },
-              { term: '多少 (Tashou)', mean: 'Somewhat / A little bit' }
-            ],
-            my: [
-              { term: '納期', mean: 'ပစ္စည်းပို့ရမည့် သတ်မှတ်ရက်' },
-              { term: '体調', mean: 'ကျန်းမာရေး အခြေအနေ' },
-              { term: '〜わけにはいかない', mean: 'တာဝန်အရ မလုပ်ဘဲ မနေနိုင်' }
-            ],
-            id: [
-              { term: '納期 (Nouki)', mean: 'Batas waktu penyerahan / Tenggat waktu' },
-              { term: '体調 (Taichou)', mean: 'Kondisi kesehatan fisik' },
-              { term: '〜わけにはいかない', mean: 'Tidak boleh / Tidak bisa (karena tanggung jawab moral)' }
-            ]
-          },
-          explanations: {
+          correct: 'B',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Ngày mai là hạn giao hàng quan trọng, nên dù sức khỏe có hơi mệt một chút thì tôi cũng (không thể nghỉ phép).<br><strong>Đáp án A:</strong> 「わけにはいかない」',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Mẫu ngữ pháp JLPT N2/N3: `Động từ thể từ điển + わけにはいかない` mang ý nghĩa: "Vì lý do đạo đức, trách nhiệm xã hội, công việc nên không thể làm việc đó". Vì mai là ngày bàn giao sản phẩm quan trọng cho khách hàng nên trách nhiệm không cho phép nghỉ. Do đó đáp án A là chính xác.',
-              m3Title: 'Miền 3: Ngữ pháp tương tự',
-              m3Chips: ['〜わけにはいかない: Không thể vì trách nhiệm', '〜ざるを得ない: Buộc phải làm', '〜かねる: Khó lòng làm được', '〜まい: Quyết không làm']
+              regionalIntro: 'Từ vựng văn phòng Nhật Bản: Các cụm từ liên quan đến điều chỉnh lịch trình cuộc họp.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Lùi giờ họp muộn hơn kế hoạch ban đầu = 繰り下げる (くりさげる).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: '「繰り下げる」 có nghĩa là dời lùi thời gian lại muộn hơn.',
+              m2WrongWhy: '「前倒しする」 và 「繰り上げる」 đều có nghĩa là đẩy sớm lịch lên. 「延長する」 là kéo dài thời lượng cuộc họp.',
+              m3Title: 'Miền 3: Thuật Ngữ Lịch Trình',
+              m3Chips: ['繰り下げる: Dời lùi lịch lại', '繰り上げる: Đẩy sớm lịch lên', '前倒し: Làm trước tiến độ']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>明日は大事な納期なので、多少体調が悪くても休む（わけにはいかない）。',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '「動詞辞書形＋わけにはいかない」は、社会通念や職責、道義的理由から「〜することはできない」という強い義務感を表します。納期遅延を避けるビジネス上の責任感を表す文脈としてAが最も適切です。',
-              m3Title: '第3層：重要文法',
-              m3Chips: ['わけにはいかない: 職責上できない', 'ざるを得ない: せざるを得ない', 'かねる: できない', 'まい: しない']
+              regionalIntro: 'ビジネスシーンにおけるスケジュール調整用語の正確な理解を問う。',
+              m1Title: '直観的状況把握',
+              m1Points: ['予定時刻を遅く変更することを指す語を選択する。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「繰り下げる」が時間を遅らせる正しい用語です。',
+              m2WrongWhy: '「前倒し」「繰り上げ」は時間を早めることです。',
+              m3Title: '日程用語',
+              m3Chips: ['繰り下げる', '繰り上げる', '前倒し']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Tomorrow is a crucial delivery deadline, so even if I feel a bit unwell, I (cannot afford to take off).',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'The grammar pattern "V-dict + wake ni wa ikanai" expresses that one cannot do something due to professional, social, or moral obligations. Perfect match for business accountability.',
-              m3Title: 'Tier 3: Related Patterns',
-              m3Chips: ['Wake ni wa ikanai: Cannot afford to', 'Zaru o enai: Have no choice but to', 'Kaneru: Difficult to do']
+              regionalIntro: 'Business Japanese schedule adjustment vocabulary.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Postponing or delaying the start time = 繰り下げる (Kurisageru).'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: '"Kurisageru" means to push back to a later time.',
+              m2WrongWhy: '"Kuriageru" and "Maedaoshi" mean to move forward.',
+              m3Title: 'Schedule Terms',
+              m3Chips: ['繰り下げる: Push back', '繰り上げる: Move forward']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> မနက်ဖြန်သည် အရေးကြီးသော ပစ္စည်းပို့ရက်ဖြစ်၍ နေမကောင်းဖြစ်စေကာမူ ခွင့်ယူ၍ (မရနိုင်ပါ)။',
-              m2Title: 'ကဏ္ဍ ၂ - သဒ္ဒါ ရှင်းလင်းချက်',
-              m2Content: 'တာဝန်ဝတ္တရားအရ မလုပ်မဖြစ် အခြေအနေကို ဖော်ပြရာတွင် "わけにはいかない" ကို အသုံးပြုသည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး သဒ္ဒါများ',
-              m3Chips: ['わけにはいかない: တာဝန်အရ မရနိုင်']
+              regionalIntro: 'ဂျပန် စီးပွားရေး အချိန်ဇယား ချိန်ညှိမှု ဝေါဟာရ ဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['အစည်းအဝေးအချိန်ကို နောက်ဆုတ်ခြင်း ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'B ၏ 「繰り下げる」 သည် အချိန်နောက်ရွှေ့ခြင်းကို ဆိုလိုသည်။',
+              m2WrongWhy: 'A နှင့် C သည် အချိန်ရှေ့တိုးခြင်း ဖြစ်သည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['繰り下げる အချိန်နောက်ဆုတ်သည်', '繰り上げる အချိန်ရှေ့တိုးသည်']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Besok adalah tenggat waktu pengiriman yang penting, jadi meskipun kondisi badan agak kurang sehat, saya (tidak bisa libur).',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Pola tata bahasa "V-kamus + wake ni wa ikanai" menyatakan ketidakmampuan melakukan sesuatu karena tuntutan tanggung jawab profesional atau moral. Pilihan A adalah jawaban tepat.',
-              m3Title: 'Domain 3: Pola Terkait',
-              m3Chips: ['Wake ni wa ikanai: Tidak bisa karena tanggung jawab']
+              regionalIntro: 'Kosakata Penyesuaian Jadwal Bahasa Jepang Bisnis.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Mengundur jam rapat ke waktu yang lebih lambat = 繰り下げる.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: '"Kurisageru" berarti mengundur jadwal.',
+              m2WrongWhy: '"Kuriageru" berarti memajukan jadwal.',
+              m3Title: 'Istilah Jadwal',
+              m3Chips: ['繰り下げる: Mengundur', '繰り上げる: Memajukan']
             }
           }
         },
         {
-          id: 200003,
+          id: 100023,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 3/3 (JLPT N3-N2)',
-            ja: '模擬試験サンプル • 第 3/3 問 (JLPT N3-N2)',
-            en: 'Sample Practice Test • Question 3/3 (JLPT N3-N2)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၃/၃ (JLPT N3-N2)',
-            id: 'Simulasi Ujian Standar • Soal 3/3 (JLPT N3-N2)'
+            vi: 'Bài Làm Thử • Câu 3/3',
+            ja: '模擬試験サンプル • 第 3/3 問',
+            en: 'Sample Practice Test • Question 3/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၃/၃',
+            id: 'Simulasi Ujian Standar • Soal 3/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Đọc Hiểu Thực Chiến > <strong>Xử Lý Chỉ Thị Email Văn Phòng</strong>',
-            ja: '標準化問題バンク > 読解実務モジュール > <strong>社内連絡・指示メールの理解</strong>',
-            en: 'Standardized Question Bank > Practical Reading > <strong>Office Communication & Directives</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စာဖတ်စွမ်းရည် > <strong>ရုံးတွင်း အီးမေးလ် ညွှန်ကြားချက် နားလည်မှု</strong>',
-            id: 'Bank Soal Terstandarisasi > Pemahaman Membaca > <strong>Instruksi Email Kantor</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Nhật JLPT > <strong>Chuyên Đề: Viết Email Thương Mại Chuẩn Nhật</strong>',
+            ja: '標準化問題バンク > JLPTモジュール > <strong>実務項目：ビジネスメールの結び表現</strong>',
+            en: 'Standardized Question Bank > JLPT Module > <strong>Topic: Business Email Closings</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > JLPT မော်ဂျူး > <strong>ခေါင်းစဉ် - စီးပွားရေး အီးမေးလ် ပိတ်သိမ်း စကားလုံးများ</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul JLPT > <strong>Topik: Penutup Email Bisnis</strong>'
           },
-          questionHtml: '「<ruby>本日<rt>ほんじつ</rt></ruby>の<ruby>会議<rt>かいぎ</rt></ruby><ruby>資料<rt>しりょう</rt></ruby>は<ruby>事前<rt>じぜん</rt></ruby>に<ruby>目<rt>め</rt></ruby>を<ruby>通して<rt>とおして</rt></ruby>おいてください」という<ruby>指示<rt>しじ</rt></ruby>の<ruby>意味<rt>いみ</rt></ruby>として<ruby>最<rt>もっと</rt></ruby>も<ruby>適切<rt>てきせつ</rt></ruby>なものはどれか。',
+          questionHtml: '社外の取引先へ送るビジネスメールの結びの言葉として、最も適切なものはどれか。',
           options: {
-            A: '<ruby>会議<rt>かいぎ</rt></ruby>が<ruby>始まる<rt>はじまる</rt></ruby><ruby>前<rt>まえ</rt></ruby>に、<ruby>資料<rt>しりょう</rt></ruby>の<ruby>内容<rt>ないよう</rt></ruby>を<ruby>一通り<rt>ひととおり</rt></ruby><ruby>確認<rt>かくにん</rt></ruby>しておくこと。',
-            B: '<ruby>会議<rt>かいぎ</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で<ruby>資料<rt>しりょう</rt></ruby>を<ruby>声<rt>こえ</rt></ruby>に<ruby>出して<rt>だして</rt></ruby><ruby>読み上げる<rt>よみあげる</rt></ruby>こと。',
-            C: '<ruby>会議<rt>かいぎ</rt></ruby>が<ruby>終わった<rt>おわった</rt></ruby><ruby>後<rt>あと</rt></ruby>に<ruby>資料<rt>しりょう</rt></ruby>を<ruby>提出<rt>ていしゅつ</rt></ruby>すること。',
-            D: '<ruby>会議<rt>かいぎ</rt></ruby><ruby>資料<rt>しりょう</rt></ruby>をすべて<ruby>印刷<rt>いんさつ</rt></ruby>して<ruby>全員<rt>ぜんいん</rt></ruby>に<ruby>配る<rt>くばる</rt></ruby>こと。'
+            A: '今後とも何卒よろしくお願い申し上げます。',
+            B: 'ご苦労様でした。では失礼します。',
+            C: 'お疲れ様でした。さようなら。',
+            D: 'よろしく頼みます。またね。'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '82% (Đúng chuẩn)', B: '6%', C: '4%', D: '8%' },
-          eliminated5050: ['B', 'C'],
-          vocabChips: {
-            vi: [
-              { term: '目を通す (めをとおす)', mean: 'Xem qua, đọc lướt một lượt' },
-              { term: '事前に (じぜんに)', mean: 'Trước (trước khi cuộc họp diễn ra)' },
-              { term: '一通り (ひととおり)', mean: 'Một lượt từ đầu đến cuối' },
-              { term: '指示 (しじ)', mean: 'Chỉ thị, hướng dẫn công việc' }
-            ],
-            ja: [
-              { term: '目を通す', mean: '最初から最後まで大まかに読む・確認する' },
-              { term: '事前', mean: '物事が起こる前' },
-              { term: '一通り', mean: '最初から最後までひととおり' },
-              { term: '指示', mean: '仕事や方針を指し示すこと' }
-            ],
-            en: [
-              { term: '目を通す (Look over)', mean: 'To glance through / review briefly' },
-              { term: '事前に (In advance)', mean: 'Prior to the event' },
-              { term: '一通り (Roughly)', mean: 'From beginning to end' },
-              { term: '指示 (Directive)', mean: 'Instructions or assignment' }
-            ],
-            my: [
-              { term: '目を通す', mean: 'ဖတ်ရှုစစ်ဆေးသည်' },
-              { term: '事前に', mean: 'ကြိုတင်၍' }
-            ],
-            id: [
-              { term: '目を通す (Membaca sekilas)', mean: 'Membaca dan memeriksa dokumen secara garis besar' },
-              { term: '事前に (Sebelumnya)', mean: 'Sebelum acara dimulai' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Ý nghĩa phù hợp nhất của chỉ thị: "Hãy xem qua tài liệu cuộc họp hôm nay trước nhé" là gì?<br><strong>Đáp án A:</strong> "Trước khi cuộc họp bắt đầu, hãy đọc lướt qua để nắm được nội dung tài liệu."',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Quán dụng ngữ tiếng Nhật 「目を通す (めをとおす)」 có nghĩa là đọc lướt qua từ đầu đến cuối để nắm nội dung cơ bản. Trong văn hóa làm việc Nhật, việc đọc trước tài liệu giúp cuộc họp đi thẳng vào thảo luận và ra quyết định, tiết kiệm thời gian.',
-              m3Title: 'Miền 3: Quán dụng ngữ thường gặp',
-              m3Chips: ['目を通す: Đọc qua', '耳を傾ける: Lắng nghe chăm chú', '手を抜く: Làm việc qua loa', '足を引っ張る: Cản trở đồng đội']
+              regionalIntro: 'Tác phong gửi email cho đối tác khách hàng bên ngoài công ty.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Email gửi cho đối tác (社外の取引先) cần kết thúc bằng lời chào trang trọng nhất.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: '「今後とも何卒よろしくお願い申し上げます」 là câu kết chuẩn mực nhất trong giao dịch thương mại Nhật.',
+              m2WrongWhy: 'B, C, D đều suồng sã hoặc dùng sai đối tượng (ご苦労様 chỉ dùng cho cấp dưới).',
+              m3Title: 'Miền 3: Mẫu Câu Email',
+              m3Chips: ['何卒よろしくお願い申し上げます', 'ご苦労様 (Chỉ dùng cho cấp dưới)']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>「本日の会議資料は事前に目を通しておいてください」という指示の意味として最も適切なものはどれか。',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '慣用句「目を通す」は、書類などにひととおり目配りして内容を把握することを指します。会議前の事前確認により、会議時間の短縮と円滑な意思決定を促すビジネス基本所作です。',
-              m3Title: '第3層：重要慣用句',
-              m3Chips: ['目を通す: 一通り確認する', '耳を傾ける: 注意深く聞く', '気を配る: 配慮する', '手を打つ: 対策を講じる']
+              regionalIntro: '社外向けビジネスメールの定型表現の理解。',
+              m1Title: '直観的状況把握',
+              m1Points: ['社外取引先宛ての結びの挨拶としてAが最もフォーマルで適切。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「何卒よろしくお願い申し上げます」がビジネスメールの標準です。',
+              m2WrongWhy: 'ご苦労様は目下に対して使う語であり社外には厳禁です。',
+              m3Title: 'メール用語',
+              m3Chips: ['結びの言葉', '社外取引先', '何卒']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> What is the most appropriate meaning of the directive "Please look over today\'s meeting materials in advance"?',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'The Japanese idiom "Me o toosu" means to quickly read or review documents. In Japanese corporate culture, reading meeting packets in advance ensures meetings focus strictly on decision-making.',
-              m3Title: 'Tier 3: Common Idioms',
-              m3Chips: ['Me o toosu: Look over', 'Mimi o katamukeru: Listen closely', 'Te o utsu: Take countermeasures']
+              regionalIntro: 'Japanese Business Email Etiquette.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Formal closing to an external client requires highest respect.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Option A is the universally accepted polite business email sign-off.',
+              m2WrongWhy: 'Gokurousama is strictly reserved for subordinates.',
+              m3Title: 'Email Terms',
+              m3Chips: ['Business sign-off', 'Formal email etiquette']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> "ယနေ့အစည်းအဝေး အချက်အလက်များကို ကြိုတင်ဖတ်ရှုထားပါ" ဟူသော ညွှန်ကြားချက်၏ အဓိပ္ပာယ်မှာ အဘယ်နည်း။',
-              m2Title: 'ကဏ္ဍ ၂ - စကားပုံ အသုံးအနှုန်း',
-              m2Content: '"目を通す" သည် အချက်အလက်များကို ကြိုတင်ဖတ်ရှုစစ်ဆေးခြင်းကို ဆိုလိုသည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး စကားပုံများ',
-              m3Chips: ['目を通す: ဖတ်ရှုစစ်ဆေးသည်']
+              regionalIntro: 'စီးပွားရေး အီးမေးလ် ပိတ်သိမ်း စကားလုံး မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ပြင်ပ လုပ်ငန်းရှင်ထံ ပေးပို့သော အီးမေးလ်တွင် အယဉ်ကျေးဆုံး စကား သုံးရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် ဂျပန် စီးပွားရေး အီးမေးလ်တွင် အသုံးအများဆုံး စံအဖြေ ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မယဉ်ကျေးပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['何卒よろしくお願い申し上げます အထူးပင် ကျေးဇူးတင်ရှိပါသည်']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Apakah arti yang paling tepat dari instruksi "Harap baca sekilas materi rapat hari ini sebelumnya"?',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Idiom Jepang "Me o toosu" berarti membaca sekilas materi dari awal hingga akhir untuk memahami gambaran umumnya sebelum rapat dimulai. Pilihan A tepat.',
-              m3Title: 'Domain 3: Idiom Terkait',
-              m3Chips: ['Me o toosu: Membaca sekilas']
+              regionalIntro: 'Etika Email Bisnis Jepang.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Penutup email untuk mitra eksternal memerlukan tingkat kesopanan tertinggi.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Opsi A adalah salam penutup email resmi yang baku.',
+              m2WrongWhy: 'Pilihan lainnya tidak sopan untuk mitra kerja eksternal.',
+              m3Title: 'Istilah Email',
+              m3Chips: ['Salam penutup resmi', 'Etika email bisnis']
+            }
+          }
+        }
+      ],
+      korean: [
+        {
+          id: 100031,
+          sourceTag: {
+            vi: 'TOPIK & EPS • Câu 1/3 (Ngữ pháp TOPIK I/II)',
+            ja: '韓国語 TOPIK • 第 1/3 問（文法選択）',
+            en: 'Korean TOPIK • Question 1/3 (Grammar Selection)',
+            my: 'ကိုရီးယား TOPIK • မေးခွန်း ၁/၃ (သဒ္ဒါ)',
+            id: 'TOPIK Bahasa Korea • Soal 1/3 (Tata Bahasa)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi Năng Lực Tiếng Hàn TOPIK > Ngữ Pháp & Đọc Hiểu > <strong>Liên Từ Chỉ Mục Đích Hành Động</strong>',
+            ja: '韓国語能力試験 TOPIK > 語彙・文法 > <strong>目的を表す接続表現</strong>',
+            en: 'Korean Proficiency TOPIK > Grammar & Reading > <strong>Conjunctions Expressing Purpose</strong>',
+            my: 'ကိုရီးယားစာ အရည်အချင်းစစ် TOPIK > သဒ္ဒါ > <strong>ရည်ရွယ်ချက်ဖော်ပြသော ဆက်စပ်သဒ္ဒါ</strong>',
+            id: 'Ujian Kemampuan Bahasa Korea TOPIK > Tata Bahasa > <strong>Konjungsi Tujuan Tindakan</strong>'
+          },
+          questionHtml: '다음 (　)에 들어갈 가장 알맞은 것을 고르십시오.<br><br>퇴근 후에 한국어 학원에 (　) 지하철을 탔습니다.',
+          options: {
+            A: '가려고',
+            B: '가지만',
+            C: '가거나',
+            D: '가니까'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng đề thi TOPIK: Phân biệt chính xác ý nghĩa các vĩ tố liên kết ngữ pháp trong tiếng Hàn.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Mục đích lên tàu điện ngầm)',
+              m1Points: ['Hành động lên tàu điện ngầm (지하철을 탔습니다) nhằm mục đích ĐẾN trung tâm học tiếng Hàn sau giờ làm.', 'Vĩ tố biểu thị mục đích, ý định là 「-(으)려고」.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Ngữ Pháp TOPIK',
+              m2CorrectWhy: 'Cấu trúc 「-(으)려고」 kết nối động từ diễn đạt "để làm gì đó". Ví dụ: 학원에 가려고 (để đi đến trung tâm).',
+              m2WrongWhy: 'B (-지만: nhưng - chỉ sự tương phản), C (-거나: hoặc - chỉ sự lựa chọn), D (-니까: vì - chỉ nguyên nhân thực tế đã xảy ra).',
+              m3Title: 'Miền 3: Thuật Ngữ TOPIK',
+              m3Chips: ['-(으)려고: Để làm gì (Mục đích)', '퇴근: Tan sở/Tan ca làm', '학원: Trung tâm đào tạo']
+            },
+            ja: {
+              regionalIntro: 'TOPIK頻出文法：意図・目的を表す接続語尾の適切な選択。',
+              m1Title: '直観的状況把握',
+              m1Points: ['「地下鉄に乗った」目的が「語学学校に行くため」であることを表す。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「〜(으)려고」（〜しようと／〜するために）が目的を表す正解です。',
+              m2WrongWhy: 'Bは逆接、Cは選択、Dは理由・前提を表すため文脈に合いません。',
+              m3Title: '韓国語表現',
+              m3Chips: ['-(으)려고', '퇴근（退勤）', '학원（学院）']
+            },
+            en: {
+              regionalIntro: 'TOPIK Grammar: Choosing connective suffixes indicating intention or purpose.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Riding the subway was done with the goal of going to the academy.'],
+              m2Title: 'Linguistic Verification',
+              m2CorrectWhy: '"-(eu)ryeogo" denotes intention or purpose ("in order to go").',
+              m2WrongWhy: 'B (-jiman) is contrast, C (-geona) is alternation, D (-nikka) is cause.',
+              m3Title: 'Vocabulary',
+              m3Chips: ['-(으)려고: In order to', '퇴근: Leaving work', '학원: Academy']
+            },
+            my: {
+              regionalIntro: 'TOPIK သဒ္ဒါ - ရည်ရွယ်ချက်ဖော်ပြသော သဒ္ဒါအသုံးအနှုန်း ရွေးချယ်ခြင်း။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ကိုရီးယားစကားသင်တန်းကျောင်းသို့ သွားရန် ရထားစီးခဲ့သည်ဟူသော ရည်ရွယ်ချက် ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ 「-(으)려고」 သည် ရည်ရွယ်ချက် (ပြုလုပ်ရန်) ကို ဖော်ပြသောကြောင့် မှန်ကန်ပါသည်။',
+              m2WrongWhy: 'ကျန်သဒ္ဒါများသည် အကြောင်းပြချက် သို့မဟုတ် ဆန့်ကျင်ဘက်ကို ဖော်ပြသည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['-(으)려고: ပြုလုပ်ရန်အတွက်', '퇴근: အလုပ်ဆင်းချိန်']
+            },
+            id: {
+              regionalIntro: 'Tata Bahasa TOPIK: Memilih konjungsi tujuan dalam bahasa Korea.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Naik kereta bertujuan untuk pergi ke tempat les bahasa Korea.'],
+              m2Title: 'Verifikasi Linguistik',
+              m2CorrectWhy: '"-(eu)ryeogo" berarti "bermaksud untuk / agar bisa pergi".',
+              m2WrongWhy: 'B menyatakan pertentangan, C menyatakan pilihan, D menyatakan alasan.',
+              m3Title: 'Kosakata',
+              m3Chips: ['-(으)려고: Untuk / Demi', '퇴근: Pulang kerja', '학원: Lembaga kursus']
+            }
+          }
+        },
+        {
+          id: 100032,
+          sourceTag: {
+            vi: 'TOPIK & EPS • Câu 2/3 (Kính ngữ giao tiếp nơi làm việc)',
+            ja: '韓国語 TOPIK • 第 2/3 問（職場会話・敬語）',
+            en: 'Korean TOPIK • Question 2/3 (Workplace Communication)',
+            my: 'ကိုရီးယား TOPIK • မေးခွန်း ၂/၃ (လုပ်ငန်းခွင် ယဉ်ကျေးစကား)',
+            id: 'TOPIK Bahasa Korea • Soal 2/3 (Komunikasi Sopan Tempat Kerja)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi Năng Lực Tiếng Hàn TOPIK > Giao Tiếp & Kính Ngữ > <strong>Xác Nhận Tiến Độ Giao Hàng Với Quản Lý</strong>',
+            ja: '韓国語能力試験 TOPIK > 実務会話 > <strong>班長への納期進捗確認</strong>',
+            en: 'Korean Proficiency TOPIK > Workplace Communication > <strong>Delivery Status with Supervisor</strong>',
+            my: 'ကိုရီးယားစာ အရည်အချင်းစစ် TOPIK > လုပ်ငန်းခွင် စကားပြော > <strong>အထက်လူကြီးနှင့် ပို့ဆောင်မှု အခြေအနေ အတည်ပြုခြင်း</strong>',
+            id: 'Ujian Kemampuan Bahasa Korea TOPIK > Percakapan Kerja > <strong>Konfirmasi Pengiriman ke Manajer</strong>'
+          },
+          questionHtml: '공장에서 반장님께 보고할 때 밑줄 친 부분에 들어갈 가장 적절한 표현은 무엇입니까?<br><br>반장님, 방금 주문하신 부품 생산이 모두 (　).',
+          options: {
+            A: '완료되었습니다',
+            B: '끝났다',
+            C: '끝났어',
+            D: '완료되었지'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Kính ngữ công xưởng Hàn Quốc: Khi báo cáo với tổ trưởng (반장님) bắt buộc dùng đuôi câu trang trọng 「-습니다/ㅂ니다」.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Báo cáo hoàn thành công việc lên cấp trên cần thể hiện thái độ tôn trọng và chuyên nghiệp.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: '「완료되었습니다」 (Đã hoàn thành) là dạng kính ngữ trang trọng cao nhất (하십시오체), phù hợp tuyệt đối trong môi trường sản xuất.',
+              m2WrongWhy: 'B và C là thể thân mật (반말), dùng với cấp trên sẽ bị coi là thô lỗ, vi phạm kỷ luật xưởng.',
+              m3Title: 'Miền 3: Thuật Ngữ Xưởng Hàn',
+              m3Chips: ['반장님: Tổ trưởng xưởng', '부품: Linh kiện phụ tùng', '완료: Hoàn thành']
+            },
+            ja: {
+              regionalIntro: '韓国の製造現場における上司への敬語表現の重要性。',
+              m1Title: '直観的状況把握',
+              m1Points: ['班長への業務報告には最も丁寧な「ハシプシオ体」を使用する。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「완료되었습니다」（完了いたしました）が正解です。',
+              m2WrongWhy: 'パンマル（タメ口）での報告は職場規律違反となります。',
+              m3Title: '現場語彙',
+              m3Chips: ['반장님（班長）', '완료되었습니다（完了しました）']
+            },
+            en: {
+              regionalIntro: 'Korean workplace honorifics in industrial manufacturing.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Reporting production completion to a supervisor requires formal polite style.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: '"Wanryo doe-eotseumnida" (Has been completed) represents appropriate formal register.',
+              m2WrongWhy: 'Informal low forms (B, C) are strictly unacceptable towards superiors.',
+              m3Title: 'Workplace Terms',
+              m3Chips: ['반장님: Factory supervisor', '완료: Completion']
+            },
+            my: {
+              regionalIntro: 'ကိုရီးယား စက်ရုံလုပ်ငန်းခွင် ယဉ်ကျေးစကား မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['အလုပ်ရုံ ဌာနမှူးအား လုပ်ငန်းပြီးစီးကြောင်း သတင်းပို့သည့် ယဉ်ကျေးစကား ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ 「완료되었습니다」 သည် အယဉ်ကျေးဆုံး အသုံးအနှုန်း ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် သူငယ်ချင်းအချင်းချင်းသုံးသော စကားများဖြစ်၍ အထက်လူကြီးအား မသုံးရပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['완료되었습니다: ပြီးစီးပါပြီ', '반장님: ဌာနမှူး/ခေါင်းဆောင်']
+            },
+            id: {
+              regionalIntro: 'Etika Kesopanan Bahasa Korea di Lingkungan Pabrik.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Melaporkan pekerjaan ke mandor (Banjangnim) harus menggunakan bahasa formal sopan.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: '"Wanryo doe-eotseumnida" adalah ragam hormat tertinggi yang baku.',
+              m2WrongWhy: 'B dan C adalah bahasa informal (banmal) yang tidak sopan di tempat kerja.',
+              m3Title: 'Kosakata Pabrik',
+              m3Chips: ['반장님: Mandor pabrik', '완료: Selesai']
+            }
+          }
+        },
+        {
+          id: 100033,
+          sourceTag: {
+            vi: 'TOPIK & EPS • Câu 3/3 (Biển báo an toàn xưởng sản xuất)',
+            ja: '韓国語 TOPIK • 第 3/3 問（安全標識読解）',
+            en: 'Korean TOPIK • Question 3/3 (Safety Sign Reading)',
+            my: 'ကိုရီးယား TOPIK • မေးခွန်း ၃/၃ (ဘေးကင်းရေး သတိပေးဆိုင်းဘုတ်)',
+            id: 'TOPIK Bahasa Korea • Soal 3/3 (Rambu Keselamatan Kerja)'
+          },
+          breadcrumb: {
+            vi: 'Kỳ Thi Năng Lực Tiếng Hàn TOPIK > EPS-TOPIK Chuyên Ngành > <strong>Biển Báo An Toàn & Thiết Bị Bảo Hộ</strong>',
+            ja: '韓国語能力試験 TOPIK > 製造安全標識 > <strong>保護具着用ルール</strong>',
+            en: 'Korean Proficiency TOPIK > EPS-TOPIK Safety > <strong>PPE & Factory Warning Signs</strong>',
+            my: 'ကိုရီးယားစာ အရည်အချင်းစစ် TOPIK > စက်ရုံ ဘေးကင်းရေး > <strong>အကာအကွယ်ပစ္စည်း ဝတ်ဆင်မှု စည်းမျဉ်း</strong>',
+            id: 'Ujian Kemampuan Bahasa Korea TOPIK > Keselamatan EPS > <strong>Rambu APD & Keselamatan Pabrik</strong>'
+          },
+          questionHtml: '작업장에 다음과 같은 안전 표지가 붙어 있습니다. 이 표지는 무슨 뜻입니까?<br><br><div style="background: #fef2f2; border: 1.5px solid #ef4444; color: #991b1b; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center;">【안 전 제 일】<br>안전 장갑과 보안경을 반드시 착용하십시오.</div>',
+          options: {
+            A: '장갑과 보안경을 쓰고 작업해야 합니다.',
+            B: '장갑만 끼고 일하면 됩니다.',
+            C: '보안경은 착용하지 않아도 됩니다.',
+            D: '작업장에서는 사진을 찍으면 안 됩니다.'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng đề thi EPS-TOPIK: Yêu cầu hiểu rõ các quy định bắt buộc về bảo hộ lao động.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Biển báo ghi rõ: 「안전 장갑」(Găng tay an toàn) VÀ 「보안경」(Kính bảo hộ) 「반드시 착용」(Bắt buộc đeo).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Nhà Xưởng',
+              m2CorrectWhy: 'Phương án A diễn giải chính xác nội dung biển báo: Cả hai thiết bị bảo hộ đều bắt buộc.',
+              m2WrongWhy: 'B và C chỉ đeo một trong hai là vi phạm quy định an toàn. D nói về chụp ảnh, hoàn toàn sai nội dung.',
+              m3Title: 'Miền 3: Từ Vựng An Toàn EPS',
+              m3Chips: ['안전제일: An toàn là trên hết', '보안경: Kính bảo hộ', '반드시: Nhất định/Bắt buộc']
+            },
+            ja: {
+              regionalIntro: '製造現場における安全標識の読解。',
+              m1Title: '直観的状況把握',
+              m1Points: ['安全手袋と保護メガネの「両方の着用」が義務付けられている。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'Aが標識の指示を正確に言い換えた正解です。',
+              m2WrongWhy: '片方のみの着用（B, C）は安全基準違反となります。',
+              m3Title: '安全用語',
+              m3Chips: ['안전 장갑（安全手袋）', '보안경（保護メガネ）', '반드시 착용（必ず着用）']
+            },
+            en: {
+              regionalIntro: 'EPS-TOPIK Industrial Safety Sign Comprehension.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Sign instructs mandatory wear of BOTH safety gloves and goggles.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Option A matches the sign: Must wear protective gloves and goggles.',
+              m2WrongWhy: 'Options B and C violate factory PPE policies.',
+              m3Title: 'Safety Terms',
+              m3Chips: ['Safety gloves', 'Protective goggles', 'Mandatory wear']
+            },
+            my: {
+              regionalIntro: 'EPS-TOPIK ဘေးကင်းရေး သတိပေးဆိုင်းဘုတ် မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ဘေးကင်းရေးလက်အိတ်နှင့် မျက်မှန်နှစ်မျိုးစလုံး မဖြစ်မနေ တပ်ဆင်ရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် ဆိုင်းဘုတ်၏ အဓိပ္ပာယ်ကို အတိအကျ ဖော်ပြထားသည်။',
+              m2WrongWhy: 'တစ်ခုတည်းသာ ဝတ်ဆင်ခြင်းသည် စည်းကမ်းဖောက်ဖျက်ခြင်း ဖြစ်သည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['안전 장갑: ဘေးကင်းရေးလက်အိတ်', '보안경: အကာအကွယ်မျက်မှန်']
+            },
+            id: {
+              regionalIntro: 'Pemahaman Rambu Keselamatan Pabrik EPS-TOPIK.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Rambu mewajibkan penggunaan sarung tangan DAN kacamata pelindung.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Opsi A merangkum instruksi kedua alat pelindung diri (APD) dengan benar.',
+              m2WrongWhy: 'Hanya mengenakan salah satunya melanggar standar keselamatan kerja.',
+              m3Title: 'Kosakata Keselamatan',
+              m3Chips: ['Sarung tangan safety', 'Kacamata pelindung', 'Wajib memakai']
+            }
+          }
+        }
+      ],
+      german: [
+        {
+          id: 100041,
+          sourceTag: {
+            vi: 'Tiếng Đức Goethe • Câu 1/3 (Ngữ pháp Sprachbausteine)',
+            ja: 'ドイツ語 ゲーテ検定 • 第 1/3 問（文法選択）',
+            en: 'German Goethe B1 • Question 1/3 (Grammar & Conjunctions)',
+            my: 'ဂျာမန် Goethe • မေးခွန်း ၁/၃ (သဒ္ဒါ)',
+            id: 'Bahasa Jerman Goethe • Soal 1/3 (Tata Bahasa)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Đức Du Học Nghề B1 > Cấu Trúc Ngữ Pháp > <strong>Mệnh Đề Phụ Liên Từ Weil (Kausalsatz)</strong>',
+            ja: 'ドイツ語検定 Goethe B1 > 文法項目 > <strong>理由を表す従属接続詞 weil</strong>',
+            en: 'German Goethe B1 Exam > Grammar Module > <strong>Subordinate Conjunctions (Nebensatz mit weil)</strong>',
+            my: 'ဂျာမန် Goethe B1 စာမေးပွဲ > သဒ္ဒါ > <strong>အကြောင်းပြချက်ပြ ဂျာမန်သဒ္ဒါ (weil)</strong>',
+            id: 'Ujian Goethe B1 Jerman > Modul Tata Bahasa > <strong>Klausa Subordinat dengan weil</strong>'
+          },
+          questionHtml: 'Wählen Sie das richtige Wort für die Lücke:<br><br>Ich kann heute leider nicht zur Spätschicht kommen, (　) ich hohes Fieber habe.',
+          options: {
+            A: 'weil',
+            B: 'denn',
+            C: 'deshalb',
+            D: 'obwohl'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng đề thi Goethe B1: Kiểm tra quy tắc vị trí động từ trong mệnh đề phụ (Nebensatz).',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Động từ habe đứng cuối câu)',
+              m1Points: ['Cuối mệnh đề có động từ chia 「habe」 đứng ở vị trí cuối cùng (Endstellung).', 'Liên từ chỉ nguyên nhân đẩy động từ về cuối câu là 「weil」.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Ngữ Pháp Đức',
+              m2CorrectWhy: '「weil」 tạo mệnh đề phụ (Nebensatz), bắt buộc động từ chia phải nằm ở cuối câu.',
+              m2WrongWhy: '「denn」 là liên từ đẳng lập (vị trí 0), động từ phải đứng vị trí 2. 「deshalb」 yêu cầu đảo ngữ. 「obwohl」 mang nghĩa nhượng bộ (mặc dù).',
+              m3Title: 'Miền 3: Thuật Ngữ Ngữ Pháp Đức',
+              m3Chips: ['weil: Vì (Đẩy động từ về cuối)', 'die Spätschicht: Ca làm việc chiều/tối', 'das Fieber: Cơn sốt']
+            },
+            ja: {
+              regionalIntro: 'ゲーテB1頻出：従属接続詞と副文（動詞後置）の文法規則。',
+              m1Title: '直観的状況把握',
+              m1Points: ['動詞「habe」が文末にあるため、従属接続詞を選択する。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「weil」は理由を表し、定動詞を文末に後置させます。',
+              m2WrongWhy: '「denn」は並列接続詞で定動詞は第2位、「deshalb」は副詞、「obwohl」は逆接です。',
+              m3Title: 'ドイツ語文法用語',
+              m3Chips: ['weil（〜だから）', 'Spätschicht（遅番）', 'Nebensatz（副文）']
+            },
+            en: {
+              regionalIntro: 'German Goethe B1: Subordinate clause word order rule.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['The conjugated verb "habe" sits at the very end of the clause.'],
+              m2Title: 'Linguistic Verification',
+              m2CorrectWhy: '"weil" triggers a subordinate clause (Nebensatz) where the finite verb moves to the end.',
+              m2WrongWhy: '"denn" uses main clause word order (Verb in position 2). "obwohl" means although.',
+              m3Title: 'Key German Words',
+              m3Chips: ['weil: Because', 'die Spätschicht: Late shift', 'das Fieber: Fever']
+            },
+            my: {
+              regionalIntro: 'ဂျာမန် Goethe B1 သဒ္ဒါ - ကြိယာနောက်ပို့ စည်းမျဉ်း မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ဝါကျအဆုံးတွင် ကြိယာ "habe" ရှိနေသောကြောင့် "weil" ကို သုံးရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ "weil" သည် အကြောင်းပြချက်ဖော်ပြပြီး ကြိယာကို ဝါကျအဆုံးသို့ ပို့ပေးသည်။',
+              m2WrongWhy: '"denn" သည် ကြိယာကို အဆုံးသို့ မပို့ပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['weil: အဘယ်ကြောင့်ဆိုသော်', 'das Fieber: အဖျား']
+            },
+            id: {
+              regionalIntro: 'Tata Bahasa Goethe B1 Jerman: Aturan urutan kata klausa subordinat.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Kata kerja konjugasi "habe" terletak di akhir kalimat.'],
+              m2Title: 'Verifikasi Linguistik',
+              m2CorrectWhy: '"weil" memicu klausa subordinat (Nebensatz) dengan kata kerja di akhir.',
+              m2WrongWhy: '"denn" menempatkan kata kerja di posisi ke-2. "obwohl" berarti meskipun.',
+              m3Title: 'Kosakata',
+              m3Chips: ['weil: Karena', 'die Spätschicht: Shift sore', 'das Fieber: Demam']
+            }
+          }
+        },
+        {
+          id: 100042,
+          sourceTag: {
+            vi: 'Tiếng Đức Goethe • Câu 2/3 (Giao tiếp nghề điều dưỡng Ausbildung)',
+            ja: 'ドイツ語 ゲーテ検定 • 第 2/3 問（介護・職場対話）',
+            en: 'German Goethe B1 • Question 2/3 (Nursing & Healthcare Dialogue)',
+            my: 'ဂျာမန် Goethe • မေးခွန်း ၂/၃ (သူနာပြု အလုပ်ခွင် စကားပြော)',
+            id: 'Bahasa Jerman Goethe • Soal 2/3 (Percakapan Perawat Rumah Sakit)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Đức Du Học Nghề B1 > Giao Tiếp Chuyên Ngành > <strong>Chăm Sóc & Đo Huyết Áp Bệnh Nhân</strong>',
+            ja: 'ドイツ語検定 Goethe B1 > 専門会話 > <strong>病院・介護施設での患者対応</strong>',
+            en: 'German Goethe B1 Exam > Professional Dialogue > <strong>Patient Care & Blood Pressure Measurement</strong>',
+            my: 'ဂျာမန် Goethe B1 စာမေးပွဲ > ဆေးရုံ လုပ်ငန်းခွင် > <strong>လူနာစောင့်ရှောက်မှုနှင့် သွေးပေါင်ချိန်ခြင်း</strong>',
+            id: 'Ujian Goethe B1 Jerman > Percakapan Medis > <strong>Pelayanan Pasien & Pengukuran Tekanan Darah</strong>'
+          },
+          questionHtml: 'Welcher Satz passt am besten in der Pflegepraxis?<br><br>Pflegekraft: „Guten Morgen, Herr Müller. Wie fühlen Sie sich heute? Ich möchte jetzt Ihren (　) messen.“',
+          options: {
+            A: 'Blutdruck',
+            B: 'Kofferraum',
+            C: 'Fahrplan',
+            D: 'Feierabend'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng du học nghề Điều dưỡng Đức (Pflegefachmann): Từ vựng chăm sóc y tế bắt buộc.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Đo chỉ số sức khỏe bệnh nhân)',
+              m1Points: ['Hành động y tế là 「messen」(đo đạc) đối với bệnh nhân buổi sáng.', 'Từ phù hợp nhất là 「Blutdruck」(Huyết áp).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Ngành Y Đức',
+              m2CorrectWhy: 'Cụm từ 「den Blutdruck messen」 (đo huyết áp) là thao tác nghiệp vụ hàng ngày của điều dưỡng viên tại Đức.',
+              m2WrongWhy: 'Kofferraum (Cốp xe hơi), Fahrplan (Lịch trình tàu xe), Feierabend (Giờ tan sở) đều hoàn toàn vô nghĩa trong ngữ cảnh y tế.',
+              m3Title: 'Miền 3: Thuật Ngữ Điều Dưỡng Đức',
+              m3Chips: ['der Blutdruck: Huyết áp', 'messen: Đo lường', 'die Pflegekraft: Điều dưỡng viên']
+            },
+            ja: {
+              regionalIntro: 'ドイツ看護・介護留学（Ausbildung）で必須となる医療会話語彙。',
+              m1Title: '直観的状況把握',
+              m1Points: ['患者に対して「計測する（messen）」対象として医療用語を選択する。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「Blutdruck messen」（血圧を測る）が正しい医療実務表現です。',
+              m2WrongWhy: 'トランク、時刻表、終業時間はいずれも文脈に合いません。',
+              m3Title: '医療ドイツ語',
+              m3Chips: ['Blutdruck（血圧）', 'messen（測る）', 'Pflegekraft（看護・介護職）']
+            },
+            en: {
+              regionalIntro: 'German Healthcare & Nursing Vocational Training (Ausbildung).',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Nurse needs to measure a vital sign for a patient in the morning.'],
+              m2Title: 'Clinical Verification',
+              m2CorrectWhy: '"den Blutdruck messen" (to measure blood pressure) is standard daily clinical practice.',
+              m2WrongWhy: 'Trunk (B), Timetable (C), or Quitting time (D) make zero sense clinically.',
+              m3Title: 'Nursing Vocabulary',
+              m3Chips: ['Blutdruck: Blood pressure', 'messen: Measure', 'Pflegekraft: Caregiver/Nurse']
+            },
+            my: {
+              regionalIntro: 'ဂျာမန် သူနာပြု အလုပ်ခွင် ဝေါဟာရ မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['လူနာအား တိုင်းတာမည့် ဆေးဘက်ဆိုင်ရာ အရာကို ရွေးချယ်ရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ "Blutdruck" (သွေးပေါင်ချိန်) သည် မှန်ကန်သော ဆေးဘက်ဆိုင်ရာ စကားလုံး ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်စကားလုံးများသည် ဆေးရုံနှင့် သက်ဆိုင်ခြင်း မရှိပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['der Blutdruck: သွေးပေါင်ချိန်', 'messen: တိုင်းတာသည်']
+            },
+            id: {
+              regionalIntro: 'Kosakata Pelatihan Keperawatan Jerman (Ausbildung Pflege).',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Perawat perlu mengukur tanda vital pasien di pagi hari.'],
+              m2Title: 'Verifikasi Klinis',
+              m2CorrectWhy: '"den Blutdruck messen" (mengukur tekanan darah) adalah rutinitas medis harian.',
+              m2WrongWhy: 'Opsi lainnya (bagasi, jadwal kereta, jam pulang) tidak relevan dengan dunia medis.',
+              m3Title: 'Kosakata Medis',
+              m3Chips: ['Blutdruck: Tekanan darah', 'messen: Mengukur', 'Pflegekraft: Perawat']
+            }
+          }
+        },
+        {
+          id: 100043,
+          sourceTag: {
+            vi: 'Tiếng Đức Goethe • Câu 3/3 (Đọc hiểu hợp đồng học nghề Ausbildung)',
+            ja: 'ドイツ語 ゲーテ検定 • 第 3/3 問（職業訓練告知読解）',
+            en: 'German Goethe B1 • Question 3/3 (Vocational Training Notice Reading)',
+            my: 'ဂျာမန် Goethe • မေးခွန်း ၃/၃ (အလုပ်သင် ကြော်ငြာ ဖတ်ရှုခြင်း)',
+            id: 'Bahasa Jerman Goethe • Soal 3/3 (Membaca Pengumuman Magang)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Đức Du Học Nghề B1 > Đọc Hiểu Văn Bản > <strong>Quyền Lợi Trợ Cấp & Thời Gian Học Nghề</strong>',
+            ja: 'ドイツ語検定 Goethe B1 > 実務読解 > <strong>Ausbildung手当と勤務条件</strong>',
+            en: 'German Goethe B1 Exam > Reading Module > <strong>Ausbildung Allowance & Working Conditions</strong>',
+            my: 'ဂျာမန် Goethe B1 စာမေးပွဲ > စာဖတ်စွမ်းရည် > <strong>အလုပ်သင် ထောက်ပံ့ကြေးနှင့် အလုပ်ချိန် စည်းကမ်းများ</strong>',
+            id: 'Ujian Goethe B1 Jerman > Pemahaman Membaca > <strong>Tunjangan Magang Ausbildung & Ketentuan Kerja</strong>'
+          },
+          questionHtml: '<div style="background: var(--slate-100); border: 1px dashed var(--slate-300); padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.9rem;"><strong>Ausbildungsplatz: Industriemechaniker (m/w/d)</strong><br>・Dauer: 3,5 Jahre<br>・Vergütung: 1.050 € im 1. Ausbildungsjahr<br>・Urlaub: 30 Tage pro Kalenderjahr<br>・Voraussetzung: Mindestens Sprachniveau B1 Deutsch</div>Welche Aussage ist richtig?',
+          options: {
+            A: 'Auszubildende erhalten 30 Tage Urlaub pro Jahr.',
+            B: 'Die Ausbildung dauert nur 1 Jahr.',
+            C: 'Man braucht kein Deutschzertifikat.',
+            D: 'Es gibt im ersten Jahr kein Gehalt.'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đọc hiểu thông tin thực tế khi làm hồ sơ du học nghề Ausbildung tại Đức.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Thông báo ghi rõ: 「Urlaub: 30 Tage pro Kalenderjahr」(Nghỉ phép 30 ngày mỗi năm lịch).', 'Phương án A trùng khớp 100% với thông tin tuyển dụng.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: 'Phương án A khẳng định đúng số ngày phép hàng năm (30 Tage Urlaub).',
+              m2WrongWhy: 'B sai vì đào tạo kéo dài 3.5 năm. C sai vì bắt buộc tiếng Đức B1. D sai vì năm đầu nhận trợ cấp 1.050 Euro/tháng.',
+              m3Title: 'Miền 3: Thuật Ngữ Hợp Đồng Ausbildung',
+              m3Chips: ['die Vergütung: Trợ cấp học nghề hàng tháng', 'der Urlaub: Ngày nghỉ phép hưởng lương', 'die Voraussetzung: Điều kiện bắt buộc']
+            },
+            ja: {
+              regionalIntro: 'ドイツ職業訓練（Ausbildung）の募集要項読解。',
+              m1Title: '直観的状況把握',
+              m1Points: ['募集要項の各条件を照合し、事実と合致する選択肢を特定する。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'A（年30日の有給休暇）が正確な記述です。',
+              m2WrongWhy: 'B（期間は3.5年）、C（B1必須）、D（初年度手当1,050ユーロ支給）は不正確です。',
+              m3Title: '募集要項語彙',
+              m3Chips: ['Vergütung（手当）', 'Urlaub（有給休暇）', 'Voraussetzung（必要条件）']
+            },
+            en: {
+              regionalIntro: 'German Dual Vocational Training (Ausbildung) contract reading.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Checking stated contract facts against options.'],
+              m2Title: 'Expert Verification',
+              m2CorrectWhy: 'Option A matches the explicit fact: 30 vacation days per year.',
+              m2WrongWhy: 'Duration is 3.5 years (not 1). B1 is strictly required. Year 1 salary is 1,050 EUR.',
+              m3Title: 'Contract Terms',
+              m3Chips: ['Vergütung: Allowance/Remuneration', 'Urlaub: Paid vacation', 'Dauer: Duration']
+            },
+            my: {
+              regionalIntro: 'ဂျာမန် အလုပ်သင် ခေါ်ယူမှု ကြေညာချက် ဖတ်ရှုခြင်း။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ကြေညာချက်ပါ အချက်အလက်နှင့် တိုက်ဆိုင်စစ်ဆေးခြင်း ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် မှန်ကန်သည် (တစ်နှစ်လျှင် ခွင့်ရက် ၃၀ ရရှိမည်)။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် ကြေညာချက်နှင့် မကိုက်ညီပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['Urlaub: ခွင့်ရက်', 'Vergütung: လစဉ်ထောက်ပံ့ကြေး']
+            },
+            id: {
+              regionalIntro: 'Pemahaman Syarat Kontrak Magang Kerja Jerman (Ausbildung).',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Mencocokkan informasi kontrak magang dengan pilihan ganda.'],
+              m2Title: 'Verifikasi Ahli',
+              m2CorrectWhy: 'Opsi A benar: Peserta magang mendapatkan 30 hari libur per tahun.',
+              m2WrongWhy: 'B salah karena durasi 3,5 tahun. C salah karena butuh sertifikat B1. D salah karena ada gaji 1.050 €.',
+              m3Title: 'Istilah Kontrak',
+              m3Chips: ['Vergütung: Uang saku/Gaji magang', 'Urlaub: Cuti tahunan', 'Voraussetzung: Syarat wajib']
             }
           }
         }
       ],
       english: [
         {
-          id: 300001,
+          id: 100051,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 1/3 (Tiếng Anh Doanh Nghiệp)',
-            ja: '模擬試験サンプル • 第 1/3 問 (ビジネス英語)',
-            en: 'Sample Practice Test • Question 1/3 (Business English)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၁/၃ (စီးပွားရေး အင်္ဂလိပ်စာ)',
-            id: 'Simulasi Ujian Standar • Soal 1/3 (Bahasa Inggris Bisnis)'
+            vi: 'Bài Làm Thử • Câu 1/3',
+            ja: '模擬試験サンプル • 第 1/3 問',
+            en: 'Sample Practice Test • Question 1/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၁/၃',
+            id: 'Simulasi Ujian Standar • Soal 1/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Tiếng Anh Doanh Nghiệp > <strong>Thư Tín & Email Thương Mại</strong>',
-            ja: '標準化問題バンク > 国際ビジネス英語 > <strong>ビジネスEメール・日程確認</strong>',
-            en: 'Standardized Question Bank > Business English > <strong>Corporate Correspondence & Meetings</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီးပွားရေး အင်္ဂလိပ်စာ > <strong>ရုံးသုံး အီးမေးလ် ရေးသားမှု</strong>',
-            id: 'Bank Soal Terstandarisasi > Bahasa Inggris Bisnis > <strong>Korespondensi Email & Pertemuan</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Anh Doanh Nghiệp > <strong>Chuyên Đề: Thư Tín & Thương Lượng Quốc Tế</strong>',
+            ja: '標準化問題バンク > ビジネス英語モジュール > <strong>実務項目：国際ビジネス書簡と交渉</strong>',
+            en: 'Standardized Question Bank > Business English Module > <strong>Topic: International Correspondence</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီးပွားရေး အင်္ဂလိပ်စာ မော်ဂျူး > <strong>ခေါင်းစဉ် - နိုင်ငံတကာ စီးပွားရေး ဆက်သွယ်ရေး</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul Bahasa Inggris Bisnis > <strong>Topik: Korespondensi Internasional</strong>'
           },
-          questionHtml: 'Choose the most professional expression to confirm a scheduled meeting with a corporate client:',
+          questionHtml: 'Choose the most professional response to a client reporting a delivery delay:<br><br>Client: "We have not received the shipment promised for yesterday."',
           options: {
-            A: 'I look forward to our meeting scheduled for tomorrow at 2:00 PM.',
-            B: 'See you tomorrow 2pm, please don\'t be late.',
-            C: 'I am waiting for you tomorrow at 2 o\'clock sharp.',
-            D: 'We will definitely meet each other tomorrow at 2pm.'
+            A: 'We apologize for the inconvenience and are actively tracking the shipment to resolve this immediately.',
+            B: 'That is not our fault because the courier company was delayed.',
+            C: 'You should wait a few more days before contacting us.',
+            D: 'We already sent it, so please check again yourself.'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '85% (Đúng chuẩn)', B: '8%', C: '4%', D: '3%' },
-          eliminated5050: ['B', 'D'],
-          vocabChips: {
-            vi: [
-              { term: 'Look forward to + V-ing', mean: 'Trông đợi, mong chờ (Trang trọng)' },
-              { term: 'Scheduled for', mean: 'Được lên lịch trình vào thời điểm...' },
-              { term: 'Corporate client', mean: 'Khách hàng doanh nghiệp' },
-              { term: 'Professional etiquette', mean: 'Chuẩn mực giao tiếp chuyên nghiệp' }
-            ],
-            ja: [
-              { term: 'look forward to', mean: '〜を楽しみに待つ（ビジネス標準表現）' },
-              { term: 'scheduled for', mean: '〜に予定されている' },
-              { term: 'corporate client', mean: '法人顧客・取引先' }
-            ],
-            en: [
-              { term: 'Look forward to', mean: 'Anticipate with pleasure (Formal business closure)' },
-              { term: 'Scheduled for', mean: 'Arranged to take place at a specific time' },
-              { term: 'Corporate client', mean: 'Business-to-business customer' }
-            ],
-            my: [
-              { term: 'look forward to', mean: 'မျှော်လင့်စောင့်စားသည် (ရုံးသုံးစကား)' },
-              { term: 'scheduled for', mean: 'အချိန်သတ်မှတ်ထားသည်' }
-            ],
-            id: [
-              { term: 'Look forward to', mean: 'Menantikan dengan senang hati (Penutup email formal)' },
-              { term: 'Scheduled for', mean: 'Dijadwalkan untuk waktu tertentu' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Chọn cách diễn đạt chuyên nghiệp nhất để xác nhận cuộc họp đã lên lịch với khách hàng doanh nghiệp:<br><strong>Đáp án A:</strong> "I look forward to our meeting scheduled for tomorrow at 2:00 PM." (Tôi rất mong đợi cuộc họp của chúng ta vào lúc 2:00 chiều mai).',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Cụm từ "I look forward to our meeting scheduled for..." là chuẩn mực văn phong giao dịch thư tín quốc tế trang trọng và lịch thiệp. Các phương án B, C, D mang tính chất quá thân mật hoặc mệnh lệnh, không phù hợp trong môi trường kinh doanh B2B.',
-              m3Title: 'Miền 3: Mẫu câu email thông dụng',
-              m3Chips: ['I look forward to: Tôi mong chờ...', 'Please let me know: Xin vui lòng báo cho tôi', 'Best regards: Trân trọng']
+              regionalIntro: 'Đặc trưng giao tiếp thương mại quốc tế: Nguyên tắc tôn trọng đối tác và xử lý phàn nàn theo chuẩn ISO Customer Care.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh (Ứng phó sự cố trễ hạn)',
+              m1Points: ['Khách hàng phàn nàn về sự cố chậm hàng.', 'Phản hồi chuyên nghiệp bắt buộc phải có lời xin lỗi vì sự bất tiện và cam kết hành động giải quyết ngay.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Thương Mại',
+              m2CorrectWhy: 'Phương án A thể hiện trách nhiệm cao và hành động tích cực (We apologize... actively tracking... resolve immediately).',
+              m2WrongWhy: 'Các phương án B, C, D đều đổ lỗi hoặc thái độ trịch thượng, gây nguy cơ đứt gãy quan hệ đối tác.',
+              m3Title: 'Miền 3: Thuật Ngữ Thương Mại Anh',
+              m3Chips: ['Apologize for inconvenience: Xin lỗi vì sự bất tiện', 'Actively track: Chủ động truy vết', 'Shipment: Lô hàng']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>法人顧客との予定された会議を確認する最も適切なビジネス英語表現はどれか。',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: '「I look forward to our meeting scheduled for...」は国際ビジネスにおける日程再確認の標準公式表現です。他の選択肢はカジュアルすぎたり、不自然な命令口調が含まれるため不適切です。',
-              m3Title: '第3層：重要表現',
-              m3Chips: ['look forward to: 楽しみに待つ', 'scheduled for: 予定された', 'best regards: 敬具']
+              regionalIntro: '国際ビジネスにおけるクレーム対応の標準的コミュニケーション。',
+              m1Title: '直観的状況把握',
+              m1Points: ['納期遅延のクレームに対し、誠意ある謝罪と迅速な解決姿勢を示すAが正解。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '不便に対する謝罪と追跡調査の確約が国際商取引のエチケットです。',
+              m2WrongWhy: '他社への責任転嫁（B）や高圧的な対応（C, D）は信頼を損ないます。',
+              m3Title: 'ビジネス英語',
+              m3Chips: ['Apologize for inconvenience', 'Actively tracking', 'Shipment']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Choose the most professional expression to confirm a scheduled meeting with a corporate client.',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: 'Option A uses the polite and universally accepted corporate closing: "I look forward to our meeting scheduled for...". Options B, C, and D are overly casual or command-like.',
-              m3Title: 'Tier 3: Business English Idioms',
-              m3Chips: ['Look forward to: Anticipate respectfully', 'Scheduled for: Appointed time']
+              regionalIntro: 'Corporate Business English: Professional dispute and delay resolution.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['A customer is inquiring about delayed freight. Accountability and urgency are required.'],
+              m2Title: 'Professional Standard',
+              m2CorrectWhy: 'Option A takes ownership, expresses empathy, and provides immediate solution-oriented action.',
+              m2WrongWhy: 'Options B, C, and D deflect blame or show unprofessional rudeness.',
+              m3Title: 'Key Corporate Terms',
+              m3Chips: ['Apologize for inconvenience', 'Actively tracking', 'Immediate resolution']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> စီးပွားဖက် ဖောက်သည်နှင့် တွေ့ဆုံမည့်ရက် အတည်ပြုရန် အသင့်လျော်ဆုံး ရုံးသုံးစကားလုံးကို ရွေးချယ်ပါ။',
-              m2Title: 'ကဏ္ဍ ၂ - ရုံးသုံး အင်္ဂလိပ်စာ ရှင်းလင်းချက်',
-              m2Content: '"I look forward to our meeting scheduled for..." သည် နိုင်ငံတကာ စီးပွားရေးလုပ်ငန်းခွင်တွင် အသုံးအများဆုံး စံပြုစကားလုံး ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး ဝေါဟာရများ',
-              m3Chips: ['Look forward to: မျှော်လင့်ပါသည်']
+              regionalIntro: 'နိုင်ငံတကာ စီးပွားရေး အင်္ဂလိပ်စာ ဆက်သွယ်မှု မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ပစ္စည်းရောက်ရှိမှု နောက်ကျခြင်းအပေါ် ယဉ်ကျေးစွာ ဖြေရှင်းပေးသော အဖြေကို ရွေးရမည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် တောင်းပန်စကားနှင့်အတူ ချက်ချင်း ဖြေရှင်းပေးမည်ဟု ကတိပြုထားသော အကောင်းဆုံး အဖြေဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် အပြစ်လွှဲချခြင်းနှင့် မယဉ်ကျေးသော စကားများ ဖြစ်သည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['Apologize: တောင်းပန်ပါသည်', 'Shipment: ပို့ကုန်ပစ္စည်း']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Pilihlah ungkapan paling profesional untuk mengonfirmasi jadwal pertemuan dengan klien perusahaan.',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Frasa "I look forward to our meeting scheduled for..." adalah standar etika korespondensi bisnis internasional yang sopan dan profesional.',
-              m3Title: 'Domain 3: Kosakata Terkait',
-              m3Chips: ['Look forward to: Menantikan dengan senang hati']
+              regionalIntro: 'Bahasa Inggris Bisnis Perusahaan: Menangani keluhan pelanggan secara profesional.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Klien mengeluhkan keterlambatan kiriman barang. Diperlukan tanggung jawab dan empati.'],
+              m2Title: 'Standar Profesional',
+              m2CorrectWhy: 'Opsi A meminta maaf secara sopan dan langsung mengambil tindakan pelacakan.',
+              m2WrongWhy: 'Opsi B, C, dan D menyalahkan pihak lain dan terkesan kasar.',
+              m3Title: 'Istilah Bisnis',
+              m3Chips: ['Apologize for inconvenience', 'Actively tracking', 'Shipment']
             }
           }
         },
         {
-          id: 300002,
+          id: 100052,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 2/3 (Tiếng Anh Doanh Nghiệp)',
-            ja: '模擬試験サンプル • 第 2/3 問 (ビジネス英語)',
-            en: 'Sample Practice Test • Question 2/3 (Business English)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၂/၃ (စီးပွားရေး အင်္ဂလိပ်စာ)',
-            id: 'Simulasi Ujian Standar • Soal 2/3 (Bahasa Inggris Bisnis)'
+            vi: 'Bài Làm Thử • Câu 2/3',
+            ja: '模擬試験サンプル • 第 2/3 問',
+            en: 'Sample Practice Test • Question 2/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၂/၃',
+            id: 'Simulasi Ujian Standar • Soal 2/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Quản Trị Dự Án > <strong>Xử Lý Sự Cố Trễ Hạn Tiến Độ</strong>',
-            ja: '標準化問題バンク > プロジェクト管理 > <strong>サプライチェーン遅延対応</strong>',
-            en: 'Standardized Question Bank > Project Management > <strong>Handling Delivery Delays</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီမံကိန်း စီမံခန့်ခွဲမှု > <strong>အချိန်နှောင့်နှေးမှု ဖြေရှင်းခြင်း</strong>',
-            id: 'Bank Soal Terstandarisasi > Manajemen Proyek > <strong>Penanganan Keterlambatan Pengiriman</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Anh Doanh Nghiệp > <strong>Chuyên Đề: Thỏa Thuận Thời Hạn & Kế Hoạch Họp</strong>',
+            ja: '標準化問題バンク > ビジネス英語モジュール > <strong>実務項目：会議日程の再調整</strong>',
+            en: 'Standardized Question Bank > Business English Module > <strong>Topic: Meeting Rescheduling</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီးပွားရေး အင်္ဂလိပ်စာ မော်ဂျူး > <strong>ခေါင်းစဉ် - အစည်းအဝေး အချိန် ပြန်လည်ညှိနှိုင်းခြင်း</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul Bahasa Inggris Bisnis > <strong>Topik: Penjadwalan Ulang Rapat</strong>'
           },
-          questionHtml: 'Due to unforeseen supply chain disruptions, the final shipment date will be (      ) by two weeks.',
+          questionHtml: 'Which sentence correctly requests to postpone a meeting to next Monday?',
           options: {
-            A: 'postponed',
-            B: 'refused',
-            C: 'deleted',
-            D: 'expired'
+            A: 'Could we push back our meeting to next Monday due to a scheduling conflict?',
+            B: 'We must cancel the meeting forever because I am busy.',
+            C: 'I do not want to see you this week, so come on Monday.',
+            D: 'You have to change your time to Monday right now.'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '76% (Đúng chuẩn)', B: '10%', C: '6%', D: '8%' },
-          eliminated5050: ['B', 'C'],
-          vocabChips: {
-            vi: [
-              { term: 'Supply chain disruptions', mean: 'Sự gián đoạn chuỗi cung ứng' },
-              { term: 'Postponed', mean: 'Bị hoãn lại / Dời ngày' },
-              { term: 'Unforeseen', mean: 'Không lường trước được' },
-              { term: 'Shipment date', mean: 'Ngày giao hàng' }
-            ],
-            ja: [
-              { term: 'supply chain disruption', mean: 'サプライチェーンの寸断・遅延' },
-              { term: 'postpone', mean: '延期する' },
-              { term: 'unforeseen', mean: '予期せぬ' }
-            ],
-            en: [
-              { term: 'Supply chain disruptions', mean: 'Interruption in goods logistics' },
-              { term: 'Postponed', mean: 'Delayed to a later date' },
-              { term: 'Unforeseen', mean: 'Unexpected / unpredicted' }
-            ],
-            my: [
-              { term: 'supply chain', mean: 'ကုန်ပစ္စည်း ထောက်ပံ့မှုကွင်းဆက်' },
-              { term: 'postponed', mean: 'ရွှေ့ဆိုင်းသည်' }
-            ],
-            id: [
-              { term: 'Supply chain', mean: 'Rantai pasok logistik' },
-              { term: 'Postponed', mean: 'Ditunda ke tanggal berikutnya' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Do những sự cố gián đoạn chuỗi cung ứng không lường trước được, ngày giao chuyến hàng cuối cùng sẽ bị (hoãn lại) hai tuần.<br><strong>Đáp án A:</strong> "postponed" (hoãn lại / lùi lịch).',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Trong quản lý đơn hàng thương mại quốc tế, khi có sự cố bất khả kháng làm lùi ngày bàn giao, từ vựng kỹ thuật chuẩn xác nhất là "postponed" hoặc "delayed". "Refused" (bị từ chối), "Deleted" (bị xóa) hay "Expired" (hết hạn) đều sai nghĩa ngữ cảnh.',
-              m3Title: 'Miền 3: Thuật ngữ chuỗi cung ứng',
-              m3Chips: ['Postpone: Lùi lịch / Hoãn', 'Disruption: Gián đoạn', 'Lead time: Thời gian giao hàng']
+              regionalIntro: 'Kỹ năng thương lượng lịch họp bằng tiếng Anh công sở.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Cụm từ "push back" mang nghĩa lùi lịch họp lại vào một thời điểm muộn hơn.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: 'Phương án A dùng cấu trúc lịch sự 「Could we...?」 kèm lý do khách quan 「scheduling conflict」.',
+              m2WrongWhy: 'B, C, D đều dùng ngôn từ mang tính áp đặt hoặc xúc phạm người nghe.',
+              m3Title: 'Miền 3: Thuật Ngữ Lịch Họp',
+              m3Chips: ['Push back: Lùi lịch lại', 'Scheduling conflict: Trùng lịch trình']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>予期せぬサプライチェーンの混乱により、最終出荷日は2週間（延期）されます。',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: 'ビジネスにおける納期の変更・延期を表す動詞として「postponed」が最適です。',
-              m3Title: '第3層：貿易・物流用語',
-              m3Chips: ['postpone: 延期する', 'disruption: 寸断・混乱', 'lead time: 調達期間']
+              regionalIntro: 'ビジネス英語における日程再調整の丁寧な依頼表現。',
+              m1Title: '直観的状況把握',
+              m1Points: ['「push back」を用いた丁寧な日程延期の申し入れ（A）が正解。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'Could we...とscheduling conflictを組み合わせた洗練された表現です。',
+              m2WrongWhy: 'B、C、Dはいずれも高圧的でビジネスに不適切です。',
+              m3Title: '英語表現',
+              m3Chips: ['Push back（延期する）', 'Scheduling conflict（日程重複）']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> Due to unforeseen supply chain disruptions, the final shipment date will be postponed by two weeks.',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: '"Postponed" is the correct term for rescheduling logistics commitments due to operational delays.',
-              m3Title: 'Tier 3: Supply Chain Vocabulary',
-              m3Chips: ['Postpone: Delay respectfully', 'Disruption: Interruption', 'Lead time: Fulfillment window']
+              regionalIntro: 'Corporate Business English: Polite rescheduling.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['"Push back" politely indicates delaying a meeting.'],
+              m2Title: 'Professional Standard',
+              m2CorrectWhy: 'Option A utilizes polite modal phrasing with a professional justification.',
+              m2WrongWhy: 'B, C, D are demanding, aggressive, or culturally unacceptable.',
+              m3Title: 'Terms',
+              m3Chips: ['Push back: Reschedule later', 'Scheduling conflict']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> ပစ္စည်းထောက်ပံ့မှု နှောင့်နှေးမှုကြောင့် ပစ္စည်းပို့မည့်ရက်ကို ၂ ပတ် (ရွှေ့ဆိုင်း) ရပါမည်။',
-              m2Title: 'ကဏ္ဍ ၂ - ဝေါဟာရ ရှင်းလင်းချက်',
-              m2Content: 'ရက်ရွှေ့ဆိုင်းခြင်းအတွက် "postponed" သည် အမှန်ဆုံး ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး ဝေါဟာရများ',
-              m3Chips: ['Postponed: ရွှေ့ဆိုင်းသည်']
+              regionalIntro: 'အစည်းအဝေး အချိန် ရွှေ့ဆိုင်းခြင်းဆိုင်ရာ အင်္ဂလိပ်စာ အသုံးအနှုန်း ဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ယဉ်ကျေးစွာ အစည်းအဝေးရက် နောက်ဆုတ်ရန် တောင်းဆိုခြင်း ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် အယဉ်ကျေးဆုံးနှင့် စီးပွားရေးလုပ်ငန်းသုံး စံစကား ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မယဉ်ကျေးပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['Push back: နောက်ဆုတ်သည်', 'Scheduling conflict: အချိန်တိုက်ဆိုင်မှု']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Karena gangguan rantai pasok yang tidak terduga, tanggal pengiriman akhir akan (ditunda) selama dua minggu.',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Dalam logistik dan pengadaan, "postponed" adalah kata kerja baku untuk menyatakan penjadwalan ulang tanggal pengiriman.',
-              m3Title: 'Domain 3: Kosakata Terkait',
-              m3Chips: ['Postpone: Menunda']
+              regionalIntro: 'Bahasa Inggris Bisnis: Menjadwal ulang rapat dengan sopan.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['"Push back" berarti mengundur jadwal rapat.'],
+              m2Title: 'Standar Profesional',
+              m2CorrectWhy: 'Opsi A menggunakan bahasa sopan dengan alasan jadwal yang berbenturan.',
+              m2WrongWhy: 'Pilihan lainnya terkesan menuntut dan kasar.',
+              m3Title: 'Istilah Bisnis',
+              m3Chips: ['Push back: Mengundur', 'Scheduling conflict: Tabrakan jadwal']
             }
           }
         },
         {
-          id: 300003,
+          id: 100053,
           sourceTag: {
-            vi: 'Bài Làm Thử • Câu 3/3 (Tiếng Anh Doanh Nghiệp)',
-            ja: '模擬試験サンプル • 第 3/3 問 (ビジネス英語)',
-            en: 'Sample Practice Test • Question 3/3 (Business English)',
-            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၃/၃ (စီးပွားရေး အင်္ဂလိပ်စာ)',
-            id: 'Simulasi Ujian Standar • Soal 3/3 (Bahasa Inggris Bisnis)'
+            vi: 'Bài Làm Thử • Câu 3/3',
+            ja: '模擬試験サンプル • 第 3/3 問',
+            en: 'Sample Practice Test • Question 3/3',
+            my: 'စံပြု စာမေးပွဲပုံစံ • မေးခွန်း ၃/၃',
+            id: 'Simulasi Ujian Standar • Soal 3/3'
           },
           breadcrumb: {
-            vi: 'Kho Đề Thi Mẫu > Dịch Vụ Khách Hàng > <strong>Cam Kết Khắc Phục Sự Cố Hệ Thống</strong>',
-            ja: '標準化問題バンク > カスタマーサクセス > <strong>システム障害対応と解決コミット</strong>',
-            en: 'Standardized Question Bank > Customer Relations > <strong>System Outage & Issue Resolution</strong>',
-            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > ဖောက်သည် ဝန်ဆောင်မှု > <strong>စနစ်ချို့ယွင်းမှု ဖြေရှင်းခြင်း</strong>',
-            id: 'Bank Soal Terstandarisasi > Layanan Pelanggan > <strong>Pemulihan Gangguan Sistem</strong>'
+            vi: 'Kho Đề Thi Mẫu > Phần Tiếng Anh Doanh Nghiệp > <strong>Chuyên Đề: An Toàn Công Trường & Báo Cáo Sự Cố</strong>',
+            ja: '標準化問題バンク > ビジネス英語モジュール > <strong>実務項目：労働安全と事故防止</strong>',
+            en: 'Standardized Question Bank > Business English Module > <strong>Topic: Workplace Safety & Incident Reporting</strong>',
+            my: 'စံသတ်မှတ် မေးခွန်းဘဏ် > စီးပွားရေး အင်္ဂလိပ်စာ မော်ဂျူး > <strong>ခေါင်းစဉ် - လုပ်ငန်းခွင် ဘေးကင်းရေးနှင့် မတော်တဆမှု အစီရင်ခံခြင်း</strong>',
+            id: 'Bank Soal Terstandarisasi > Modul Bahasa Inggris Bisnis > <strong>Topik: Keselamatan Kerja & Laporan Insiden</strong>'
           },
-          questionHtml: 'We sincerely apologize for the unexpected server downtime and are actively working to (      ) the technical issue promptly.',
+          questionHtml: 'In an international project site, what is the meaning of the sign "PPE REQUIRED BEYOND THIS POINT"?',
           options: {
-            A: 'resolve',
-            B: 'cancel',
-            C: 'ignore',
-            D: 'create'
+            A: 'All personnel must wear personal protective equipment before entering this area.',
+            B: 'Personal phones and electronics are prohibited here.',
+            C: 'Only certified engineers are permitted to enter.',
+            D: 'You can enter freely without any protective gear.'
           },
-          correctAnswer: 'A',
-          pollPcts: { A: '88% (Đúng chuẩn)', B: '5%', C: '2%', D: '5%' },
-          eliminated5050: ['B', 'C'],
-          vocabChips: {
-            vi: [
-              { term: 'Resolve the issue', mean: 'Giải quyết dứt điểm vấn đề kỹ thuật' },
-              { term: 'Server downtime', mean: 'Thời gian máy chủ ngừng hoạt động' },
-              { term: 'Promptly', mean: 'Một cách nhanh chóng, kịp thời' },
-              { term: 'Sincerely apologize', mean: 'Chân thành xin lỗi (Chuẩn mực B2B)' }
-            ],
-            ja: [
-              { term: 'resolve the issue', mean: '問題を解決する' },
-              { term: 'server downtime', mean: 'サーバー停止時間' },
-              { term: 'promptly', mean: '迅速に、速やかに' }
-            ],
-            en: [
-              { term: 'Resolve the issue', mean: 'Settle or find an effective solution to a problem' },
-              { term: 'Server downtime', mean: 'Period when a system is unavailable' },
-              { term: 'Promptly', mean: 'Without delay / swiftly' }
-            ],
-            my: [
-              { term: 'resolve', mean: 'ပြဿနာကို ဖြေရှင်းသည်' },
-              { term: 'downtime', mean: 'စနစ် ရပ်တန့်နေချိန်' }
-            ],
-            id: [
-              { term: 'Resolve the issue', mean: 'Menyelesaikan masalah teknis' },
-              { term: 'Server downtime', mean: 'Waktu henti server' },
-              { term: 'Promptly', mean: 'Dengan segera / cepat' }
-            ]
-          },
-          explanations: {
+          correct: 'A',
+          explanation3Regions: {
             vi: {
-              statusCorrect: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              statusWrong: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ A',
-              m1Title: 'Miền 1: Dịch nghĩa câu hỏi & đáp án',
-              m1Content: '<strong>Câu hỏi:</strong> Chúng tôi chân thành xin lỗi vì sự cố máy chủ ngừng hoạt động bất ngờ và đang tích cực xử lý để (giải quyết) dứt điểm sự cố kỹ thuật một cách nhanh chóng nhất.<br><strong>Đáp án A:</strong> "resolve" (giải quyết / xử lý sự cố).',
-              m2Title: 'Miền 2: Phân tích bản chất nghiệp vụ & thực tế',
-              m2Content: 'Trong văn hóa chăm sóc khách hàng và hỗ trợ kỹ thuật B2B (SaaS Customer Support), cụm từ "resolve the issue promptly" là lời cam kết uy tín nhất sau một thông báo xin lỗi sự cố (incident report).',
-              m3Title: 'Miền 3: Cụm từ chuyên môn CSKH',
-              m3Chips: ['Resolve an issue: Xử lý sự cố', 'Escalate: Chuyển cấp trên', 'Follow up: Theo dõi sau xử lý']
+              regionalIntro: 'Thuật ngữ an toàn lao động quốc tế trên công trường nước ngoài.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['PPE là từ viết tắt phổ biến toàn cầu của Personal Protective Equipment (Thiết bị bảo hộ cá nhân).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: 'Phương án A giải thích chuẩn xác: Mọi nhân viên đều phải trang bị đầy đủ đồ bảo hộ trước khi bước qua ranh giới này.',
+              m2WrongWhy: 'B, C, D đều dịch sai hoàn toàn ý nghĩa của từ viết tắt PPE.',
+              m3Title: 'Miền 3: Thuật Ngữ An Toàn',
+              m3Chips: ['PPE: Personal Protective Equipment', 'Required: Bắt buộc trang bị']
             },
             ja: {
-              statusCorrect: '正解です！正解の選択肢は A です',
-              statusWrong: '不正解です！正解の選択肢は A です',
-              m1Title: '第1層：問題文と選択肢の日本語・対訳',
-              m1Content: '<strong>問題文：</strong>予期せぬサーバー停止を心よりお詫び申し上げますとともに、技術的問題を迅速に（解決）できるよう全力を尽くしております。',
-              m2Title: '第2層：実務および業務背景の解説',
-              m2Content: 'IT・SaaSの障害対応文面において、「問題を解決する」は「resolve the issue」が定番の定型句です。',
-              m3Title: '第3層：ITサポート英語',
-              m3Chips: ['resolve: 解決する', 'downtime: 停止時間', 'promptly: 速やかに']
+              regionalIntro: '海外建設・製造プロジェクト現場における安全標識。',
+              m1Title: '直観的状況把握',
+              m1Points: ['PPE（個人用保護具）の着用義務を明示する標識。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'A（エリア進入前の保護具着用義務）が正解です。',
+              m2WrongWhy: '電話禁止や資格者限定を意味する言葉ではありません。',
+              m3Title: '安全用語',
+              m3Chips: ['PPE（個人用保護具）', 'Required（必須）']
             },
             en: {
-              statusCorrect: 'CORRECT! THE CORRECT ANSWER IS A',
-              statusWrong: 'INCORRECT! THE CORRECT ANSWER IS A',
-              m1Title: 'Tier 1: Question & Options Translation',
-              m1Content: '<strong>Question:</strong> We sincerely apologize for the unexpected server downtime and are actively working to resolve the technical issue promptly.',
-              m2Title: 'Tier 2: Professional & practical context analysis',
-              m2Content: '"Resolve" collocates directly with "issue" or "problem" in tech/SaaS incident response communication.',
-              m3Title: 'Tier 3: Customer Success Vocabulary',
-              m3Chips: ['Resolve an issue: Settle problem', 'Downtime: Outage window', 'Promptly: Rapidly']
+              regionalIntro: 'Global Health, Safety & Environment (HSE) site standard.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['PPE stands for Personal Protective Equipment (hard hat, safety boots, high-vis vest).'],
+              m2Title: 'HSE Compliance',
+              m2CorrectWhy: 'Option A directly reflects OSHA and international site safety mandates.',
+              m2WrongWhy: 'PPE never refers to personal phones or role qualifications.',
+              m3Title: 'HSE Terms',
+              m3Chips: ['PPE: Personal Protective Equipment', 'Safety Compliance']
             },
             my: {
-              statusCorrect: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              statusWrong: 'မှားယွင်းနေပါသည်! အဖြေမှန်မှာ A ဖြစ်ပါသည်',
-              m1Title: 'ကဏ္ဍ ၁ - မေးခွန်းနှင့် အဖြေ ဘာသာပြန်',
-              m1Content: '<strong>မေးခွန်း -</strong> စာဗာချို့ယွင်းမှုအတွက် အထူးတောင်းပန်ပြီး နည်းပညာပြဿနာကို အမြန်ဆုံး (ဖြေရှင်း) ပေးပါမည်။',
-              m2Title: 'ကဏ္ဍ ၂ - နည်းပညာ အင်္ဂလိပ်စာ',
-              m2Content: '"resolve" သည် ပြဿနာဖြေရှင်းခြင်းအတွက် အမှန်ကန်ဆုံး ဖြစ်သည်။',
-              m3Title: 'ကဏ္ဍ ၃ - အရေးကြီး ဝေါဟာရများ',
-              m3Chips: ['resolve: ဖြေရှင်းသည်']
+              regionalIntro: 'နိုင်ငံတကာ စီမံကိန်း လုပ်ငန်းခွင် ဘေးကင်းရေး သတိပေးဆိုင်းဘုတ် ဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['PPE ဆိုသည်မှာ တစ်ကိုယ်ရည် အကာအကွယ်ပစ္စည်းကို ဆိုလိုသည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ အဓိပ္ပာယ်ဖွင့်ဆိုချက် မှန်ကန်ပါသည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မှားယွင်းပါသည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['PPE: တစ်ကိုယ်ရည် အကာအကွယ်ပစ္စည်း']
             },
             id: {
-              statusCorrect: 'BENAR! JAWABAN YANG BENAR ADALAH A',
-              statusWrong: 'BELUM TEPAT! JAWABAN YANG BENAR ADALAH A',
-              m1Title: 'Domain 1: Terjemahan Soal & Jawaban',
-              m1Content: '<strong>Pertanyaan:</strong> Kami mohon maaf sebesar-besarnya atas gangguan server yang tidak terduga dan sedang berupaya aktif untuk (menyelesaikan) masalah teknis ini secepatnya.',
-              m2Title: 'Domain 2: Analisis konteks praktis & profesional',
-              m2Content: 'Dalam komunikasi insiden teknis/SaaS, "resolve" adalah kolokasi baku untuk "issue" atau masalah teknis.',
-              m3Title: 'Domain 3: Kosakata Layanan Terkait',
-              m3Chips: ['Resolve: Menyelesaikan', 'Downtime: Waktu henti sistem']
+              regionalIntro: 'Standar Keselamatan Kerja Proyek Internasional (K3/HSE).',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['PPE adalah singkatan baku dari Alat Pelindung Diri (APD).'],
+              m2Title: 'Kepatuhan K3',
+              m2CorrectWhy: 'Opsi A menjelaskan kewajiban mengenakan APD sebelum memasuki area.',
+              m2WrongWhy: 'Pilihan lain salah mengartikan singkatan PPE.',
+              m3Title: 'Istilah K3',
+              m3Chips: ['PPE: Alat Pelindung Diri (APD)', 'Kepatuhan K3']
+            }
+          }
+        }
+      ],
+      chinese: [
+        {
+          id: 100061,
+          sourceTag: {
+            vi: 'Tiếng Trung HSK • Câu 1/3 (Ngữ pháp liên từ)',
+            ja: '中国語 HSK • 第 1/3 問（接続詞選択）',
+            en: 'Chinese HSK 3-4 • Question 1/3 (Grammar & Conjunctions)',
+            my: 'တရုတ် HSK • မေးခွန်း ၁/၃ (သဒ္ဒါ)',
+            id: 'Bahasa Mandarin HSK • Soal 1/3 (Tata Bahasa)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Trung HSK > Ngữ Pháp & Đọc Hiểu > <strong>Cặp Liên Từ Tăng Tiến (不仅...而且...)</strong>',
+            ja: '中国語検定 HSK > 語彙・文法 > <strong>漸進を表す接続詞 不仅...而且...</strong>',
+            en: 'Chinese HSK Exam > Grammar & Reading > <strong>Correlative Conjunctions (不仅...而且...)</strong>',
+            my: 'တရုတ် HSK စာမေးပွဲ > သဒ္ဒါ > <strong>အဆင့်ဆင့်တိုးတက်မှုပြ သဒ္ဒါစုံတွဲ</strong>',
+            id: 'Ujian Bahasa Mandarin HSK > Tata Bahasa > <strong>Konjungsi Korelatif (不仅...而且...)</strong>'
+          },
+          questionHtml: '请选出最恰当的词语填空：<br><br>这家工厂的生产效率很高，（　）产品质量也非常好。',
+          options: {
+            A: '而且',
+            B: '但是',
+            C: '所以',
+            D: '如果'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đặc trưng ngữ pháp HSK 3–4: Quan hệ tăng tiến bổ sung thông tin tích cực giữa hai phân câu.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Phân câu 1: Hiệu suất sản xuất cao (效率很高).', 'Phân câu 2: Chất lượng sản phẩm cũng rất tốt (质量也非常好).', 'Quan hệ tăng tiến, đi kèm phó từ 「也」 -> Chọn 「而且」(Mà còn/Hơn nữa).'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: '「而且」 (érqiě) liên kết hai vế cùng chiều, nhấn mạnh tính ưu việt của nhà máy.',
+              m2WrongWhy: '但是 (Nhưng - ngược hướng), 所以 (Cho nên - kết quả), 如果 (Nếu như - giả thiết) đều không hợp logic.',
+              m3Title: 'Miền 3: Thuật Ngữ HSK',
+              m3Chips: ['而且: Hơn nữa/Mà còn', '生产效率: Hiệu suất sản xuất', '产品质量: Chất lượng sản phẩm']
+            },
+            ja: {
+              regionalIntro: 'HSK頻出文法：累加・漸進を表す接続関係。',
+              m1Title: '直観的状況把握',
+              m1Points: ['生産効率が高く、その上品質も良いという並列・累加関係。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: '「而且」（その上、さらに）が副詞「也」と呼応する正解です。',
+              m2WrongWhy: '「但是」は逆接、「所以」は因果、「如果」は仮定です。',
+              m3Title: '中国語用語',
+              m3Chips: ['而且', '生产效率', '产品质量']
+            },
+            en: {
+              regionalIntro: 'Chinese HSK Grammar: Progressive addition conjunctions.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Both clauses express positive attributes (high efficiency + high quality).'],
+              m2Title: 'Linguistic Verification',
+              m2CorrectWhy: '"érqiě" (furthermore/and also) matches the adverb "yě" perfectly.',
+              m2WrongWhy: '"dànshì" indicates contrast; "suǒyǐ" indicates consequence; "rúguǒ" indicates conditional.',
+              m3Title: 'HSK Vocabulary',
+              m3Chips: ['而且: Furthermore', '生产效率: Efficiency', '质量: Quality']
+            },
+            my: {
+              regionalIntro: 'တရုတ် HSK သဒ္ဒါ - ပိုမိုအားဖြည့်သော သဒ္ဒါအသုံးအနှုန်း မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['စက်ရုံ၏ ထုတ်လုပ်မှုလည်း ကောင်းမွန်ပြီး အရည်အသွေးလည်း ကောင်းမွန်ကြောင်း ပြဆိုသည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A ၏ 「而且」 (ထို့အပြင်) သည် သဒ္ဒါအရ အကိုက်ညီဆုံး ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်စကားလုံးများသည် အဓိပ္ပာယ် မကိုက်ညီပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['而且: ထို့အပြင်', '质量: အရည်အသွေး']
+            },
+            id: {
+              regionalIntro: 'Tata Bahasa HSK Mandarin: Konjungsi perluasan progresif.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Kedua klausa bernada positif (efisiensi tinggi + kualitas bagus).'],
+              m2Title: 'Verifikasi Linguistik',
+              m2CorrectWhy: '"érqiě" (dan juga / terlebih lagi) berpadu serasi dengan adverbia "yě".',
+              m2WrongWhy: '"dànshì" (tetapi) berlawanan arah; "suǒyǐ" (maka); "rúguǒ" (jika).',
+              m3Title: 'Kosakata HSK',
+              m3Chips: ['而且: Selain itu / Terlebih lagi', '生产效率: Efisiensi produksi', '质量: Kualitas']
+            }
+          }
+        },
+        {
+          id: 100062,
+          sourceTag: {
+            vi: 'Tiếng Trung HSK • Câu 2/3 (Giao dịch thương mại xưởng gia công)',
+            ja: '中国語 HSK • 第 2/3 問（工場商務対話）',
+            en: 'Chinese HSK 3-4 • Question 2/3 (Factory Trade Dialogue)',
+            my: 'တရုတ် HSK • မေးခွန်း ၂/၃ (ကုန်သွယ်မှု စကားပြော)',
+            id: 'Bahasa Mandarin HSK • Soal 2/3 (Percakapan Perdagangan Pabrik)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Trung HSK > Tiếng Trung Thương Mại > <strong>Xác Nhận Đơn Hàng & Thời Hạn Giao Hàng</strong>',
+            ja: '中国語検定 HSK > ビジネス中国語 > <strong>注文確認と納期交渉</strong>',
+            en: 'Chinese HSK Exam > Business Chinese > <strong>Order Confirmation & Delivery Schedule</strong>',
+            my: 'တရုတ် HSK စာမေးပွဲ > စီးပွားရေး တရုတ်စာ > <strong>အမှာစာ အတည်ပြုခြင်းနှင့် ပို့ဆောင်ရက်</strong>',
+            id: 'Ujian Bahasa Mandarin HSK > Mandarin Bisnis > <strong>Konfirmasi Pesanan & Waktu Pengiriman</strong>'
+          },
+          questionHtml: '客户发来紧急订单，问：“这批货物下周五之前能发货吗？”<br><br>厂长确认可以按时交货，最礼貌专业的回答是：',
+          options: {
+            A: '没问题，我们一定按时发货，请您放心。',
+            B: '不知道，下周再看看吧。',
+            C: '你为什么这么着急？下个月才行。',
+            D: '我们不管发货，你找物流公司去。'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Kỹ năng giao tiếp thương mại với đối tác Trung Quốc/Đài Loan.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['Khách hàng hỏi tiến độ giao hàng, xưởng đã xác nhận kịp tiến độ.', 'Phản hồi cần thể hiện sự chuyên nghiệp và tạo sự an tâm tuyệt đối.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn',
+              m2CorrectWhy: '「没问题，我们一定按时发货，请您放心」 khẳng định chắc chắn và trấn an đối tác.',
+              m2WrongWhy: 'B, C, D đều thể hiện thái độ tắc trách, thô lỗ trong kinh doanh.',
+              m3Title: 'Miền 3: Mẫu Câu Thương Mại Trung',
+              m3Chips: ['按时发货: Giao hàng đúng hạn', '请您放心: Xin quý khách yên tâm']
+            },
+            ja: {
+              regionalIntro: '中国ビジネスにおける顧客対応・納期回答の基本。',
+              m1Title: '直観的状況把握',
+              m1Points: ['納期通り出荷可能であることを確約し、安心感を与える表現を選択。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'A（問題ありません、期日通り出荷いたしますのでご安心ください）が最善です。',
+              m2WrongWhy: 'B、C、Dはビジネス上の信頼関係を破綻させます。',
+              m3Title: 'ビジネス用語',
+              m3Chips: ['按时发货（期日通り出荷）', '请您放心（ご安心ください）']
+            },
+            en: {
+              regionalIntro: 'Cross-border trade communication in Chinese.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['Confirming on-time shipment to reassure a VIP client.'],
+              m2Title: 'Business Standard',
+              m2CorrectWhy: 'Option A conveys professional reliability ("No problem, we will deliver on time, rest assured").',
+              m2WrongWhy: 'Other choices are dismissive, rude, or evasive.',
+              m3Title: 'Terms',
+              m3Chips: ['按时发货: Deliver on schedule', '请您放心: Please be assured']
+            },
+            my: {
+              regionalIntro: 'တရုတ် စီးပွားရေး ဆက်ဆံရေး စကားပြော မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['ဖောက်သည်အား အချိန်မီ ပစ္စည်းပို့ဆောင်ပေးမည်ဖြစ်ကြောင်း ယဉ်ကျေးစွာ အတည်ပြုခြင်း ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိစစ်ချက်',
+              m2CorrectWhy: 'A သည် အကောင်းဆုံးနှင့် အယဉ်ကျေးဆုံး စီးပွားရေး စကား ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မယဉ်ကျေးပါ။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['按时发货: အချိန်မီ ပို့ဆောင်မည်', '请您放心: စိတ်ချပါ']
+            },
+            id: {
+              regionalIntro: 'Komunikasi Perdagangan Bahasa Mandarin.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['Mengonfirmasi pengiriman tepat waktu untuk menenangkan klien.'],
+              m2Title: 'Standar Profesional',
+              m2CorrectWhy: 'Opsi A memberikan komitmen profesional dan rasa aman kepada mitra bisnis.',
+              m2WrongWhy: 'Pilihan lain menunjukkan sikap tidak bertanggung jawab.',
+              m3Title: 'Istilah Bisnis',
+              m3Chips: ['按时发货: Kirim tepat waktu', '请您放心: Harap tenang/yakin']
+            }
+          }
+        },
+        {
+          id: 100063,
+          sourceTag: {
+            vi: 'Tiếng Trung HSK • Câu 3/3 (Biển báo an toàn xưởng sản xuất)',
+            ja: '中国語 HSK • 第 3/3 問（安全標識読解）',
+            en: 'Chinese HSK 3-4 • Question 3/3 (Factory Safety Sign Reading)',
+            my: 'တရုတ် HSK • မေးခွန်း ၃/၃ (ဘေးကင်းရေး ဆိုင်းဘုတ်)',
+            id: 'Bahasa Mandarin HSK • Soal 3/3 (Rambu Keselamatan Pabrik)'
+          },
+          breadcrumb: {
+            vi: 'Chứng Chỉ Tiếng Trung HSK > An Toàn Công Xưởng > <strong>Biển Báo Cấm Hút Thuốc & Phòng Chống Cháy Nổ</strong>',
+            ja: '中国語検定 HSK > 工場安全 > <strong>火気厳禁と安全規則</strong>',
+            en: 'Chinese HSK Exam > Workplace Safety > <strong>Fire Prevention & No Smoking Sign</strong>',
+            my: 'တရုတ် HSK စာမေးပွဲ > စက်ရုံ ဘေးကင်းရေး > <strong>မီးဘေးကာကွယ်ရေးနှင့် ဆေးလိပ်မသောက်ရ ဆိုင်းဘုတ်</strong>',
+            id: 'Ujian Bahasa Mandarin HSK > Keselamatan Kerja > <strong>Pencegahan Kebakaran & Larangan Merokok</strong>'
+          },
+          questionHtml: '在工厂车间门口看到标语：<strong>「严禁烟火，违者必究」</strong>，这句话的意思是：',
+          options: {
+            A: '绝对禁止抽烟和使用明火，违反者必须追究责任。',
+            B: '可以在指定区域内随意吸烟。',
+            C: '车间内部允许烧烤和煮饭。',
+            D: '只有主管人员才能在车间吸烟。'
+          },
+          correct: 'A',
+          explanation3Regions: {
+            vi: {
+              regionalIntro: 'Đọc hiểu biển báo an toàn trong xưởng sản xuất Trung Quốc / Đài Loan.',
+              m1Title: 'Miền 1: Trực Giác Bối Cảnh',
+              m1Points: ['「严禁烟火」: Nghiêm cấm khói lửa (hút thuốc, lửa trần).', '「违者必究」: Người vi phạm nhất định sẽ bị xử lý kỷ luật.'],
+              m2Title: 'Miền 2: Phản Biện Chuyên Môn Nhà Xưởng',
+              m2CorrectWhy: 'Phương án A giải thích chính xác 100% nghĩa của khẩu hiệu an toàn phòng chống cháy nổ.',
+              m2WrongWhy: 'B, C, D đều trái ngược hoàn toàn với quy tắc phòng chống cháy nổ trong nhà máy.',
+              m3Title: 'Miền 3: Thuật Ngữ An Toàn Trung',
+              m3Chips: ['严禁烟火: Nghiêm cấm lửa', '违者必究: Vi phạm nhất định bị xử lý', '消防安全: An toàn PCCC']
+            },
+            ja: {
+              regionalIntro: '中国の工場における防火安全標識の読解。',
+              m1Title: '直観的状況把握',
+              m1Points: ['「厳禁煙火（火気厳禁）」および「違者必究（違反者は必ず処罰）」の解釈。'],
+              m2Title: '専門的検証',
+              m2CorrectWhy: 'A（喫煙および火気使用の絶対禁止、違反者の責任追及）が正解です。',
+              m2WrongWhy: 'いかなる喫煙や火気使用も許可されていません。',
+              m3Title: '安全用語',
+              m3Chips: ['严禁烟火（火気厳禁）', '违者必究（違反者処罰）']
+            },
+            en: {
+              regionalIntro: 'Industrial Fire Safety Sign in Chinese Manufacturing.',
+              m1Title: 'Contextual Intuition',
+              m1Points: ['"Yán jìn yān huǒ" strictly prohibits sparks and smoking.'],
+              m2Title: 'Safety Compliance',
+              m2CorrectWhy: 'Option A precisely translates: Absolute prohibition of smoking/open fire, violators will be penalized.',
+              m2WrongWhy: 'No smoking is permitted for any personnel under any circumstance.',
+              m3Title: 'Safety Terms',
+              m3Chips: ['Strictly prohibited', 'Fire safety compliance']
+            },
+            my: {
+              regionalIntro: 'တရုတ် စက်ရုံ မီးဘေးကာကွယ်ရေး ဆိုင်းဘုတ် မေးခွန်းဖြစ်ပါသည်။',
+              m1Title: 'အခြေအနေ သဘောပေါက်မှု',
+              m1Points: ['မီးနှင့် ဆေးလိပ်လုံးဝ မသောက်ရ၊ ဖောက်ဖျက်ပါက အရေးယူမည်ဟူသော အဓိပ္ပာယ် ဖြစ်သည်။'],
+              m2Title: 'ကျွမ်းကျင်မှု စိcစ်ချက်',
+              m2CorrectWhy: 'A သည် ဆိုင်းဘုတ်၏ အဓိပ္ပာယ် အမှန် ဖြစ်သည်။',
+              m2WrongWhy: 'ကျန်အဖြေများသည် မှားယွင်းပါသည်။',
+              m3Title: 'ဝေါဟာရများ',
+              m3Chips: ['严禁烟火: မီးဘေးသတိ မီးလုံးဝမသုံးရ']
+            },
+            id: {
+              regionalIntro: 'Rambu Keselamatan Kebakaran Pabrik Berbahasa Mandarin.',
+              m1Title: 'Intuisi Konteks',
+              m1Points: ['"Yán jìn yān huǒ" melarang keras rokok dan api terbuka.'],
+              m2Title: 'Kepatuhan K3',
+              m2CorrectWhy: 'Opsi A menjelaskan larangan mutlak dan sanksi bagi pelanggar.',
+              m2WrongWhy: 'Pilihan lainnya melanggar standar keselamatan kerja pabrik.',
+              m3Title: 'Istilah K3',
+              m3Chips: ['Dilarang merokok & menyalakan api', 'Sanksi bagi pelanggar']
             }
           }
         }
       ]
     };
 
-    let currentSubjectKey = 'tokutei';
-    let EXAM_QUESTIONS_DATA = MULTI_SUBJECT_EXAMS.tokutei;
+    let currentSubjectKey = 'jft';
+    let EXAM_QUESTIONS_DATA = MULTI_SUBJECT_EXAMS.jft;
 
     function switchExamSubject(subjectKey) {
       if (!MULTI_SUBJECT_EXAMS[subjectKey]) return;
@@ -9458,13 +10163,19 @@
       renderExamQuestion(0);
 
       const toastSubjectMap = {
-        tokutei: { vi: 'Đã mở bộ đề: Kỹ Năng Nghề & Tokutei', ja: '技能・特定技能科目に切り替えました', en: 'Switched to: Vocational & Tokutei Skills', my: 'Tokutei ဘာသာရပ်သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Keterampilan & Tokutei' },
-        jlpt: { vi: 'Đã mở bộ đề: Tiếng Nhật JLPT N3-N2', ja: '日本語能力試験 (JLPT) に切り替えました', en: 'Switched to: Japanese JLPT N3-N2', my: 'JLPT ဘာသာရပ်သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Jepang JLPT N3-N2' },
-        english: { vi: 'Đã mở bộ đề: Tiếng Anh Doanh Nghiệp (TOEIC)', ja: 'ビジネス英語科目に切り替えました', en: 'Switched to: Business English (TOEIC)', my: 'စီးပွားရေး အင်္ဂလိပ်စာသို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Inggris Bisnis' }
+        jft: { vi: 'Đã nạp đề mẫu: Tiếng Nhật JFT-Basic A2', ja: 'JFT-Basic A2 基礎テストに切り替えました', en: 'Switched to: JFT-Basic A2 Exam', my: 'JFT-Basic A2 သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: JFT-Basic A2' },
+        tokutei: { vi: 'Đã nạp đề mẫu: Tokutei 14 Ngành', ja: '特定技能14分野に切り替えました', en: 'Switched to: Tokutei 14 Sectors', my: 'Tokutei သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Tokutei 14 Bidang' },
+        jlpt: { vi: 'Đã nạp đề mẫu: Tiếng Nhật JLPT (N3 - N2)', ja: '日本語能力試験 (JLPT) に切り替えました', en: 'Switched to: Japanese JLPT N3-N2', my: 'JLPT သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Jepang JLPT' },
+        korean: { vi: 'Đã nạp đề mẫu: Tiếng Hàn TOPIK & EPS', ja: '韓国語能力試験 (TOPIK) に切り替えました', en: 'Switched to: Korean TOPIK & EPS', my: 'ကိုရီးယားစာ TOPIK သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Korea TOPIK' },
+        german: { vi: 'Đã nạp đề mẫu: Tiếng Đức Goethe (Ausbildung B1)', ja: 'ドイツ語 ゲーテB1に切り替えました', en: 'Switched to: German Goethe B1', my: 'ဂျာမန်စာ Goethe B1 သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Jerman Goethe' },
+        english: { vi: 'Đã nạp đề mẫu: Tiếng Anh Doanh Nghiệp (TOEIC)', ja: 'ビジネス英語科目に切り替えました', en: 'Switched to: Business English (TOEIC)', my: 'စီးပွားရေး အင်္ဂလိပ်စာသို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Inggris Bisnis' },
+        chinese: { vi: 'Đã nạp đề mẫu: Tiếng Trung HSK 3-4', ja: '中国語 HSKに切り替えました', en: 'Switched to: Chinese HSK 3-4', my: 'တရုတ်စာ HSK သို့ ပြောင်းလဲပြီးပါပြီ', id: 'Beralih ke: Bahasa Mandarin HSK' }
       };
       const curL = typeof currentLang !== 'undefined' ? currentLang : 'vi';
-      const map = toastSubjectMap[subjectKey] || toastSubjectMap.tokutei;
-      showPortfolioToast(map[curL] || map.vi);
+      const map = toastSubjectMap[subjectKey] || toastSubjectMap.jft;
+      if (typeof showPortfolioToast === 'function') {
+        showPortfolioToast(map[curL] || map.vi);
+      }
     }
 
     // ── LIVE BRAND SIMULATOR CONTROLLER ─────────────────────────
@@ -10233,7 +10944,7 @@
     const studentsValEl = document.getElementById('roi-students-val');
     const teachersValEl = document.getElementById('roi-teachers-val');
     const hoursSavedEl = document.getElementById('roi-hours-saved');
-    const costSavedEl = document.getElementById('roi-cost-saved');
+    const testsSavedEl = document.getElementById('roi-tests-saved');
 
     const curLang = window._currentPortfolioLang || 'vi';
 
@@ -10257,8 +10968,8 @@
 
     // Công thức tính số giờ tiết kiệm: ~1.5h/học viên/tháng + ~10h/giáo viên
     const hours = Math.round(students * 1.5 + teachers * 10);
-    // Chi phí tiết kiệm: ~75.000đ/giờ công + in ấn
-    const costVnd = Math.round(hours * 75000);
+    // Khối lượng bài thi & lượt nộp tự động hóa: ~12 bài/học viên/tháng
+    const testsCount = Math.round(students * 12);
 
     if (hoursSavedEl) {
       if (curLang === 'vi') hoursSavedEl.textContent = '~' + hours + ' Giờ / Tháng';
@@ -10268,19 +10979,20 @@
       else if (curLang === 'id') hoursSavedEl.textContent = '~' + hours + ' Jam / Bulan';
     }
 
-    if (costSavedEl) {
+    if (testsSavedEl) {
       if (curLang === 'vi') {
-        costSavedEl.textContent = '~' + costVnd.toLocaleString('vi-VN') + 'đ / Tháng';
+        testsSavedEl.textContent = '~' + testsCount.toLocaleString('vi-VN') + ' Lượt / Tháng';
       } else if (curLang === 'ja') {
-        const costYen = Math.round(costVnd / 165);
-        costSavedEl.textContent = '約 ' + costYen.toLocaleString('ja-JP') + ' 円 / 月';
-      } else {
-        const costUsd = Math.round(costVnd / 25000);
-        costSavedEl.textContent = '~$' + costUsd.toLocaleString('en-US') + ' / Mo';
+        testsSavedEl.textContent = '約 ' + testsCount.toLocaleString('ja-JP') + ' 回 / 月';
+      } else if (curLang === 'en') {
+        testsSavedEl.textContent = '~' + testsCount.toLocaleString('en-US') + ' Tests / Mo';
+      } else if (curLang === 'my') {
+        testsSavedEl.textContent = 'ခန့်မှန်း ' + testsCount.toLocaleString('my-MM') + ' ကြိမ် / လ';
+      } else if (curLang === 'id') {
+        testsSavedEl.textContent = '~' + testsCount.toLocaleString('id-ID') + ' Ujian / Bulan';
       }
     }
   }
-
   /* ── MICRO LEAD CAPTURE LOGIC ── */
   let _selectedLeadNeed = 'Tokutei';
 
