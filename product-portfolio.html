@@ -10261,28 +10261,28 @@
     let isExamVocabOpen = false;
     let selectedOptionKey = null;
 
-    function renderExamQuestion(index) {
-      if (index < 0 || index >= EXAM_QUESTIONS_DATA.length) return;
+        function renderExamQuestion(index) {
+      if (!EXAM_QUESTIONS_DATA || index < 0 || index >= EXAM_QUESTIONS_DATA.length) return;
       currentExamQIndex = index;
       const q = EXAM_QUESTIONS_DATA[index];
       const lang = typeof currentLang !== 'undefined' ? currentLang : 'vi';
 
       // 1. Source badge & Breadcrumb
       const sourceBadge = document.getElementById('q-source-badge');
-      if (sourceBadge) {
-        sourceBadge.innerText = q.sourceTag[lang] || q.sourceTag.vi;
+      if (sourceBadge && q.sourceTag) {
+        sourceBadge.innerText = q.sourceTag[lang] || q.sourceTag.vi || '';
       }
       const bc = document.getElementById('q-breadcrumb');
-      if (bc) {
+      if (bc && q.breadcrumb) {
         const iconSvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> ';
         const prefix = window._customBrandName ? '<strong>' + window._customBrandName + '</strong> > ' : '';
-        bc.innerHTML = iconSvg + prefix + (q.breadcrumb[lang] || q.breadcrumb.vi);
+        bc.innerHTML = iconSvg + prefix + (q.breadcrumb[lang] || q.breadcrumb.vi || '');
       }
 
-      // 2. Nội dung câu hỏi tiếng Nhật có Ruby
+      // 2. Nội dung câu hỏi
       const qContent = document.getElementById('q-content');
       if (qContent) {
-        qContent.innerHTML = q.questionHtml;
+        qContent.innerHTML = q.questionHtml || '';
       }
 
       // 3. Render 4 Options
@@ -10290,22 +10290,38 @@
         const optEl = document.getElementById('opt-' + k.toLowerCase());
         if (optEl) {
           const innerSpan = optEl.querySelector('.option-inner span:last-child');
-          if (innerSpan) {
-            innerSpan.innerHTML = q.options[k];
+          if (innerSpan && q.options) {
+            innerSpan.innerHTML = q.options[k] || '';
           }
-          // Poll percentage
+          // Poll percentage phòng thủ không bao giờ crash
           const pctEl = document.getElementById('pct-' + k.toLowerCase());
-          if (pctEl) pctEl.innerText = q.pollPcts[k];
+          if (pctEl) {
+            const correctKey = (q.correctAnswer || q.correct || 'A').toUpperCase();
+            const pcts = q.pollPcts || {
+              [correctKey]: '68%',
+              ...(['A', 'B', 'C', 'D'].filter(x => x !== correctKey).reduce((acc, x, i) => ({ ...acc, [x]: i === 0 ? '16%' : i === 1 ? '10%' : '6%' }), {}))
+            };
+            pctEl.innerText = pcts[k] || '25%';
+          }
         }
       });
 
       // 4. Accordion từ vựng trong câu
       const vocabBody = document.getElementById('q-vocab-body');
       if (vocabBody) {
-        const chips = q.vocabChips[lang] || q.vocabChips.vi;
-        vocabBody.innerHTML = chips.map(c => 
-          '<div class="q-vocab-item-chip"><strong>' + c.term + ':</strong> ' + c.mean + '</div>'
-        ).join('');
+        let chips = (q.vocabChips && (q.vocabChips[lang] || q.vocabChips.vi)) ||
+                    (q.vocabList && (q.vocabList[lang] || q.vocabList.vi)) || [];
+        if (chips.length === 0 && q.explanation3Regions && q.explanation3Regions[lang] && q.explanation3Regions[lang].m3Chips) {
+          chips = q.explanation3Regions[lang].m3Chips.map(c => {
+            const p = c.split(':');
+            return { term: p[0], mean: p[1] || '' };
+          });
+        }
+        if (chips.length > 0) {
+          vocabBody.innerHTML = chips.map(c => 
+            '<div class="q-vocab-item-chip"><strong>' + (c.term || '') + ':</strong> ' + (c.mean || c.reading || '') + '</div>'
+          ).join('');
+        }
       }
 
       // 5. Thanh tiến trình
@@ -10318,43 +10334,55 @@
 
       // 6. Điều khiển nút Prev/Next
       const btnPrev = document.getElementById('btn-exam-prev');
-      if (btnPrev) {
-        btnPrev.disabled = index === 0;
-      }
       const btnNext = document.getElementById('btn-exam-next');
-      if (btnNext) {
-        btnNext.disabled = false;
+      const txtNext = document.getElementById('txt-exam-next');
+      if (btnPrev) btnPrev.disabled = (index === 0);
+      if (txtNext) {
+        const isLast = (index === EXAM_QUESTIONS_DATA.length - 1);
+        const nextTextMap = {
+          vi: isLast ? 'Nộp bài thi' : 'Câu tiếp theo',
+          ja: isLast ? '試験を提出' : '次の問題へ',
+          en: isLast ? 'Submit Test' : 'Next Question',
+          my: isLast ? 'စာမေးပွဲ အဖြေလွှာ ပို့မည်' : 'နောက်မေးခွန်း',
+          id: isLast ? 'Kirim Ujian' : 'Soal Berikutnya'
+        };
+        txtNext.innerText = nextTextMap[lang] || (isLast ? 'Nộp bài thi' : 'Câu tiếp theo');
       }
 
-      // 7. Reset trạng thái chọn của câu hỏi mới
+      // 7. Reset trạng thái chọn của câu hỏi
       resetInteractiveQuestion();
-
-      // Cập nhật hiển thị furigana theo cài đặt hiện tại
-      applyFuriganaDisplay();
+      if (typeof applyFuriganaDisplay === 'function') {
+        applyFuriganaDisplay();
+      }
     }
 
     function nextExamQuestion() {
       if (currentExamQIndex < EXAM_QUESTIONS_DATA.length - 1) {
         renderExamQuestion(currentExamQIndex + 1);
         const toastNext = {
-          vi: 'Đã chuyển sang câu ' + (currentExamQIndex + 1) + '/3',
-          ja: '第 ' + (currentExamQIndex + 1) + '/3 問に移動しました',
-          en: 'Switched to question ' + (currentExamQIndex + 1) + '/3',
-          my: 'မေးခွန်း ' + (currentExamQIndex + 1) + '/၃ သို့ ကူးပြောင်းပါပြီ',
-          id: 'Beralih ke soal ' + (currentExamQIndex + 1) + '/3'
+          vi: 'Đã chuyển sang câu ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length,
+          ja: '第 ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length + ' 問に移動しました',
+          en: 'Switched to question ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length,
+          my: 'မေးခွန်း ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length + ' သို့ ကူးပြောင်းပါပြီ',
+          id: 'Beralih ke soal ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length
         };
-        showPortfolioToast(toastNext[currentLang] || toastNext.vi);
+        const curL = typeof currentLang !== 'undefined' ? currentLang : 'vi';
+        if (typeof showPortfolioToast === 'function') {
+          showPortfolioToast(toastNext[curL] || toastNext.vi);
+        }
       } else {
-        // Vòng lại câu 1
         renderExamQuestion(0);
         const toastComplete = {
-          vi: 'Bạn đã xem hết 3 câu mẫu! Đang quay lại Câu 1.',
-          ja: 'サンプル3問をすべて確認しました。第1問に戻ります。',
-          en: 'All 3 sample questions reviewed! Returning to Question 1.',
-          my: 'နမူနာမေးခွန်း ၃ ခုလုံး ပြီးဆုံးပါပြီ။ မေးခွန်း ၁ သို့ ပြန်လည်ရောက်ရှိပါသည်။',
-          id: 'Selesai meninjau 3 soal sampel! Kembali ke Soal 1.'
+          vi: 'Bạn đã xem hết ' + EXAM_QUESTIONS_DATA.length + ' câu mẫu! Đang quay lại Câu 1.',
+          ja: 'サンプル問題をすべて確認しました。第1問に戻ります。',
+          en: 'All sample questions reviewed! Returning to Question 1.',
+          my: 'နမူနာမေးခွန်းများ ပြီးဆုံးပါပြီ။ မေးခွန်း ၁ သို့ ပြန်လည်ရောက်ရှိပါသည်။',
+          id: 'Semua soal contoh telah selesai! Kembali ke Soal 1.'
         };
-        showPortfolioToast(toastComplete[currentLang] || toastComplete.vi);
+        const curL = typeof currentLang !== 'undefined' ? currentLang : 'vi';
+        if (typeof showPortfolioToast === 'function') {
+          showPortfolioToast(toastComplete[curL] || toastComplete.vi);
+        }
       }
     }
 
@@ -10362,13 +10390,16 @@
       if (currentExamQIndex > 0) {
         renderExamQuestion(currentExamQIndex - 1);
         const toastPrev = {
-          vi: 'Đã quay lại câu ' + (currentExamQIndex + 1) + '/3',
-          ja: '第 ' + (currentExamQIndex + 1) + '/3 問に戻りました',
-          en: 'Returned to question ' + (currentExamQIndex + 1) + '/3',
-          my: 'မေးခွန်း ' + (currentExamQIndex + 1) + '/၃ သို့ ပြန်သွားပါပြီ',
-          id: 'Kembali ke soal ' + (currentExamQIndex + 1) + '/3'
+          vi: 'Đã quay lại câu ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length,
+          ja: '第 ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length + ' 問に戻りました',
+          en: 'Returned to question ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length,
+          my: 'မေးခွန်း ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length + ' သို့ ပြန်သွားပါပြီ',
+          id: 'Kembali ke soal ' + (currentExamQIndex + 1) + '/' + EXAM_QUESTIONS_DATA.length
         };
-        showPortfolioToast(toastPrev[currentLang] || toastPrev.vi);
+        const curL = typeof currentLang !== 'undefined' ? currentLang : 'vi';
+        if (typeof showPortfolioToast === 'function') {
+          showPortfolioToast(toastPrev[curL] || toastPrev.vi);
+        }
       }
     }
 
@@ -10396,6 +10427,16 @@
       if (bPoll) bPoll.disabled = false;
     }
 
+    function resetSimQuestion() {
+      resetInteractiveQuestion();
+      const progFill = document.getElementById('exam-prog-fill');
+      if (progFill) {
+        const pct = Math.round(((currentExamQIndex + 1) / EXAM_QUESTIONS_DATA.length) * 100);
+        progFill.style.width = pct + '%';
+        progFill.classList.remove('shimmer-active');
+      }
+    }
+
     function selectAnswer(optKey) {
       if (isQuestionLocked) return;
       isQuestionLocked = true;
@@ -10403,8 +10444,8 @@
 
       const q = EXAM_QUESTIONS_DATA[currentExamQIndex];
       const lang = typeof currentLang !== 'undefined' ? currentLang : 'vi';
-      const exp = q.explanations[lang] || q.explanations.vi;
-      const isCorrect = optKey === q.correctAnswer;
+      const correctAns = (q.correctAnswer || q.correct || 'A').toUpperCase();
+      const isCorrect = (optKey.toUpperCase() === correctAns);
 
       // Khóa và highlight đáp án
       ['a', 'b', 'c', 'd'].forEach(k => {
@@ -10413,17 +10454,32 @@
       });
 
       const chosenEl = document.getElementById('opt-' + optKey.toLowerCase());
-      const correctEl = document.getElementById('opt-' + q.correctAnswer.toLowerCase());
+      const correctEl = document.getElementById('opt-' + correctAns.toLowerCase());
 
       const expBox = document.getElementById('explanation-box');
       const fbHead = document.getElementById('fb-head');
       const fbStatus = document.getElementById('fb-status-text');
 
+      const statusCorrMap = {
+        vi: 'CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ ' + correctAns,
+        ja: '正解です！ 正しい選択肢は ' + correctAns,
+        en: 'CORRECT! THE RIGHT ANSWER IS ' + correctAns,
+        my: 'မှန်ကန်ပါသည်! အဖြေမှန်မှာ ' + correctAns,
+        id: 'TEPAT SEKALI! JAWABAN BENAR ADALAH ' + correctAns
+      };
+      const statusWrongMap = {
+        vi: 'CHƯA CHÍNH XÁC! ĐÁP ÁN ĐÚNG LÀ ' + correctAns,
+        ja: '不正解です。 正しい選択肢は ' + correctAns,
+        en: 'INCORRECT. THE RIGHT ANSWER IS ' + correctAns,
+        my: 'မှားယွင်းနေပါသည်။ အဖြေမှန်မှာ ' + correctAns,
+        id: 'KURANG TEPAT. JAWABAN BENAR ADALAH ' + correctAns
+      };
+
       if (isCorrect) {
         if (chosenEl) chosenEl.classList.add('correct-ans');
         if (expBox) expBox.className = 'real-feedback-card correct show';
         if (fbHead) fbHead.className = 'feedback-head correct';
-        if (fbStatus) fbStatus.innerText = exp.statusCorrect;
+        if (fbStatus) fbStatus.innerText = statusCorrMap[lang] || statusCorrMap.vi;
 
         // Kích hoạt Streak Badge
         const streakBadge = document.getElementById('exam-streak-combo-badge');
@@ -10438,10 +10494,10 @@
         if (correctEl) correctEl.classList.add('correct-ans');
         if (expBox) expBox.className = 'real-feedback-card wrong show';
         if (fbHead) fbHead.className = 'feedback-head wrong';
-        if (fbStatus) fbStatus.innerText = exp.statusWrong;
+        if (fbStatus) fbStatus.innerText = statusWrongMap[lang] || statusWrongMap.vi;
       }
 
-      // Render nội dung giải thích 3 miền theo ngôn ngữ hiện tại
+      // Render nội dung giải thích 3 miền
       renderExplanationContent(q, lang);
 
       // Vô hiệu hóa nút trợ giúp sau khi chọn
@@ -10452,34 +10508,58 @@
     }
 
     function renderExplanationContent(q, lang) {
-      const exp = q.explanations[lang] || q.explanations.vi;
       const expBox = document.getElementById('explanation-box');
       if (!expBox) return;
+
+      const exp = (q.explanations && (q.explanations[lang] || q.explanations.vi)) ||
+                  (q.explanation3Regions && (q.explanation3Regions[lang] || q.explanation3Regions.vi)) || {};
 
       const secTitles = expBox.querySelectorAll('.feedback-sec-title span');
       const secContents = expBox.querySelectorAll('.feedback-sec-content');
 
       // Miền 1
-      if (secTitles[0]) secTitles[0].innerText = exp.m1Title;
-      if (secContents[0]) secContents[0].innerHTML = exp.m1Content;
+      if (secTitles[0]) secTitles[0].innerText = exp.m1Title || 'Miền 1: Trực Giác Bối Cảnh';
+      if (secContents[0]) {
+        let content1 = exp.m1Content || '';
+        if (!content1 && exp.m1Points) {
+          content1 = '<ul style="margin: 0; padding-left: 18px; line-height: 1.6;">' + 
+            exp.m1Points.map(p => '<li>' + p + '</li>').join('') + '</ul>';
+        }
+        secContents[0].innerHTML = content1;
+      }
 
       // Miền 2
-      if (secTitles[1]) secTitles[1].innerText = exp.m2Title;
-      if (secContents[1]) secContents[1].innerHTML = exp.m2Content;
+      if (secTitles[1]) secTitles[1].innerText = exp.m2Title || 'Miền 2: Phản Biện Chuyên Môn';
+      if (secContents[1]) {
+        let content2 = exp.m2Content || '';
+        if (!content2 && (exp.m2CorrectWhy || exp.m2WrongWhy)) {
+          content2 = '<p style="margin: 0 0 6px;"><strong>Vì sao đúng:</strong> ' + (exp.m2CorrectWhy || '') + '</p>' +
+                     '<p style="margin: 0;"><strong>Bẫy cần tránh:</strong> ' + (exp.m2WrongWhy || '') + '</p>';
+        }
+        secContents[1].innerHTML = content2;
+      }
 
       // Miền 3
-      if (secTitles[2]) secTitles[2].innerText = exp.m3Title;
+      if (secTitles[2]) secTitles[2].innerText = exp.m3Title || 'Miền 3: Thuật Ngữ Liên Kết';
       if (secContents[2]) {
-        secContents[2].innerHTML = exp.m3Chips.map(chip => 
-          '<span style="background: white; border: 1px solid var(--slate-200); padding: 4px 10px; border-radius: 6px;"><strong>' + chip.split(':')[0] + ':</strong> ' + (chip.split(':')[1] || '') + '</span>'
-        ).join('');
+        const chips = exp.m3Chips || [];
+        secContents[2].innerHTML = chips.map(chip => {
+          const parts = chip.split(':');
+          return '<span style="background: white; border: 1px solid var(--slate-200); padding: 4px 10px; border-radius: 6px;"><strong>' + 
+            parts[0] + ':</strong> ' + (parts[1] || '') + '</span>';
+        }).join('');
       }
     }
 
     function useLifeline5050() {
       if (isQuestionLocked) return;
       const q = EXAM_QUESTIONS_DATA[currentExamQIndex];
-      q.eliminated5050.forEach(k => {
+      const correctAns = (q.correctAnswer || q.correct || 'A').toUpperCase();
+      let elim = q.eliminated5050;
+      if (!elim || elim.length === 0) {
+        elim = ['A', 'B', 'C', 'D'].filter(k => k !== correctAns).slice(0, 2);
+      }
+      elim.forEach(k => {
         const el = document.getElementById('opt-' + k.toLowerCase());
         if (el) el.classList.add('eliminated');
       });
@@ -10490,31 +10570,26 @@
     function useLifelinePoll() {
       if (isQuestionLocked) return;
       const q = EXAM_QUESTIONS_DATA[currentExamQIndex];
+      const correctAns = (q.correctAnswer || q.correct || 'A').toUpperCase();
+      const pcts = q.pollPcts || {
+        [correctAns]: '68%',
+        ...(['A', 'B', 'C', 'D'].filter(k => k !== correctAns).reduce((acc, k, idx) => ({ ...acc, [k]: idx === 0 ? '16%' : idx === 1 ? '10%' : '6%' }), {}))
+      };
       ['a', 'b', 'c', 'd'].forEach(k => {
         const poll = document.getElementById('poll-' + k);
         const keyUpper = k.toUpperCase();
         if (poll) {
-          const pctVal = parseInt(q.pollPcts[keyUpper], 10) || 20;
+          const pctVal = parseInt(pcts[keyUpper], 10) || 20;
           poll.style.width = pctVal + '%';
         }
         const pctEl = document.getElementById('pct-' + k);
         if (pctEl) {
-          pctEl.innerText = q.pollPcts[keyUpper];
+          pctEl.innerText = pcts[keyUpper] || '25%';
           pctEl.style.display = 'block';
         }
       });
       const bPoll = document.getElementById('btn-poll');
       if (bPoll) bPoll.disabled = true;
-    }
-
-    function resetSimQuestion() {
-      resetInteractiveQuestion();
-      const progFill = document.getElementById('exam-prog-fill');
-      if (progFill) {
-        const pct = Math.round(((currentExamQIndex + 1) / EXAM_QUESTIONS_DATA.length) * 100);
-        progFill.style.width = pct + '%';
-        progFill.classList.remove('shimmer-active');
-      }
     }
 
     function applyFuriganaDisplay() {
